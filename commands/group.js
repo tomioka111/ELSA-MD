@@ -370,6 +370,62 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
+    cmd({
+        pattern: "كشف",
+        alias :['whois'],
+        category: "owner",
+        desc: "Shows list of all externally installed modules",
+        filename: __filename
+    },
+async(Void, person, memo) => { 
+
+   if (!person.quoted) return person.reply(`*_Please reply any User_*`);
+    var bio = await Void.fetchStatus(person.quoted.sender);
+    var bioo = bio.status;
+    var setAt = bio.setAt.toString();
+    
+    var words = setAt.split(" ");
+    if(words.length > 3){ setAt= words.slice(0, 5).join(' ') ; }
+     
+    var num = person.quoted.sender.split('@')[0];
+    let pfp;
+    try  {  pfp = await Void.profilePictureUrl(person.quoted.sender, "image"); } 
+    catch (e) { pfp = await Void.profilePictureUrl(person.sender, "image") ||  'https://telegra.ph/file/29a8c892a1d18fdb26028.jpg' ; }    //|| 'https://telegra.ph/file/29a8c892a1d18fdb26028.jpg' ;  }
+    
+    let username = await sck1.findOne({ id: person.quoted.sender });
+    var tname = username.name;
+
+    
+    let Elsa = `
+┏━━⟪⟪ ${mztit} ⟫━⦿
+┃✗ *•ᴘᴇʀsᴏɴ's ɪɴғᴏʀᴍᴀᴛɪᴏɴ•*
+┃✗ *•ɴᴀᴍᴇ•* ${tname}
+┃✗ *•ɴᴜᴍ•* ${num}
+┃✗ *•ʙɪᴏ•*  ${bioo}
+┃✗ *•sᴇᴛ-ᴀᴛ•* ${setAt}
+┃✗   *•ᴋᴇᴇᴘ ᴄᴀʟᴍ ᴅᴜᴅᴇ•*
+┗━━━━━━━━━━⦿
+`
+    let king = {            
+    image: { url: pfp},
+    caption: Elsa,
+    footer: tlang().footer,
+    headerType: 4,
+    contextInfo: {
+        externalAdReply: {
+            title: `${name.ownername}`,
+            body: `${name.botname}`,
+            thumbnail: log0,
+            mediaType: 4,
+            mediaUrl: '',
+            sourceUrl: `${Gname}`,}}}
+  
+return await Void.sendMessage(person.chat, king,{quoted:person});
+}
+)
+    
+    
+    
 cmd({
             pattern: "profile",
             desc: "Shows profile of user.",
