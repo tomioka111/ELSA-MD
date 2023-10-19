@@ -63,8 +63,8 @@ let result = await download(text)
     }, {
         quoted: citel,
     });
-  } catch (err) {
-    console.error(err);
+  } catch (e) {
+            console.log(e)
     citel.reply(`❌ An error occurred while processing your request. Please try again later.${err}`);
   }
 	
