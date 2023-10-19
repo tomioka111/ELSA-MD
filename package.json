@@ -9,7 +9,7 @@
     "start": "pm2 start lib/client.js --deep-monitoring --attach --name izuku",
     "stop": "pm2 stop izuku"
   },
-  "author": "excelottah6",
+  "author": "Sjshskdhd",
   "dependencies": {
     "soundcloud-downloader": "^1.0.0",
     "node-schedule": "^2.1.1",
