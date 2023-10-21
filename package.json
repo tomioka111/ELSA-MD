@@ -6,8 +6,8 @@
   "type": "commonjs",
   "license": "GPL-3.0",
   "scripts": {
-    "start": "pm2 start lib/client.js --deep-monitoring --attach --name izuku",
-    "stop": "pm2 stop izuku"
+    "start": "pm2 start lib/client.js --deep-monitoring --attach --name elsa",
+    "stop": "pm2 stop elsa"
   },
   "author": "Sjshskdhd",
   "dependencies": {
