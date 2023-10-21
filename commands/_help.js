@@ -60,7 +60,6 @@ Secktor.cmd({
                     .locale('id')
                 const date = moment.tz('Africa/Lagos').format('DD/MM/YYYY')
                 let total = await sck1.countDocuments()
-                let str = `━━❰ ` + fancytext(Config.ownername.split(' ')[0], 38) + `❱━━━\n`
                 str +=
                     '```' + ` *❋ ─═══━•┇❄️┇•━═══─ ❋*
 *${citel.pushName}┇اهـلاً بـك فـي اوامـر الـبـوته الـكـيـوت مـلـكـة الـجـلـيـد "إلـسـا" ❄️┇*
@@ -71,7 +70,7 @@ Secktor.cmd({
 *❆ الـمـنـصـة 🌐 ⦂『هـروكـو』*
 *❆ الـمـوقـع الـرسـمـي لـلـبـوت 🔗 ⦂『https://639cdc98e060b.site123.me/』*
 *❆ أرقـام الـمـطـوريـن 👨‍💻 ⦂『201098906252〆96178965440』*
-*❋ ─═══━•┇❄️┇•━═══─ ❋*\n\n◆ ━━━━ ◉┇❄️┇◉ ━━━━ ◆
+*◆ ━━━━ ◉┇❄️┇◉ ━━━━ ◆
 
 *↵ ┇  قـائـمـة المجموعات ┇  🔮*
 
