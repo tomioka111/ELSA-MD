@@ -9,18 +9,18 @@ global.port= process.env.PORT || 5000
 global.email = 'sam@secktor.live'
 global.github = 'https://github.com/excelottah6/IZUKU-MD'
 global.location = 'Sultanpur IN'
-global.gurl = 'https://instagram.com/' // add your username
-global.sudo = process.env.SUDO || '2347039570336'
-global.devs = '2347039570336';
+global.gurl = 'https://639cdc98e060b.site123.me/' // add your username
+global.sudo = process.env.SUDO || '201098906252', '96178965440'
+global.devs = '201098906252', '96178965440';
 global.website = 'https://github.com/excelottah6/IZUKU-Md' //wa.me/+91000000000000
-global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'https://raw.githubusercontent.com/SecktorBot/Brandimages/main/logos/SocialLogo%201.png'
+global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'https://telegra.ph/file/24bb9841a79d8b45e8441.jpg'
 module.exports = {
-  botname:   process.env.BOT_NAME === undefined ? 'IZUKU 𝐁𝐨𝐭' : process.env.BOT_NAME,
-  ownername: process.env.OWNER_NAME === undefined ? 'excel' : process.env.OWNER_NAME,
+  botname:   process.env.BOT_NAME === undefined ? '*『❄️┇❆ 𝐸𝐿𝑆𝐴 𝐵𝑂𝑇-𝑀𝐷 ❆┇❄️』*' : process.env.BOT_NAME,
+  ownername: process.env.OWNER_NAME === undefined ? '𝐈𝐓𝐀𝐂𝐇𝐈 👑&𝐄𝐋𝐆𝐀𝐙𝐀𝐑 ❄️' : process.env.OWNER_NAME,
   sessionName:  process.env.SESSION_ID === undefined ? false : process.env.SESSION_ID,
-  author:  process.env.PACK_INFO.split(";")[0] === undefined ? 'excel' : process.env.PACK_INFO.split(";")[0],
+  author:  process.env.PACK_INFO.split(";")[0] === undefined ? '*『❄️┇❆ 𝐸𝐿𝑆𝐴 𝐵𝑂𝑇-𝑀𝐷 ❆┇❄️』*' : process.env.PACK_INFO.split(";")[0],
   auto_read_status :  process.env.AUTO_READ_STATUS === undefined ? false : process.env.AUTO_READ_STATUS,
-  packname:  process.env.PACK_INFO.split(";")[1] === undefined ? 'IZUKU-Md' : process.env.PACK_INFO.split(";")[1],
+  packname:  process.env.PACK_INFO.split(";")[1] === undefined ? '𝐈𝐓𝐀𝐂𝐇𝐈 👑&𝐄𝐋𝐆𝐀𝐙𝐀𝐑 ❄️' : process.env.PACK_INFO.split(";")[1],
   autoreaction:  process.env.AUTO_REACTION  === undefined ? false : process.env.AUTO_REACTION ,
   antibadword :  process.env.ANTI_BAD_WORD === undefined ? 'nbwoed' : process.env.ANTI_BAD_WORD,
   alwaysonline:  process.env.ALWAYS_ONLINE === undefined ? false : process.env.ALWAYS_ONLINE,
@@ -43,9 +43,9 @@ module.exports = {
     API_KEY: process.env.HEROKU_API_KEY === undefined ? '' : process.env.HEROKU_API_KEY,
     APP_NAME: process.env.HEROKU_APP_NAME === undefined ? '' : process.env.HEROKU_APP_NAME
 },
-  VERSION: process.env.VERSION === undefined ? 'v.0.0.3' : process.env.VERSION,
-  LANG: process.env.THEME|| 'IZUKU',
-  WORKTYPE: process.env.WORKTYPE === undefined ? 'private' : process.env.WORKTYPE
+  VERSION: process.env.VERSION === undefined ? 'v1' : process.env.VERSION,
+  LANG: process.env.THEME|| 'ELSA',
+  WORKTYPE: process.env.WORKTYPE === undefined ? 'public' : process.env.WORKTYPE
 };
 
 
