@@ -1,14 +1,14 @@
 {
-  "name": "IZUKU-Md by excel ",
-  "description": "A Whatsapp md bot built in NodeJs to make experience better",
-  "logo": "https://telegra.ph/file/3845ab217fafcab86ddf5.jpg",
-  "keywords": ["nodejs", "bot", "whatsapp bot", "GARENA", "IzukuBot", "Secktor","IZUKUMD","theme bot","multi device","baileys","excel"],
+  "name": "ELSA-MD BY ELGAZAR ",
+  "description": "تم صنع هذا البوت بواسطه الجزار وايتاشي",
+  "logo": "https://telegra.ph/file/24bb9841a79d8b45e8441.jpg",
+  "keywords": ["nodejs", "bot", "whatsapp bot", "GARENA", "ElsaBot", "Secktor","ELSAMD","theme bot","multi device","baileys","elgazar"],
   "success_url": "/",
   "stack": "container",
 "env": {
   "OWNER_NAME": {
   "description": "Name of Bot Owner",
-      "value": "Izuku Midoriya"
+      "value": "𝐄𝐋𝐆𝐀𝐙𝐀𝐑 ❄️&𝐈𝐓𝐀𝐂𝐇𝐈 👑"
   },
   "ALIVE_MESSAGE": {
     "description": "Alive message for bot",
@@ -54,7 +54,7 @@
      "value": "true"
     },
     "SUDO": {
-    "description": "PUT OWNER NUMBER NOTE:remove the + and must be in international form eg:2347039570336",
+    "description": "PUT OWNER NUMBER NOTE:remove the + and must be in international form eg:201098906252",
      "required"  :false
     },
       "READ_MESSAGE": {
@@ -72,14 +72,14 @@
   },
   "OWNER_NUMBER": {
     "description": "The phone numbers of the users who you want to be admin for the bot (should be in international format without + and multiple numbers must be separated by a comma \",\")",
-       "value": "2347039570336"
+       "value": "201098906252"
   },
    "SESSION_ID": {
     "description": "Please put your SESSION_ID here,if you don't have visit https://replit.com/@Excelottah/BLACK-Md"
   },
     "OPENAI_API_KEY": {
     "description": "Please put your OPENAI api key here.Get it from beta.openai.com ",
-       "value": "Replace Me(optional)",
+       "value": "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",
        "required" :false
   },
   "MONGODB_URI": {
@@ -87,12 +87,12 @@
     "value": "mongodb://uufpxy0mfyeykbrxkjpk:m1b0dsDODVFWlBy3AF3@bufirembtiksxw6ni25m-mongodb.services.clever-cloud.com:2533/bufirembtiksxw6ni25m"
   },
     "THEME": {
-    "description": "Put the theme name you want to use. Avilable themes are IZUKU,ZEROTWO,NEZUKO,LUFFY,GOKU and many more..",
-     "value": "IZUKU"
+    "description": "Put the theme name you want to use. Avilable themes are ELSA,IZUKU,ZEROTWO,NEZUKO,LUFFY,GOKU and many more..",
+     "value": "ELSA"
   },
     "WORKTYPE": {
   "description": "Worktype of your bot. Use public or private, if it is private then only bot number can use it. If public then everyone can use it.",
-         "value": "private"
+         "value": "public"
   },
       "AUTO_REACTION": {
     "description": "Reacts emoji to all commands.",
