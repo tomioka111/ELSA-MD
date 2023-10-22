@@ -301,18 +301,7 @@ cmd({
  
          }
      )
-     //---------------------------------------------------------------------------
-
-     cmd({
-        pattern: "حذف_انذار",
-       filename: __filename,
-    },
-    async(Void, citel, text) => {
-        if (!isCreator) return citel.reply(tlang().owner)
-        await warndb.deleteOne({ id: citel.quoted.sender.split('@')[0] + 'warn' });
-        citel.reply('تم حذف إنذاراته')
-    }
-)
+     
     //---------------------------------------------------------------------------
 cmd({
             pattern: "حذف_انذار",
@@ -338,7 +327,7 @@ cmd({
         },
         async(Void, citel, text,{ isCreator }) => {
             if (!isCreator) return citel.reply(tlang().owner)
-            let [poll, opt] = text.split(";");
+            let [poll, opt] = text.split(",");
             if (text.split(",") < 2)
                 return await citel.reply(
                     `*֎╎مـثـال┇.استطلاع بتحبوني,اه, لا, لا برضو*`
@@ -875,7 +864,7 @@ cmd({
                 teskd += `*${i+1}*\n•°•═════ஓ๑♡๑ஓ═════•°•◆\n│ *الـمـكـان📡* ${h[i].group}\n`
                 teskd += `┇ *الـوقـت⏱* ${h[i].date}\n`
                 teskd += `┇ *الـمـنـذر⚠️* ${h[i].warnedby}\n`
-                teskd += `┇ *الـسـبـب📍* ${h[i].reason}*\n•°•═════ஓ๑♡๑ஓ═════•°•\n\n`
+                teskd += `┇ *الـسـبـب📍* ${h[i].reason}\n•°•═════ஓ๑♡๑ஓ═════•°•\n\n`
             }
             citel.reply(teskd)
         }
