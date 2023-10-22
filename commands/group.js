@@ -100,7 +100,7 @@ cmd({
     async(Void, citel, text) => {
         citel.reply(`*֎╎شـوف خـاصـك*`);
         await Void.sendMessage(`${citel.sender}`, {
-            image: { url: await botpic() },
+            image: log0,
             caption: `*֎╎رابـط جـروب الـدعـم┇ https://chat.whatsapp.com/DmGUnUroeRB1FAoBnHZMWP*`,
         });
 
