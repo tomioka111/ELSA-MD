@@ -372,7 +372,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "profile",
+            pattern: "بروفايل",
             desc: "Shows profile of user.",
             category: "group",
             filename: __filename,
