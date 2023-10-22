@@ -43,7 +43,7 @@ cmd({
     //---------------------------------------------------------------------------
 cmd({
             pattern: "sticker",
-            alias: ["s"],
+            alias: ["s","ملصق"],
             desc: "Makes sticker of replied image/video.",
             category: "group",
             use: '<reply to any image/video.>',
