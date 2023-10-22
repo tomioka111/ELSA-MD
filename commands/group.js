@@ -647,11 +647,11 @@ cmd({
             if (!isAdmins) return citel.reply(tlang().admin);
             if (text.split(" ")[0] === "قفل") {
                 await Void.groupSettingUpdate(citel.chat, "announcement")
-                    .then((res) => return citel.reply(`*֎╎تـم قـفـل الـجـروب*`))
+                    .then((res) => citel.reply("*֎╎تـم قـفـل الـجـروب*"))
                     .catch((err) => console.log(err));
             } else if (text.split(" ")[0] === "فتح") {
                 await Void.groupSettingUpdate(citel.chat, "not_announcement")
-                    .then((res) => return citel.reply(`*֎╎تـم فـتـح الـجـروب*`))
+                    .then((res) => citel.reply("*֎╎تـم فـتـح الـجـروب*"))
                     .catch((err) => console.log(err));
             } else {
 
