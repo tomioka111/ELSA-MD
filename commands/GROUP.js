@@ -82,7 +82,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-        pattern: "support",
+        pattern: "الدعم",
         desc: "Sends official support group link.",
         category: "group",
         filename: __filename,
