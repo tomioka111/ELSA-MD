@@ -43,7 +43,7 @@ cmd({
     //---------------------------------------------------------------------------
 cmd({
             pattern: "sticker",
-            alias: ["s","ملصق"],
+            alias: ["s"],
             desc: "Makes sticker of replied image/video.",
             category: "group",
             use: '<reply to any image/video.>',
@@ -370,8 +370,6 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
-    
-    
 cmd({
             pattern: "profile",
             alias: ["ايدي","بروفايل","me","انا"],
@@ -510,7 +508,7 @@ cmd({
             }
             let disc = citel.sender.substring(3, 7);
             let textr = '';
-            textr += `هـاي↫${citel.pushName}`;
+            textr += `هـاي↫${citel.pushName}∆${disc}'نقطه\n\n`;
             let ttms = `${userq.xp}` / 8;
             textr += `*⌁︙دورڪ🏅↫ ${role}*\n*⌁︙نقاطـڪ♦️↫ ${userq.xp}* / ${Levels.xpFor(
     userq.level + 1
