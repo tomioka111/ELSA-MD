@@ -37,7 +37,7 @@ cmd({
                 citel.reply("*֎╎الـرابـط غـلـط*");
             let result = text.split(" ")[0].split("https://chat.whatsapp.com/")[1];
             await Void.groupAcceptInvite(result)
-                .then((res) => citel.reply("تم"))
+                .then((res) => citel.reply("*֎╎تـم الانـضـمـام بـنـجـاح*"))
                 .catch((err) => citel.reply("*֎╎مـقـدرت ادخـل*"));
 
         }
@@ -57,7 +57,7 @@ cmd({
             author = Config.author
             if (citel.quoted) {
                 let media = await citel.quoted.download();
-                citel.reply("*֎╎لـحـظـه بـرسـلـك الـمـلـصـق*");
+                citel.reply("*֎╎لـحـظـه بـرسـلـك الـمـلـصـق...*");
                 let sticker = new Sticker(media, {
                     pack: pack, // The pack name
                     author: author, // The author name
@@ -98,10 +98,10 @@ cmd({
         filename: __filename,
     },
     async(Void, citel, text) => {
-        citel.reply(`*֎╎شـوف خـاصـك ${tlang().greet}*`);
+        citel.reply(`*֎╎شـوف خـاصـك*`);
         await Void.sendMessage(`${citel.sender}`, {
-            image: log0,
-            caption: `*֎╎الـرابـط : https://chat.whatsapp.com/DmGUnUroeRB1FAoBnHZMWP*`,
+            image: { url: await botpic() },
+            caption: `*֎╎رابـط جـروب الـدعـم┇ https://chat.whatsapp.com/DmGUnUroeRB1FAoBnHZMWP*`,
         });
 
     }
@@ -195,7 +195,7 @@ async(Void, citel, text,{ isCreator }) => {
     const groupAdmins = await getAdmin(Void, citel)
     const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
     if (!isAdmins) return citel.reply('*֎╎هـذا الأمـر خـاص بـالـمشرفـيـن*')
-const S=m;function Z(){const F=['126402oKAcRa','date','سيتم طرده لانه تجاوز الإنذارات\x0a','chat','8qachoN','580yXDZAo','groupParticipantsUpdate','114528WgITIL','reply','groupMetadata','│\x20*الوقت :*\x20','find','locale','log','196311jXGmuc','quoted','save','*\x0a◆──────────────╮\x0a│\x20*المكان:*\x20','759700KYdstU','warnedby','pushName','reason','8dUtMfa','2BlOCqD','550MdvhLT','\x0aالإنذار ل :\x20@','54828ViphBF','subject','1100323uEahgH','30204512uUuJcj','*عدد انذاراته :\x20','split','│\x20*المُنذر :*\x20','length','sender','setDefault','group','Asia/Riyadh','../config','215XZLRSE','HH:mm:ss','warn','remove'];Z=function(){return F;};return Z();}(function(U,w){const c=m,s=U();while(!![]){try{const q=parseInt(c(0x1eb))/0x1*(parseInt(c(0x1f0))/0x2)+parseInt(c(0x1e7))/0x3*(parseInt(c(0x1ef))/0x4)+-parseInt(c(0x200))/0x5*(-parseInt(c(0x204))/0x6)+-parseInt(c(0x1f5))/0x7*(-parseInt(c(0x1dd))/0x8)+-parseInt(c(0x1f3))/0x9*(-parseInt(c(0x1de))/0xa)+parseInt(c(0x1f1))/0xb*(parseInt(c(0x1e0))/0xc)+-parseInt(c(0x1f6))/0xd;if(q===w)break;else s['push'](s['shift']());}catch(B){s['push'](s['shift']());}}}(Z,0x707d4));function m(Y,U){const w=Z();return m=function(s,q){s=s-0x1dd;let B=w[s];return B;},m(Y,U);}if(!citel['quoted'])return citel[S(0x1e1)]('رد عرسالته');const timesam=moment(moment())['format'](S(0x201));moment['tz'][S(0x1fc)](S(0x1fe))[S(0x1e5)]('id');try{let metadata=await Void[S(0x1e2)](citel[S(0x207)]);await new warndb({'id':citel['quoted'][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202),'reason':text,'group':metadata[S(0x1f4)],'warnedby':citel[S(0x1ed)],'date':timesam})[S(0x1e9)]();let ment=citel[S(0x1e8)][S(0x1fb)];Void['sendMessage'](citel['chat'],{'text':S(0x1f2)+citel[S(0x1e8)][S(0x1fb)][S(0x1f8)]('@')[0x0]+'\x0aالسبب :\x20'+text+'\x0aالمُنذر :\x20'+citel[S(0x1ed)],'mentions':[citel[S(0x1e8)][S(0x1fb)]]},{'quoted':citel});let h=await warndb[S(0x1e4)]({'id':citel['quoted'][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202)});const Config=require(S(0x1ff));if(h[S(0x1fa)]>Config['warncount']){teskd=S(0x206);let h=await warndb[S(0x1e4)]({'id':citel[S(0x1e8)][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202)});teskd+=S(0x1f7)+h[S(0x1fa)]+'\x20\x20*\x0a';for(let i=0x0;i<h[S(0x1fa)];i++){teskd+='*'+(i+0x1)+S(0x1ea)+h[i][S(0x1fd)]+'\x0a',teskd+=S(0x1e3)+h[i][S(0x205)]+'\x0a',teskd+=S(0x1f9)+h[i][S(0x1ec)]+'\x0a',teskd+='│\x20السبب :\x20'+h[i][S(0x1ee)]+'_\x0a◆──────────────╯\x0a\x0a';}citel[S(0x1e1)](teskd),await Void[S(0x1df)](citel['chat'],[citel['quoted'][S(0x1fb)]],S(0x203));}}catch(Y){console[S(0x1e6)](Y);}
+const S=m;function Z(){const F=['126402oKAcRa','date','*֎╎تـم طـرده لانـه تـجـاوز الانـذارات*\x0a','chat','8qachoN','580yXDZAo','groupParticipantsUpdate','114528WgITIL','reply','groupMetadata','│\x20֎╎الـوقـت┇\x20','find','locale','log','196311jXGmuc','quoted','save','*\x0a◆──────────────╮\x0a│\x20֎╎الـمـكـان┇\x20','759700KYdstU','warnedby','pushName','reason','8dUtMfa','2BlOCqD','550MdvhLT','\x0a֎╎الانـذار لـ┇\x20@','54828ViphBF','subject','1100323uEahgH','30204512uUuJcj','֎╎عـدد انـذاراتـه┇\x20','split','│\x20֎╎الـمـنـذر┇\x20','length','sender','setDefault','group','Africa/Lagos','../config','215XZLRSE','HH:mm:ss','warn','remove'];Z=function(){return F;};return Z();}(function(U,w){const c=m,s=U();while(!![]){try{const q=parseInt(c(0x1eb))/0x1*(parseInt(c(0x1f0))/0x2)+parseInt(c(0x1e7))/0x3*(parseInt(c(0x1ef))/0x4)+-parseInt(c(0x200))/0x5*(-parseInt(c(0x204))/0x6)+-parseInt(c(0x1f5))/0x7*(-parseInt(c(0x1dd))/0x8)+-parseInt(c(0x1f3))/0x9*(-parseInt(c(0x1de))/0xa)+parseInt(c(0x1f1))/0xb*(parseInt(c(0x1e0))/0xc)+-parseInt(c(0x1f6))/0xd;if(q===w)break;else s['push'](s['shift']());}catch(B){s['push'](s['shift']());}}}(Z,0x707d4));function m(Y,U){const w=Z();return m=function(s,q){s=s-0x1dd;let B=w[s];return B;},m(Y,U);}if(!citel['quoted'])return citel[S(0x1e1)]('*֎╎رد عـلـي رسـالـه شـخـص*');const timesam=moment(moment())['format'](S(0x201));moment['tz'][S(0x1fc)](S(0x1fe))[S(0x1e5)]('id');try{let metadata=await Void[S(0x1e2)](citel[S(0x207)]);await new warndb({'id':citel['quoted'][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202),'reason':text,'group':metadata[S(0x1f4)],'warnedby':citel[S(0x1ed)],'date':timesam})[S(0x1e9)]();let ment=citel[S(0x1e8)][S(0x1fb)];Void['sendMessage'](citel['chat'],{'text':S(0x1f2)+citel[S(0x1e8)][S(0x1fb)][S(0x1f8)]('@')[0x0]+'\x0a֎╎الـسـبـب┇\x20'+text+'\x0a֎╎الـمـنـذر┇\x20'+citel[S(0x1ed)],'mentions':[citel[S(0x1e8)][S(0x1fb)]]},{'quoted':citel});let h=await warndb[S(0x1e4)]({'id':citel['quoted'][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202)});const Config=require(S(0x1ff));if(h[S(0x1fa)]>Config['warncount']){teskd=S(0x206);let h=await warndb[S(0x1e4)]({'id':citel[S(0x1e8)][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202)});teskd+=S(0x1f7)+h[S(0x1fa)]+'\x20\x20*\x0a';for(let i=0x0;i<h[S(0x1fa)];i++){teskd+='*'+(i+0x1)+S(0x1ea)+h[i][S(0x1fd)]+'\x0a',teskd+=S(0x1e3)+h[i][S(0x205)]+'\x0a',teskd+=S(0x1f9)+h[i][S(0x1ec)]+'\x0a',teskd+='│\x20֎╎الـسـبـب┇\x20'+h[i][S(0x1ee)]+'_\x0a◆──────────────╯\x0a\x0a';}citel[S(0x1e1)](teskd),await Void[S(0x1df)](citel['chat'],[citel['quoted'][S(0x1fb)]],S(0x203));}}catch(Y){console[S(0x1e6)](Y);}
     
 }
 )
@@ -257,7 +257,7 @@ cmd({
         let textt = `
 ◐╤╤✪〘   *Tag All*   〙✪╤╤◑
 
-➲ *Message :* ${text ? text : "blank"}\n\n
+➲ *Message :* ${text ? text : "مفيش رساله"}\n\n
 ➲ *Author:* ${citel.pushName} 👾
 `
         for (let mem of participants) {
@@ -278,7 +278,7 @@ cmd({
              filename: __filename,
          },
          async(Void, citel, text) => {
-             if (!text) return reply(`.طلب ممكن تضيف امر يسوي ملصقات؟`);
+             if (!text) return citel.reply(`.طلب ممكن تضيف امر يسوي ملصقات؟`);
              textt = `*| لديك طلب |*`;
              teks1 = `\n\n*المُطالب* : @${
      citel.sender.split("@")[0]
@@ -304,7 +304,7 @@ cmd({
      
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "حذف_انذار",
+            pattern: "حذف-انذار",
             desc: "Deletes all previously given warns of quoted user.",
             category: "group",
             filename: __filename,
@@ -314,7 +314,7 @@ cmd({
             if (!isCreator) return citel.reply(tlang().owner)
             if (!citel.quoted) return citel.reply('*֎╎مـنـشـن عـلـي شـخـص*')
             await warndb.deleteOne({ id: citel.quoted.sender.split('@')[0] + 'warn' });
-            return citel.reply('*֎╎تـم حـذف انـذاراتـه*')
+            return citel.reply('*֎╎تـم حـذف انـذار*')
         }
     )
     //---------------------------------------------------------------------------
@@ -323,7 +323,7 @@ cmd({
             desc: "Makes poll in group.",
             category: "group",
             filename: __filename,
-            use: `question;option1,option2,option3.....`,
+            use: `questionoption1,option2,option3.....`,
         },
         async(Void, citel, text,{ isCreator }) => {
             if (!isCreator) return citel.reply(tlang().owner)
@@ -647,11 +647,11 @@ cmd({
             if (!isAdmins) return citel.reply(tlang().admin);
             if (text.split(" ")[0] === "قفل") {
                 await Void.groupSettingUpdate(citel.chat, "announcement")
-                    .then((res) => reply(`*֎╎تـم قـفـل الـجـروب*`))
+                    .then((res) => return citel.reply(`*֎╎تـم قـفـل الـجـروب*`))
                     .catch((err) => console.log(err));
             } else if (text.split(" ")[0] === "فتح") {
                 await Void.groupSettingUpdate(citel.chat, "not_announcement")
-                    .then((res) => reply(`*֎╎تـم فـتـح الـجـروب*`))
+                    .then((res) => return citel.reply(`*֎╎تـم فـتـح الـجـروب*`))
                     .catch((err) => console.log(err));
             } else {
 
@@ -760,7 +760,7 @@ cmd({
                 .map((entry) => entry[1]);
             let anu = groups.map((v) => v.id);
             let jackhuh = `〖 جـمـيـع جـروبـات الـبـوت 〗\n\n`
-            citel.reply(`֎╎جـاري جـلـب ${anu.length} جـروب*`)
+            citel.reply(`*֎╎جـاري جـلـب ${anu.length} جـروب...*`)
             for (let i of anu) {
                 let metadata = await Void.groupMetadata(i);
                 await sleep(500)
@@ -797,7 +797,7 @@ cmd({
     
     try {
         await Void.groupParticipantsUpdate(citel.chat, [users], "demote");
-        citel.reply("*֎╎تـم  إزالـة  إشـرافـه*");
+        citel.reply("*֎╎تـم إزالـة إشـرافـه*");
     } catch {
          citel.reply(tlang().botAdmin);
     }
@@ -893,47 +893,52 @@ cmd({
 
 //--------------------------------------------------------------------------------
 cmd({
-    pattern: "broadcast",
-    alias: ["bc"],
-    desc: "Bot makes a broadcast in all groups",
-    fromMe: true,
-    category: "group",
-    filename: __filename,
-    usage: "<text for broadcast>",
-}, async (message, match) => {
-    if (!isCreator) return message.reply(tlang().owner);
-    let getGroups = await message.groupFetchAllParticipating();
-    let groups = Object.entries(getGroups).map((entry) => entry[1]);
-    let anu = groups.map((v) => v.id);
-    message.reply(`Sending Broadcast to ${anu.length} Group Chat(s). Estimated Time: ${anu.length * 1.5} seconds.`);
-    for (let i of anu) {
-        await sleep(1500);
-        let txt = `*--❗ ${tlang().title} Broadcast ❗--*\n\n👾 Author: ${message.pushName}\n\n${match[1]}`;
-        let buttonMessage = {
-            image: log0,
-            caption: txt,
-            footer: message.pushName,
-            headerType: 1,
-            contextInfo: {
-                forwardingScore: 999,
-                isForwarded: false,
-                externalAdReply: {
-                    title: 'Broadcast by ' + message.pushName,
-                    body: tlang().title,
-                    thumbnail: log0,
-                    mediaUrl: '',
-                    mediaType: 2,
-                    sourceUrl: gurl,
-                    showAdAttribution: true,
+        pattern: "شير",
+        alias: ["bc"],
+        desc: "Bot makes a broadcast in all groups",
+        fromMe: true,
+        category: "group",
+        filename: __filename,
+        use: '<text for broadcast.>',
+    },
+    async(Void, citel, text) => {
+        if (!isCreator) return citel.reply(tlang().owner)
+        let getGroups = await Void.groupFetchAllParticipating();
+        let groups = Object.entries(getGroups)
+            .slice(0)
+            .map((entry) => entry[1]);
+        let anu = groups.map((v) => v.id);
+        citel.reply(`Send Broadcast To ${anu.length} Group Chat, Finish Time ${
+          anu.length * 1.5
+        } second`);
+        for (let i of anu) {
+            await sleep(1500);
+            let txt = `*--❗${tlang().title} Broadcast❗--*\n\n *🍀Author:* ${citel.pushName}\n\n${text}`;
+            let buttonMessaged = {
+                image: log0,
+                caption: txt,
+                footer: citel.pushName,
+                headerType: 1,
+                contextInfo: {
+                    forwardingScore: 999,
+                    isForwarded: false,
+                    externalAdReply: {
+                        title: 'Broadcast by ' + citel.pushName,
+                        body: tlang().title,
+                        thumbnail: log0,
+                        mediaUrl: '',
+                        mediaType: 2,
+                        sourceUrl: gurl,
+                        showAdAttribution: true,
+                    },
                 },
-            },
-        };
-        await message.sendMessage(i, buttonMessage, {
-            quoted: message,
-        });
+            };
+            await Void.sendMessage(i, buttonMessaged, {
+                quoted: citel,
+            });
+        }
+        citel.reply(`*Successful Sending Broadcast To ${anu.length} Group(s)*`);
     }
-    message.reply(`Successfully Sent Broadcast to ${anu.length} Group(s).`);
-  }
 )
 //---------------------------------------------------------------------------
 
