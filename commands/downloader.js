@@ -271,7 +271,7 @@ cmd({
     //---------------------------------------------------------------------------
 cmd({
             pattern: "audio",
-            alias :['song'],
+            alias :['song','شغل'],
             desc: "Downloads audio from youtube.",
             category: "downloader",
             filename: __filename,
