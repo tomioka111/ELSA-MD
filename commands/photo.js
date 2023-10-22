@@ -194,7 +194,7 @@ const { cmd } = require('../lib')
       
         await Void.sendMessage(citel.chat, {
           image: { url: randomImage },
-          caption: "احزر اسم الشخصية"
+          caption: "*֎╎احـزر اسـم الـشـخـصـيـه┇*"
         });
       });
       
