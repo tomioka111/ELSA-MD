@@ -414,9 +414,8 @@ cmd({
             let ttms = `${userq.xp}` / 8;
             const timenow = moment(moment())
                 .format('HH:mm:ss')
-            moment.tz.setDefault('Africa/Lagos
+            moment.tz.setDefault('Africa/Lagos')
                 .locale('id')
-	let pfp;
             try {
                 pfp = await Void.profilePictureUrl(citel.sender, "image");
             } catch (e) {
