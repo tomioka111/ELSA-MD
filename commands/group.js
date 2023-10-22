@@ -43,7 +43,7 @@ cmd({
     //---------------------------------------------------------------------------
 cmd({
             pattern: "sticker",
-            alias: ["s","ملصق"],
+            alias: ["s"],
             desc: "Makes sticker of replied image/video.",
             category: "group",
             use: '<reply to any image/video.>',
@@ -370,11 +370,8 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
-    
-    
 cmd({
-            pattern: "profile",
-            alias: ["ايدي","بروفايل","me","انا"],
+            pattern: "بروفايل",
             desc: "Shows profile of user.",
             category: "group",
             filename: __filename,
@@ -385,31 +382,31 @@ cmd({
             let meh = citel.sender;
             const userq = await Levels.fetch(citel.sender, "RandomXP");
             const lvpoints = userq.level;
-            var role = "فنان✨";
-             if (lvpoints <=  2) { var role = "🏳مواطن"; } 
-	else if (lvpoints <=  4) { var role = "👼طبيب اطفال"; } 
-	else if (lvpoints <=  6) { var role = "🧙‍♀️ساحر";  } 
-	else if (lvpoints <=  8) { var role = "🧙‍♂️معالج روحاني"; }
-	else if (lvpoints <= 10) { var role = "🧚🏻طفل ملاك";  } 
-	else if (lvpoints <= 12) { var role = "🧜ملاك"; } 
-	else if (lvpoints <= 14) { var role = "🧜‍♂️سيد الملاك";} 
-	else if (lvpoints <= 16) { var role = "🌬طفل نوبل"; } 
-	else if (lvpoints <= 18) { var role = "❄نوبل"; }
-	else if (lvpoints <= 20) { var role = "⚡سريع النخبه"; } 
-	else if (lvpoints <= 22) { var role = "🎭نخبه"; } 
-	else if (lvpoints <= 24) { var role = "🥇بارع I"; }
-	else if (lvpoints <= 26) { var role = "🥈بارع II"; } 
-	else if (lvpoints <= 28) { var role = "🥉متفوق بارع"; }
-	else if (lvpoints <= 30) { var role = "🎖متفوق مسيطر";} 
-	else if (lvpoints <= 32) { var role = "🏅متفوق النخبه"; }
-	else if (lvpoints <= 34) { var role = "🏆فائق";}
-	else if (lvpoints <= 36) { var role = "💍فائق I";}
-	else if (lvpoints <= 38) { var role = "💎فائق Ii";} 
-	else if (lvpoints <= 40) { var role = "🔮سيد اللعبه";} 
-	else if (lvpoints <= 42) { var role = "🛡اسطوره III";} 
-	else if (lvpoints <= 44) { var role = "🏹اسطوره II";} 
-	else if (lvpoints <= 46) { var role = "⚔اسطوره"; } 
-	else if (lvpoints <= 55) { var role = "🐉ابدي"; }
+            var role = "GOD";
+             if (lvpoints <=  2) { var role = "Citizen"; } 
+	else if (lvpoints <=  4) { var role = "Baby Wizard"; } 
+	else if (lvpoints <=  6) { var role = "Wizard";  } 
+	else if (lvpoints <=  8) { var role = "Wizard Lord"; }
+	else if (lvpoints <= 10) { var role = "Baby Mage";  } 
+	else if (lvpoints <= 12) { var role = "Mage"; } 
+	else if (lvpoints <= 14) { var role = "Master of Mage";} 
+	else if (lvpoints <= 16) { var role = "Child of Nobel"; } 
+	else if (lvpoints <= 18) { var role = "Nobel"; }
+	else if (lvpoints <= 20) { var role = "Speed of Elite"; } 
+	else if (lvpoints <= 22) { var role = "Elite"; } 
+	else if (lvpoints <= 24) { var role = "Ace I"; }
+	else if (lvpoints <= 26) { var role = "Ace II"; } 
+	else if (lvpoints <= 28) { var role = "Ace Master"; }
+	else if (lvpoints <= 30) { var role = "Ace Dominator";} 
+	else if (lvpoints <= 32) { var role = "Ace Elite"; }
+	else if (lvpoints <= 34) { var role = "Ace Supreme";}
+	else if (lvpoints <= 36) { var role = "Supreme I";}
+	else if (lvpoints <= 38) { var role = "Supreme Ii";} 
+	else if (lvpoints <= 40) { var role = "Supreme Master";} 
+	else if (lvpoints <= 42) { var role = "Legend III";} 
+	else if (lvpoints <= 44) { var role = "Legend II";} 
+	else if (lvpoints <= 46) { var role = "Legend"; } 
+	else if (lvpoints <= 55) { var role = "•𝐊𝐈𝐍𝐆•"; }
 	
             let ttms = `${userq.xp}` / 8;
             const timenow = moment(moment())
@@ -423,14 +420,14 @@ cmd({
                 pfp = await botpic();
             }
             const profile = `
-*↫ صوره قمر زي صاحبها 🥺♥.!*
-*⌁︙اسمڪ🪪↫ ${citel.pushName}*
-*⌁︙تفاعلـڪ💥↫ سايق مخده 😹*
-*⌁︙مستواڪ💎↫ ${userq.level}*
-*⌁︙دورڪ🏅↫ ${role}*
-*⌁︙نقاطـڪ♦️↫ ${userq.xp}*
-*⌁︙رسائلـڪ🧩↫ ${ttms}*
-*⌁︙البـايـــو⚡↫ ${bioo}*
+*Hii ${citel.pushName},*
+*Here is your profile information*
+*👾Username:* ${citel.pushName}
+*⚡️Bio:* ${bioo}
+*🤺Role:* ${role}
+*🎚Level:* ${userq.level}
+*🗂 Total Messages* ${ttms}
+*Powered by ${tlang().title}*
 `;
             let buttonMessage = {
                 image: {
@@ -450,7 +447,6 @@ cmd({
 
 cmd({
             pattern: "rank",
-            alias: ["رانك"],
             desc: "Sends rank card of user.",
             category: "group",
             filename: __filename,
@@ -458,63 +454,64 @@ cmd({
         async(Void, citel, text) => {
             const userq = await Levels.fetch(citel.sender, "RandomXP");
             const lvpoints = userq.level;
-            var role = "فنان✨";
+            var role = "GOD✨";
             if (lvpoints <= 2) {
-                var role = "🏳مواطن";
+                var role = "Citizen";
             } else if (lvpoints <= 4) {
-                var role = "👼طبيب اطفال";
+                var role = "Baby Wizard";
             } else if (lvpoints <= 6) {
-                var role = "🧙‍♀️ساحر";
+                var role = "Wizard";
             } else if (lvpoints <= 8) {
-                var role = "🧙‍♂️معالج";
+                var role = "Wizard Lord";
             } else if (lvpoints <= 10) {
-                var role = "🧚🏻طفل ملاك";
+                var role = "Baby Mage";
             } else if (lvpoints <= 12) {
-                var role = "🧜ملاك";
+                var role = "Mage";
             } else if (lvpoints <= 14) {
-                var role = "🧜‍♂️سيد الملاك";
+                var role = "Master of Mage";
             } else if (lvpoints <= 16) {
-                var role = "🌬طفل نوبل";
+                var role = "Child of Nobel";
             } else if (lvpoints <= 18) {
-                var role = "❄نوبل";
+                var role = "Nobel";
             } else if (lvpoints <= 20) {
-                var role = "⚡سرعه النخبه";
+                var role = "Speed of Elite";
             } else if (lvpoints <= 22) {
-                var role = "🎭النخبه";
+                var role = "Elite";
             } else if (lvpoints <= 24) {
-                var role = "🥇بارع I";
+                var role = "Ace I";
             } else if (lvpoints <= 26) {
-                var role = "🥈بارع II";
+                var role = "Ace II";
             } else if (lvpoints <= 28) {
-                var role = "🥉متفوق بارع";
+                var role = "Ace Master";
             } else if (lvpoints <= 30) {
-                var role = "🎖متفوق مسيطر";
+                var role = "Ace Dominator";
             } else if (lvpoints <= 32) {
-                var role = "🏅متفوق النخبه";
+                var role = "Ace Elite";
             } else if (lvpoints <= 34) {
-                var role = "🏆فائق";
+                var role = "Ace Supreme";
             } else if (lvpoints <= 36) {
-                var role = "💍فائق I";
+                var role = "Supreme I";
             } else if (lvpoints <= 38) {
-                var role = "💎فائق Ii";
+                var role = "Supreme Ii";
             } else if (lvpoints <= 40) {
-                var role = "🔮سيد اللعبه";
+                var role = "Supreme Master";
             } else if (lvpoints <= 42) {
-                var role = "🛡اسطوره III";
+                var role = "Legend III";
             } else if (lvpoints <= 44) {
-                var role = "🏹اسطوره II";
+                var role = "Legend II";
             } else if (lvpoints <= 46) {
-                var role = "⚔اسطوره";
+                var role = "Legend";
             } else if (lvpoints <= 55) {
-                var role = "🐉ابدي";
+                var role = "•IZUKU•";
             }
+          
             let disc = citel.sender.substring(3, 7);
             let textr = '';
-            textr += `هـاي↫${citel.pushName}`;
+            textr += `*Hii ${tlang().greet} ,🌟 ${citel.pushName}∆${disc}'s* Exp\n\n`;
             let ttms = `${userq.xp}` / 8;
-            textr += `*⌁︙دورڪ🏅↫ ${role}*\n*⌁︙نقاطـڪ♦️↫ ${userq.xp}* / ${Levels.xpFor(
+            textr += `*🌟Role*: ${role}\n*🟢Exp*: ${userq.xp} / ${Levels.xpFor(
     userq.level + 1
-  )}\n*⌁︙مستواڪ💎↫ ${userq.level}*\n*⌁︙رسائلـڪ🧩↫ ${ttms}*`;
+  )}\n*🏡Level*: ${userq.level}\n*Total Messages:*- ${ttms}`;
             try {
                 ppuser = await Void.profilePictureUrl(citel.sender, "image");
             } catch {
@@ -529,8 +526,8 @@ cmd({
         }
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "المتصدرين",
-            alias: ["المتفوقين"],
+            pattern: "leaderboard",
+            alias: ["deck"],
             desc: "To check leaderboard",
             category: "general",
             filename: __filename,
@@ -538,64 +535,66 @@ cmd({
         async(Void, citel) => {
             const fetchlb = await Levels.fetchLeaderboard("RandomXP", 5);
             let leadtext = ` 
-*❋ ─═══━•┇قـائـمـه الـمـتـصـدريـن┇•━═══─ ❋*
+*─────────────*
+ *──–—• LeaderBoard •──*
+*─────────────*
 \n\n`
             for (let i = 0; i < fetchlb.length; i++) {
                 const lvpoints = fetchlb[i].level
-                var role = "فنان✨";
+                var role = "GOD";
                 if (lvpoints <= 2) {
-                    var role = "🏳مواطن";
+                    var role = "Citizen";
                 } else if (lvpoints <= 4) {
-                    var role = "👼طبيب اطفال";
+                    var role = "Baby Wizard";
                 } else if (lvpoints <= 6) {
-                    var role = "🧙‍♀️ساحر";
+                    var role = "Wizard";
                 } else if (lvpoints <= 8) {
-                    var role = "🧙‍♂️معالج";
+                    var role = "Wizard Lord";
                 } else if (lvpoints <= 10) {
-                    var role = "🧚🏻طفل ملاك";
+                    var role = "Baby Mage";
                 } else if (lvpoints <= 12) {
-                    var role = "🧜ملاك";
+                    var role = "Mage";
                 } else if (lvpoints <= 14) {
-                    var role = "🧜‍♂️سيد الملاك";
+                    var role = "Master of Mage";
                 } else if (lvpoints <= 16) {
-                    var role = "🌬طفل نوبل";
+                    var role = "Child of Nobel";
                 } else if (lvpoints <= 18) {
-                    var role = "❄نوبل";
+                    var role = "Nobel";
                 } else if (lvpoints <= 20) {
-                    var role = "⚡سرعه النخبه";
+                    var role = "Speed of Elite";
                 } else if (lvpoints <= 22) {
-                    var role = "🎭النخبه";
+                    var role = "Elite";
                 } else if (lvpoints <= 24) {
-                    var role = "🥇بارع I";
+                    var role = "Ace I";
                 } else if (lvpoints <= 26) {
-                    var role = "🥈بارع II";
+                    var role = "Ace II";
                 } else if (lvpoints <= 28) {
-                    var role = "🥉متفوق بارع";
+                    var role = "Ace Master";
                 } else if (lvpoints <= 30) {
-                    var role = "🎖متفوق مسيطر";
+                    var role = "Ace Dominator";
                 } else if (lvpoints <= 32) {
-                    var role = "🏅متفوق النخبه";
+                    var role = "Ace Elite";
                 } else if (lvpoints <= 34) {
-                    var role = "🏆فائق";
+                    var role = "Ace Supreme";
                 } else if (lvpoints <= 36) {
-                    var role = "💍فائق I";
+                    var role = "Supreme I";
                 } else if (lvpoints <= 38) {
-                    var role = "💎فائق Ii";
+                    var role = "Supreme Ii";
                 } else if (lvpoints <= 40) {
-                    var role = "🔮سيد اللعبه";
+                    var role = "Supreme Master";
                 } else if (lvpoints <= 42) {
-                    var role = "🛡اسطوره III";
+                    var role = "Legend III";
                 } else if (lvpoints <= 44) {
-                    var role = "🏹اسطوره II";
+                    var role = "Legend II";
                 } else if (lvpoints <= 46) {
-                    var role = "⚔اسطوره";
+                    var role = "Legend";
                 } else if (lvpoints <= 55) {
-                    var role = "🐉ابدي";
+                    var role = "•IZUKU•";
                 }
                 let data = await sck1.findOne({ id: fetchlb[i].userID })
                 let namew = fetchlb[i].userID
                 let ttms = fetchlb[i].xp / 8
-                leadtext += `*${i + 1}*⌁︙الاسـم🪪↫ ${data.name}*\n*⌁︙الـمسـتـوي💎↫ ${fetchlb[i].level}*\n*⌁︙الـنـقـاط♦️↫ ${fetchlb[i].xp}*\n*⌁︙الـدور🏅↫ ${role}*\n*⌁︙الـرسـائـل🧩↫ ${ttms}*\n\n`;
+                leadtext += `*${i + 1}*\n*•NAME•* ${data.name}\n*•LEVEL•* ${fetchlb[i].level}\n*•POINT•* ${fetchlb[i].xp}\n*•ROLE•* ${role}\n*•TOTAL MSG•* ${ttms}\n✯────────────────────✯\n`;
             }
             return citel.reply(leadtext)
         }
@@ -1047,69 +1046,44 @@ cmd({
 	    {
 		    const sck1 = await Levels.fetch(citel.sender, "RandomXP");
 		    const lvpoints = sck1.level;
-        var role = "فنان";
-        if (lvpoints <= 2) {
-            var role = "🏳مواطن";
-        } else if (lvpoints <= 4) {
-            var role = "👼طبيب اطفال";
-        } else if (lvpoints <= 6) {
-            var role = "🧙‍♀️ساحر";
-        } else if (lvpoints <= 8) {
-            var role = "🧙‍♂️معالج";
-        } else if (lvpoints <= 10) {
-            var role = "🧚🏻طفل ملاك";
-        } else if (lvpoints <= 12) {
-            var role = "🧜ملاك";
-        } else if (lvpoints <= 14) {
-            var role = "🧜‍♂️سيد الملاك";
-        } else if (lvpoints <= 16) {
-            var role = "🌬طفل نوبل";
-        } else if (lvpoints <= 18) {
-            var role = "❄نوبل";
-        } else if (lvpoints <= 20) {
-            var role = "⚡سرعه النخبه";
-        } else if (lvpoints <= 22) {
-            var role = "🎭النخبه";
-        } else if (lvpoints <= 24) {
-            var role = "🥇بارع I";
-        } else if (lvpoints <= 26) {
-            var role = "🥈بارع II";
-        } else if (lvpoints <= 28) {
-            var role = "🥉متفوق بارع";
-        } else if (lvpoints <= 30) {
-            var role = "🎖متفوق مسيطر";
-        } else if (lvpoints <= 32) {
-            var role = "🏅متفوق النخبه";
-        } else if (lvpoints <= 34) {
-            var role = "🏆فائق";
-        } else if (lvpoints <= 36) {
-            var role = "💍فائق I";
-        } else if (lvpoints <= 38) {
-            var role = "💎فائق Ii";
-        } else if (lvpoints <= 40) {
-            var role = "🔮سيد اللعبه";
-        } else if (lvpoints <= 42) {
-            var role = "🛡اسطوره III";
-        } else if (lvpoints <= 44) {
-            var role = "🏹اسطوره II";
-        } else if (lvpoints <= 46) {
-            var role = "⚔اسطوره";
-        } else if (lvpoints <= 55) {
-            var role = "🐉ابدي";
-        } else {
-            var role = "مختم اللعبه";  
-        }
+		    var role = "GOD";
+			 if (lvpoints <=  2) { var role = "🚹Citizen";  } 
+		    else if (lvpoints <=  4) { var role = "🧸Baby Wizard"; } 
+		    else if (lvpoints <=  6) { var role = "🪄Wizard"; } 
+		    else if (lvpoints <=  8) { var role = "🧙‍♂️Wizard Lord"; } 
+		    else if (lvpoints <= 10) { var role = "🧜‍♂️Baby Mage"; } 
+		    else if (lvpoints <= 12) { var role = "🧞Mage"; } 
+		    else if (lvpoints <= 14) { var role = "🧞‍♂️Master of Mage";} 
+		    else if (lvpoints <= 16) { var role = "👼🏽Child of Nobel";  } 
+		    else if (lvpoints <= 18) { var role = "🦸🏽‍♂️Nobel";} 
+		    else if (lvpoints <= 20) { var role = "👩🏽‍🎤Speed of Elite"; }
+		    else if (lvpoints <= 22) { var role = "Elite"; } 
+		    else if (lvpoints <= 24) { var role = "Ace I"; } 
+		    else if (lvpoints <= 26) { var role = "Ace II"; } 
+		    else if (lvpoints <= 28) { var role = "Ace Master"; }
+		    else if (lvpoints <= 30) { var role = "Ace Dominator"; }
+		    else if (lvpoints <= 32) { var role = "Ace Elite"; }
+		    else if (lvpoints <= 34) { var role = "Ace Supreme";} 
+		    else if (lvpoints <= 36) { var role = "👩🏽‍🚀Supreme I"; }
+		    else if (lvpoints <= 38) { var role = "Supreme Ii"; } 
+		    else if (lvpoints <= 40) { var role = "Supreme Master"; } 
+		    else if (lvpoints <= 42) { var role = "Legend III"; } 
+		    else if (lvpoints <= 44) { var role = "Legend II"; } 
+		    else if (lvpoints <= 46) { var role = "Legend"; } 
+		    else if (lvpoints <= 55) { var role = "«IZUKU»"; } 
+		    else {  var role = "Kiddo";   }
 
 		    if(name.levelupmessage !== 'false')
 		    {
 			    await Void.sendMessage(citel.chat, { image: {  url: await botpic() },
 			caption: `
-*❋ ─═══━•┇ارتـفـع مـسـتـواك🤴┇•━═══─ ❋*
-*⌁︙اسمڪ🪪↫ ${citel.pushName}*
-*⌁︙مستواڪ💎↫ ${sck1.level}*
-*⌁︙نقاطـڪ♦️↫ ${sck1.xp} / ${Levels.xpFor(sck1.level + 1)}*
-*⌁︙دورڪ🏅↫ ${role}*
-*❋ ─═══━•┇مـبـروك🏂┇•━═══─ ❋*
+━━━━━༺❃༻━━━━━◇
+☱ *look at that! Someone just leveled up! ✨*
+☱ *👤 Name*: ${citel.pushName}
+☱ *🎚 Level*: ${sck1.level}
+☱ *🛑 Exp*: ${sck1.xp} / ${Levels.xpFor(sck1.level + 1)}
+☱ *📍 Role*: *${role}*
+☱ *Enjoy! 😁*━━━━━༺❃༻━━━━——
 `,
             }, {
                 quoted: citel,
