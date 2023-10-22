@@ -1,7 +1,7 @@
 {
-  "name": "izuku-md",
+  "name": "elsa-md",
   "version": "0.0.7",
-  "description": "Multi device whatsapp bot by excelottah6.",
+  "description": "Multi device whatsapp bot by Sjshskdhd.",
   "main": "lib/client.js",
   "type": "commonjs",
   "license": "GPL-3.0",
@@ -70,10 +70,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sjshskdhd/IZUKU-MD.git"
+    "url": "git+https://github.com/Sjshskdhd/ELSA-MD.git"
   },
   "bugs": {
-    "url": "https://github.com/Sjshskdhd/IZUKU-MD/issues"
+    "url": "https://github.com/Sjshskdhd/ELSA-MD/issues"
   },
-  "homepage": "https://github.com/Sjshskdhd/IZUKU-MD#readme"
+  "homepage": "https://github.com/Sjshskdhd/ELDA-MD#readme"
 }
