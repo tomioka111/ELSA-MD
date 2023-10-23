@@ -695,7 +695,6 @@ cmd({
 cmd({
             pattern: "hidetag",
             alias: ["وهمي","مخفي"],
-            alias: ["tag"],
             desc: "Tags everyperson of group without mentioning their numbers",
             category: "group",
             filename: __filename,
