@@ -107,21 +107,19 @@ Void.sendMessage(citel.chat,{image:{url:data.data[0].url}})
 
 //---------------------------------------------------------------------------
 cmd({
-        pattern: "repo",
-        alias: ["git", "sc", "script"],
+        pattern: "السورس",
+        alias: ["سكريبت", "sc", "script"],
         desc: "Sends info about repo.",
         category: "general",
         filename: __filename,
     },
     async(Void, citel) => {
-        let { data } = await axios.get('https://api.github.com/repos/excelottah6/IZUKU-MD')
+        let { data } = await axios.get('https://youtube.com/@ABDALLAH_MOHAMED')
         let cap = `Hey ${citel.pushName}\n
+/
 ╭┈─────────────────────    .· * • ˚
-│*⭐ Total Stars:* ${data.stargazers_count} stars
-│*🍴 Forks:* ${data.forks_count} forks
-│*📡 Repo:* https://github.com/excelottah6/IZUKU-MD
-│*🏘Group:* https://chat.whatsapp.com/BEhEne7RdGBC3y5vYltuxL
-│*🧑‍💻Deploy IZUKU MD*:https://github.com/excelottah6/IZUKU-MD
+│*📡 قناتي:* https://youtube.com/@ABDALLAH_MOHAMED
+│*🏘جروب الدعم:* https://chat.whatsapp.com/DmGUnUroeRB1FAoBnHZMWP
 ╰──────────────────────✬      * ˚  ✶`
         let buttonMessaged = {
             image: { url: await botpic() },
@@ -130,8 +128,8 @@ cmd({
             headerType: 4,
             contextInfo: {
                 externalAdReply: {
-                    title: "IZUKU-Repo",
-                    body: "Easy to Use",
+                    title: "السورس",
+                    body: "سورس البوت",
                     thumbnail: log0,
                     mediaType: 4,
                     mediaUrl: '',
@@ -148,7 +146,7 @@ cmd({
 //---------------------------------------------------------------------------
 cmd({
         pattern: "status",
-        alias: ["about"],
+        alias: ["الحاله","الحاله"],
         desc: "To check bot status",
         category: "general",
         filename: __filename,
