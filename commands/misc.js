@@ -140,7 +140,7 @@ async(Void, citel, text,{ isCreator }) => {
              let me = citel.sender;
              let pick = member[Math.floor(Math.random() * member.length)];
              Void.sendMessage(citel.chat, {
-                 text: `*֎╎اكـتـر شـخـص ${match}فـي هـذا الـقـروب هـو @${pick.split("@")[0]}*`,
+                 text: `*֎╎اكـتـر شـخـص ${match} فـي هـذا الـقـروب هـو @${pick.split("@")[0]}*`,
                  mentions: [pick],
              }, {
                  quoted: citel,
