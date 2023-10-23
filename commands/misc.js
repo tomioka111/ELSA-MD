@@ -187,7 +187,7 @@ async(Void, citel, text,{ isCreator }) => {
          }
      )
      //---------------------------------------------------------------------------
- cmd({
+ /*cmd({
              pattern: "chatbot",
              desc: "activates and deactivates chatbot.\nuse buttons to toggle.",
              category: "misc",
@@ -241,7 +241,7 @@ async(Void, citel, text,{ isCreator }) => {
                                  },
                                  type: 1,
                              },
-                         ];*/
+                         ];
                          let chatbott= await chatbot.findOne({ id: 'chatbot' })
                          await Void.sendButtonText(citel.chat, buttons, `Chatbot Status: ${chatbott.worktype} `, 'Izuku-Md', citel);
                         citel.reply(`Chatbot Status: ${chatbott.worktype} \n*Use:* ${prefix}chatbot on\n${prefix}chatbot off`)
@@ -250,7 +250,7 @@ async(Void, citel, text,{ isCreator }) => {
  
  
          }
-     )
+     )*/
      //---------------------------------------------------------------------------
  cmd({
              pattern: "تشفير",
@@ -300,7 +300,7 @@ async(Void, citel, text,{isCreator}) => {
   if (!citel.isGroup) return citel.reply(tlang().group);
   if(!isCreator) return //citel.reply(tlang().owner)
 switch (text.split(" ")[0]) {
- case 'on':{
+ case 'فتح':{
          let checkgroup = await sck.findOne({ id: citel.chat })
          if (!checkgroup) {
              await new sck({ id: citel.chat, botenable: "شغال" }).save()
@@ -345,7 +345,7 @@ let buttons = [{
           type: 1,
       },
   ];
-  await Void.sendButtonText(citel.chat, buttons, `تشغيل او تعطيل البوت: ${checkgroup.botenable}`, Void.user.name, citel);
+  await Void.sendButtonText(citel.chat, buttons, `فتخ او قفل البوت: ${checkgroup.botenable}`, Void.user.name, citel);
 }
 }
 })   
@@ -367,14 +367,14 @@ let buttons = [{
              let buttons = [{
                      buttonId: `${prefix}فتح الروابط`,
                      buttonText: {
-                         displayText: "تشغيل",
+                         displayText: "فتح",
                      },
                      type: 1,
                  },
                  {
                      buttonId: `${prefix}قفل الروابط`,
                      buttonText: {
-                         displayText: "تعطيل",
+                         displayText: "قفل",
                      },
                      type: 1,
                  },
