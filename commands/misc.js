@@ -24,6 +24,7 @@ const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter")
   //---------------------------------------------------------------------------
  cmd({
     pattern: "setwelcome",
+    alias: ["الترحيب","تغيرالترحيب"],
     desc: "sets welcome message in specific group.",
     category: "misc",
 },
@@ -32,10 +33,10 @@ async(Void, citel, text,{ isCreator }) => {
           let Group = await sck.findOne({ id: citel.chat })
             if (!Group) {
                 await new sck({ id: citel.chat, welcome: text,events:'true' }).save()
-                return citel.reply('Welcome added added for this group.')
+                return citel.reply('*֎╎ايـن رسـالـه الـترحـيـب الـجـديـده*')
             } else {
                 await await sck.updateOne({ id: citel.chat }, { welcome:text ,events:'true'})
-                return citel.reply('Welcome msg has been updated successfully.')
+                return citel.reply('*֎╎تـم تـغـيـر رسـالـه الـتـرحـيـب بـنـجـاح*')
                 
             }      
 }
@@ -43,6 +44,7 @@ async(Void, citel, text,{ isCreator }) => {
  //---------------------------------------------------------------------------
 cmd({
     pattern: "setgoodbye",
+    alias: ["المغادره","المغادرة","تغيرالمغادره","تغيرالمغادرة"],
     desc: "sets goodbye message in specific group.",
     category: "misc",
 },
@@ -51,80 +53,18 @@ async(Void, citel, text,{ isCreator }) => {
           let Group = await sck.findOne({ id: citel.chat })
             if (!Group) {
                 await new sck({ id: citel.chat, goodbye: text,events:'true' }).save()
-                return citel.reply('Goodbye added for this group.');
+                return citel.reply('*֎╎ايـن رسـالـه الـمـغـادره الـجـديـده*');
             } else {
                 await await sck.updateOne({ id: citel.chat }, { goodbye:text,events:'true' })
-                return citel.reply('Goodbye msg has been updated successfully.');     
+                return citel.reply('*֎╎تـم تـغـيـر رسـالـه الـمـغـادره بـنـجـاح*');     
             }      
 }
 )
- //---------------------------------------------------------------------------
- cmd({
-             pattern: "attp",
-             desc: "Makes glowing sticker of text.",
-             category: "sticker",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-let a = await getBuffer(`https://citel-x.herokuapp.com/attp/${text}`)
- return citel.reply(a,{packname:'IZUKU',author:'ATTP'},"sticker") 
-         }
-     )
- cmd({
-             pattern: "ttp",
-             desc: "Makes static sticker of text.",
-             category: "sticker",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
- return citel.reply(a,{packname:'IZUKU',author:'TTP'},"sticker") 
-         }
-     )
      //---------------------------------------------------------------------------
- cmd({
-             pattern: "exec",
-             desc: "Evaluates quoted code with given language.",
-             category: "misc",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-             try {
-                 const code = {
-                     script: citel.quoted.text,
-                     language: text[1],
-                     versionIndex: "0",
-                     stdin: text.slice(2).join(" "),
-                     clientId: '694805244d4f825fc02a9d6260a54a99',
-                     clientSecret: '741b8b6a57446508285bb5893f106df3e20f1226fa3858a1f2aba813799d4734'
-                 };
-                 request({
-                     url: "https://api.jdoodle.com/v1/execute",
-                     method: "POST",
-                     json: code
-                 }, function(_error, _response, body) {
-                    return citel.reply("> " + text[1] + "\n\n" + "```" + body.output + "```");
-                 });
-             } catch (error) {
-                 console.log(error);
-             }
-         }
-     )
-     //---------------------------------------------------------------------------
- cmd({
-             pattern: "readmore",
-             desc: "Adds *readmore* in given text.",
-             category: "misc",
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-            return await citel.reply(text.replace(/\+/g, (String.fromCharCode(8206)).repeat(4001)))
  
-         }
-     )
-     //---------------------------------------------------------------------------
  cmd({
              pattern: "steal",
+             alias: ["سرقه","سرقة","زرف","ملصقي"],
              desc: "Makes sticker of replied image/video.",
              category: "sticker",
              filename: __filename,
@@ -159,7 +99,7 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
      )
      //---------------------------------------------------------------------------
  cmd({
-             pattern: "uptime",
+             pattern: "المده",
              alias: ["runtime"],
              desc: "Tells runtime/uptime of bot.",
              category: "misc",
@@ -167,12 +107,13 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
          },
          async(Void, citel, text) => {
              const upt = runtime(process.uptime())
-             return citel.reply(`Uptime of ${tlang().title}: ${upt}`)
+             return citel.reply(`֎╎مـده تـشـغـيـل ${tlang().title}: ${upt}`)
          }
      )
      //---------------------------------------------------------------------------
  cmd({
-             pattern: "wm",
+             pattern: "رابطه",
+             alias: ["رابطة"],
              desc: "Makes wa.me of quoted or mentioned user.",
              category: "misc",
              filename: __filename,
@@ -185,13 +126,13 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
      )
      //---------------------------------------------------------------------------
  cmd({
-             pattern: "pick",
+             pattern: "شخص",
              desc: "Pics random user from Group",
              category: "misc",
              filename: __filename,
          },
          async(Void, citel, match) => {
-             if (!match) return citel.reply("*Which type of User you want?*");
+             if (!match) return citel.reply("*֎╎اكـتـب صـفـه مـعـيـنـه*");
              const groupMetadata = citel.isGroup ? await Void.groupMetadata(citel.chat)
                  .catch((e) => {}) : "";
              const participants = citel.isGroup ? await groupMetadata.participants : "";
@@ -199,7 +140,7 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
              let me = citel.sender;
              let pick = member[Math.floor(Math.random() * member.length)];
              Void.sendMessage(citel.chat, {
-                 text: `The most ${match} around us is *@${pick.split("@")[0]}*`,
+                 text: `*֎╎اكـتـر شـخـص ${match}فـي هـذا الـقـروب هـو @${pick.split("@")[0]}*`,
                  mentions: [pick],
              }, {
                  quoted: citel,
@@ -207,79 +148,33 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
          }
      )
      //---------------------------------------------------------------------------
+ 
  cmd({
-             pattern: "npm",
-             desc: "download mp4 from url.",
-             category: "search",
-             use: '<package name>',
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-             if (!text) return citel.reply('Please give me package name.📦')
-             axios.get(`https://api.npms.io/v2/search?q=${text}`).then(({ data }) => {
-                 let txt = data.results.map(({ package: pkg }) => `*${pkg.name}* (v${pkg.version})\n_${pkg.links.npm}_\n_${pkg.description}_`).join('\n\n')
-                 citel.reply(txt)
-             }).catch(e => console.log(e))
-         }
-     )
-     //---------------------------------------------------------------------------
- cmd({
-             pattern: "fliptext",
+             pattern: "عكس",
              desc: "Flips given text.",
              category: "misc",
              use: '<query>',
              filename: __filename,
          },
          async(Void, citel, text) => {
-             if (!text) return citel.reply(`Example : ${prefix}fliptext Back in black`)
+             if (!text) return citel.reply(`*֎╎مـثـال┇.عـكـس الـسـا*`)
              flipe = text.split('').reverse().join('')
-             citel.reply(`\`\`\`「  Text Flipper Tool  」\`\`\`\n*IGiven text :*\n${text}\n*Fliped text :*\n${flipe}`)
- 
-         }
-     )
-     //---------------------------------------------------------------------------
- cmd({
-             pattern: "mp4fromurl",
-             desc: "download mp4 from url.",
-             category: "misc",
-             use: '<url>',
-             filename: __filename,
-         },
-         async(Void, citel, text) => {
-             if (!text) return citel.reply(`Where's the link ?`);
-             Void.sendMessage(citel.chat, {
-                 video: {
-                     url: text.split(" ")[0],
-                 },
-                 caption: "*HERE WE GO*",
-                 contextInfo: {
-                     externalAdReply: {
-                         title: tlang().title,
-                         body: `${citel.pushName}`,
-                         thumbnail: log0,
-                         mediaType: 2,
-                         mediaUrl: ``,
-                         sourceUrl: ``,
-                     },
-                 },
-             }, {
-                 quoted: citel,
-             });
+             citel.reply(`\`\`\`*〖عـكـس الـكـلـمـات〗*\`\`\`\n*֎╎الـكـلـمـه الاصـلـيـه┇* \n${text}\n*֎╎الـكـلـمـه الـمـعـكـوسـه┇* \n${flipe}`)
  
          }
      )
      //---------------------------------------------------------------------------
  
  cmd({
-             pattern: "emix",
+             pattern: "دمج",
              desc: "Mixes two emojies.",
              category: "misc",
              use: '<query>',
              filename: __filename,
          },
          async(Void, citel, text,{ isCreator }) => {
-             if (!text) return citel.reply(`Example : ${prefix}emix 😅,🤔`);
-             let [emoji1, emoji2] = text.split `,`;
+             if (!text) return citel.reply(`*֎╎مـثـال┇ ${prefix}دمج 😅+🤔*`);
+             let [emoji1, emoji2] = text.split `+`;
              let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1 )}_${encodeURIComponent(emoji2)}`);
              for (let res of anu.results) {
                  let encmedia = await Void.sendImageAsSticker(citel.chat, res.url, citel, {
@@ -332,7 +227,7 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
                      break
                  default:
                      {
-                         let buttons = [{
+                         /*let buttons = [{
                                  buttonId: `${prefix}chatbot on`,
                                  buttonText: {
                                      displayText: "Turn On",
@@ -346,7 +241,7 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
                                  },
                                  type: 1,
                              },
-                         ];
+                         ];*/
                          let chatbott= await chatbot.findOne({ id: 'chatbot' })
                          await Void.sendButtonText(citel.chat, buttons, `Chatbot Status: ${chatbott.worktype} `, 'Izuku-Md', citel);
                         citel.reply(`Chatbot Status: ${chatbott.worktype} \n*Use:* ${prefix}chatbot on\n${prefix}chatbot off`)
@@ -358,7 +253,8 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
      )
      //---------------------------------------------------------------------------
  cmd({
-             pattern: "ebinary",
+             pattern: "تشفير",
+             alias: ["شيفره"],
              desc: "encode binary",
              category: "misc",
              use: '<query>',
@@ -366,7 +262,7 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
          },
          async(Void, citel, text,{ isCreator }) => {
              try {
-                 if (!text) return citel.reply(`Send text to be encoded.`);
+                 if (!text) return citel.reply(`*֎╎تـم تـشـفـيـر الـنـص*`);
  
                  let textt = text || citel.quoted.text
                  let eb = await eBinary(textt);
@@ -378,7 +274,8 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
      )
      //---------------------------------------------------------------------------
  cmd({
-             pattern: "dbinary",
+             pattern: "فك-تشفير",
+             alias: ["فك-شيفره"],
              desc: "decode binary",
              category: "misc",
              use: '<query>',
@@ -386,7 +283,7 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
          },
          async(Void, citel, text,{ isCreator }) => {
              try {
-                 if (!text) return citel.reply(`Send text to be decoded.`);
+                 if (!text) return citel.reply(`*֎╎تـم فـك تـشـفـيـر الـنـص*`);
                  let eb = await dBinary(text);
                  citel.reply(eb);
              } catch (e) {
@@ -395,9 +292,8 @@ let a = await getBuffer(`https://citel-x.herokuapp.com/ttp/${text}`)
          }
      )
 cmd({
-  pattern: "bot",
-  desc: "activates and deactivates bot.\nuse buttons to toggle.",
-  category: "misc",
+  cmd({
+  pattern: "بوت",
   filename: __filename,
 },
 async(Void, citel, text,{isCreator}) => {
@@ -407,27 +303,27 @@ switch (text.split(" ")[0]) {
  case 'on':{
          let checkgroup = await sck.findOne({ id: citel.chat })
          if (!checkgroup) {
-             await new sck({ id: citel.chat, botenable: "true" }).save()
-             return citel.reply(`Successfully Enabled *${tlang().title}*`)
+             await new sck({ id: citel.chat, botenable: "شغال" }).save()
+             return citel.reply(`يمكنك استعمال البوت فالقروب`)
          } else {
-             if (checkgroup.botenable == "true") return citel.reply("*Bot* was already enabled")
-             await sck.updateOne({ id: citel.chat }, { botenable: "true" })
-             return citel.reply(`Successfully Enabled *${tlang().title}*`)
+             if (checkgroup.botenable == "شغال") return citel.reply("البوت شغال مسبقا")
+             await sck.updateOne({ id: citel.chat }, { botenable: "شغال" })
+             return citel.reply(`يمكنك استعمال البوت فالقروب `)
          }
      }
   
  break
-case 'off':{
+case 'قفل':{
             {
              let checkgroup = await sck.findOne({ id: citel.chat })
              if (!checkgroup) {
-                 await new sck({ id: citel.chat, botenable: "false" })
+                 await new sck({ id: citel.chat, botenable: "معطل" })
                      .save()
-                 return citel.reply(`Successfully disabled *${tlang().title}*`)
+                 return citel.reply(`تم منع البوت فالقروب `)
              } else {
-                 if (checkgroup.botenable == "false") return citel.reply("*Bot* was already disabled")
-                 await sck.updateOne({ id: citel.chat }, { botenable: "false" })
-                 return citel.reply(`Successfully disabled *${tlang().title}*`)
+                 if (checkgroup.botenable == "معطل") return citel.reply("البوت غير شغال مسبقا")
+                 await sck.updateOne({ id: citel.chat }, { botenable: "معطل" })
+                 return citel.reply(`تم منع البوت فالقروب `)
              }
          }
 }
@@ -435,30 +331,29 @@ break
 default:{
 let checkgroup = await sck.findOne({ id: citel.chat })
 let buttons = [{
-          buttonId: `${prefix}bot on`,
+          buttonId: `${prefix}بوت فتح`,
           buttonText: {
-              displayText: "Turn On",
+              displayText: "فتح",
           },
           type: 1,
       },
       {
-          buttonId: `${prefix}bot off`,
+          buttonId: `${prefix}بوت قفل`,
           buttonText: {
-              displayText: "Turn Off",
+              displayText: "قفل",
           },
           type: 1,
       },
   ];
-  await Void.sendButtonText(citel.chat, buttons, `Bot Status in Group: ${checkgroup.botenable}`, Void.user.name, citel);
+  await Void.sendButtonText(citel.chat, buttons, `تشغيل او تعطيل البوت: ${checkgroup.botenable}`, Void.user.name, citel);
 }
 }
 })   
-         
+        
      //---------------------------------------------------------------------------
  cmd({
              pattern: "antilink",
-             desc: "activates and deactivates antilink.\nuse buttons to toggle.",
-             category: "group",
+             alias: ["الروابط"],
              filename: __filename,
          },
          async(Void, citel, text) => {
@@ -470,26 +365,29 @@ let buttons = [{
              if (!isAdmins) return citel.reply(tlang().admin)
              if (!isBotAdmins) return citel.reply(tlang().botadmin)
              let buttons = [{
-                     buttonId: `${prefix}act antilink`,
+                     buttonId: `${prefix}فتح الروابط`,
                      buttonText: {
-                         displayText: "Turn On",
+                         displayText: "تشغيل",
                      },
                      type: 1,
                  },
                  {
-                     buttonId: `${prefix}deact antilink`,
+                     buttonId: `${prefix}قفل الروابط`,
                      buttonText: {
-                         displayText: "Turn Off",
+                         displayText: "تعطيل",
                      },
                      type: 1,
                  },
              ];
-             await Void.sendButtonText(citel.chat, buttons, `Activate antilink:Deletes Link + kick`, Void.user.name, citel);
+             await Void.sendButtonText(citel.chat, buttons, `تشغيل او تعطيل مضاد الروابط`, Void.user.name, citel);
          }
      )
+         
+     //---------------------------------------------------------------------------
+ 
      cmd({
-        pattern: 'ss',
-        alias :['webss' , 'fullss'],
+        pattern: 'اختصار',
+        alias :['قص' , 'تقصير'],
         category: "search",
         desc: "Provides screenshot of given url",
         use: '<text>',
@@ -498,12 +396,12 @@ let buttons = [{
     async(Void, citel, text) => {
 let limit = 5;
 try {
-if (!text) return citel.reply("```Uhh Please, Give me Url!```");
+if (!text) return citel.reply("*֎╎ويـن  الـرابـط ؟*");
 let urll = `https://s.vercel.app/api?url=${text.match(/\bhttps?:\/\/\S+/gi)[0]}&width=1280&height=720`
 let media  = await getBuffer(urll)
 return await Void.sendMessage(citel.chat ,{image : media } , {quoted:citel} )
 }
-catch (err) { return citel.reply("```Error While Fetching Snapshot```")}
+catch (err) { return citel.reply("*֎╎تـم  اخـتـصـار  رابـطـك ┇*")}
     }
 )
 

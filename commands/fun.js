@@ -18,7 +18,7 @@ const { dare, truth, kt, hal } = require('../lib/truth-dare.js')
     filename: __filename,
 },
 async(Void, citel, text) => {
-    return await citel.reply(`֎╎الـسـؤال: هل ${q}\n֎╎الاجـابـه: *${hal()}*`);
+    return await citel.reply(`${hal()}`);
 }
 )
 //---------------------------------------------------------------------------
