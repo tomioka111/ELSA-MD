@@ -291,7 +291,7 @@ async(Void, citel, text,{ isCreator }) => {
              }
          }
      )
-cmd({
+     
   cmd({
   pattern: "بوت",
   filename: __filename,
