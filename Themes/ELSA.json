@@ -1,13 +1,13 @@
 {
     "__JSON__": true,
     "AUTHOR": "elgazar",
-    "LANGUAGE": "Arab",
+    "LANGUAGE": "Arabi",
     "LANGCODE": "ar",
     "STRINGS": {
         "updater": {
-            "UPDATE": "*Your bot is already on latest version Darling*",
-            "NEW_UPDATE": "*There is a new update available for the bot!*\n\n*Changes:*\n",
-            "UPDATED_LOCAL": "*Successfully Updated!*"
+            "UPDATE": "*֎╎الـبـوت مـحـدث بـالـفـعـل*",
+            "NEW_UPDATE": "*֎╎يـوجـد تـحـديـث جـديـد للـبـوت*\n\n*تـم تـحـديـث:*\n",
+            "UPDATED_LOCAL": "*֎╎تـم الـتـحـديـث*"
         },
         "global": {
             "botName": "*『❄️┇❆ 𝐸𝐿𝑆𝐴 𝐵𝑂𝑇-𝑀𝐷 ❆┇❄️』*",
@@ -32,21 +32,21 @@
             "antlink": "Link Detected.\n*Good Bye Bro*",
             "session": "\n*This is your session.sam.json,keep it safe and store it properly*\n_Now Upload This json file in Your Forked Repo_\n Connect your repo to Heroku and *Deploy Branch* and Bot will run for Always\n\n*𝑷𝒐𝒘𝒆𝒓𝒆𝒅 𝒃𝒚 𝒁𝒆𝒓𝒐 𝑻𝒘𝒐*",
             "mention": " Please atleast mention any user bro.",
-            "title": "𝐏𝐞𝐭𝐞𝐫 𝐏𝐚𝐫𝐤𝐞𝐫",
-            "footer": "𝐏𝐞𝐭𝐞𝐫 𝐏𝐚𝐫𝐤𝐞𝐫",
+            "title": "𝐸𝐿𝑆𝐴 𝐵𝑂𝑇",
+            "footer": "𝐸𝐿𝑆𝐴 𝐵𝑂𝑇",
             "by": "Made by: *CitelVoid*",
             "chat_desc": "Options Avilable* : 1. mute\n2. unmute\n3. archive\n4. unarchive\n5. read\n6. unread\n7. delete",
-            "success": "Done ✓",
+            "success": "*֎╎تــم✅*",
             "dot": "Hii Bro, Just a Sec.\nWait,did you mean *-help?*",
             "couple_male": "*I dont want to die alone,I want a female yaar*",
             "couple_female": "*I dont want to die alone,I want a male yaar*",
-            "admin": "𝑇ℎ𝑖𝑠 𝑐𝑜𝑚𝑚𝑎𝑛𝑑 𝑖𝑠 𝑜𝑛𝑙𝑦 𝑓𝑜𝑟 𝑔𝑟𝑜𝑢𝑝 𝐴𝑑𝑚𝑖𝑛⚠️!",
-            "botAdmin": "𝑃𝑙𝑒𝑎𝑠𝑒 𝑃𝑟𝑜𝑣𝑖𝑑𝑒 𝑚𝑒 𝐴𝑑𝑚𝑖𝑛 𝑅𝑜𝑙𝑒 𝑆𝑖𝑟.❗",
-            "owner": "𝐓𝐡𝐢𝐬 𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐢𝐬 𝐨𝐧𝐥𝐲 𝐟𝐨𝐫 𝐌𝐲 𝐎𝐰𝐧𝐞𝐫 ⚠️",
-            "group": "𝑻𝒉𝒊𝒔 𝑭𝒆𝒂𝒕𝒖𝒓𝒆 𝒊𝒔 𝑶𝒏𝒍𝒚 𝑭𝒐𝒓 𝑮𝒓𝒐𝒖𝒑𝒔❗",
-            "private": "𝑻𝒉𝒊𝒔 𝒇𝒆𝒂𝒕𝒖𝒓𝒆 𝒊𝒏 𝒐𝒏𝒍𝒚 𝒇𝒐𝒓 𝒕𝒉𝒆 𝐌𝐲 𝐎𝐰𝐧𝐞𝐫 ⚠️",
-            "bot": "𝑻𝒉𝒊𝒔 𝒇𝒆𝒂𝒕𝒖𝒓𝒆 𝒊𝒏 𝒐𝒏𝒍𝒚 𝒇𝒐𝒓 𝒕𝒉𝒆 𝒃𝒐𝒕 𝒏𝒖𝒎𝒃𝒆𝒓⚠️",
-            "wait": "𝑷𝒓𝒐𝒄𝒆𝒔𝒔𝒊𝒏𝒈 𝒚𝒐𝒖𝒓 𝒓𝒆𝒒𝒖𝒆𝒔𝒕✅"
+            "admin": "*֎╎هـذا الامـر خـاص بـالـمـشـرفـيـن⚠️*",
+            "botAdmin": "*֎╎حـطـنـي مـشـرف اول❗*",
+            "owner": "*֎╎هـذا الامـر خـاص بـالـمـطـور⚠️*",
+            "group": "*֎╎هـذا الامـر خـاص بـالـقـروب❗*",
+            "private": "*֎╎هـذا الامـر بـالـخـاص⚠️*",
+            "bot": "*֎╎هـذا الامـر خـاص بـالـبـوت⚠️*",
+            "wait": "*֎╎انـتـظـر لـحـظـه...*"
         },
         "error": {
             "text": "*Uhh,Got an Error*"
