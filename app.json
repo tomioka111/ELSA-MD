@@ -15,7 +15,7 @@
      "required" :false
     },
     "AUTO_STATUS_SAVER": {
-      "description": "Automatically saves status of every person and sends in log number.",
+      "description": "حفظ حاله الشخص تلقائي",
        "required" :false
       },
 	"AUTO_READ_STATUS": {
@@ -23,11 +23,11 @@
        "required" :false
       },
     "HEROKU_API_KEY": {
-    "description": "Put HEROKU API KEY",
+    "description": "مفتاح هيروكو",
      "required"  :true
     },
  "HEROKU_APP_NAME": {
-    "description": "مفتاح هيروكو",
+    "description": "اسم المشروع اللي كتبتو بالاول",
     "required": "true"
 },
    "THUMB_IMAGE": {
@@ -58,8 +58,7 @@
      "required"  :false
     },
       "READ_MESSAGE": {
-    "description": "Fill the value true if you want bot to read all messages.",
-     "required" :false,
+    "description": "مشاهده البوت للرسائل" :false,
      "value": "true"
     },
    "DISABLE_PM": {
@@ -71,7 +70,7 @@
       "value": "."
   },
   "OWNER_NUMBER": {
-    "description": "The phone numbers of the users who you want to be admin for the bot (should be in international format without + and multiple numbers must be separated by a comma \",\")",
+    "description": "اضافه مطور اخر",
        "value": "201098906252"
   },
    "SESSION_ID": {
@@ -87,7 +86,7 @@
     "value": "mongodb://uufpxy0mfyeykbrxkjpk:m1b0dsDODVFWlBy3AF3@bufirembtiksxw6ni25m-mongodb.services.clever-cloud.com:2533/bufirembtiksxw6ni25m"
   },
     "THEME": {
-    "description": "تغير ثيم البوت ELSA,IZUKU,ZEROTWO,NEZUKO,LUFFY,GOKU and many more..",
+    "description": "تغير ثيم البوت ELSA",
      "value": "ELSA"
   },
     "WORKTYPE": {
@@ -101,11 +100,11 @@
   },
   "PACK_INFO": {
     "description": "حقوق الملصق",
-     "value": "izuku;midoriya",
+     "value": "ELSA;BOT",
      "required": false 
   },
   "heroku": {
-    "description": "Weather it is on heroku or not",
+    "description": "لا تغيره,
      "value": "true",
      "required": false 
   }
