@@ -294,8 +294,8 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "شغل",
-            alias: ["audio","play"],
+            pattern: "play",
+            alias: ["شغل"],
             desc: "Downloads audio from youtube.",
             category: "downloader",
             filename: __filename,
@@ -303,7 +303,7 @@ cmd({
         },
         async(Void, citel, text) => {
   
-                if (!text) return await citel.reply(`*֎╎اكـتـب عـنـوان لـلـبـحـث عـنـه* `);
+                if (!text) return await citel.reply(`*֎╎اكـتـب عـنـوان لـلـبـحـث عـنـه*`);
                 let yts = require("secktor-pack")
                 let search = await yts(text);
                 let i = search.all[1] ;
