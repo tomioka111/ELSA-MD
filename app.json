@@ -58,7 +58,7 @@
      "required"  :false
     },
       "READ_MESSAGE": {
-    "description": "مشاهده البوت للرسائل" :false,
+    "description": "مشاهده البوت للرسائل",
      "value": "true"
     },
    "DISABLE_PM": {
