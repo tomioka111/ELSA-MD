@@ -264,8 +264,7 @@ cmd({
 *❆╎طـالـب الـمـنـشـن┇*  ${citel.pushName} 👾
 `
         for (let mem of participants) {
-            textt += ` *❆┇↜* @${mem.id.split("@")[0]}\n*❋ ─═══━•┇❄️┇•━═══─ ❋*
-*┇❆┇𝐵𝑌 𝐸𝐿𝑆𝐴 𝐵𝑂𝑇-𝑀𝐷┇❆┇*`;
+            textt += ` *❆┇↜* @${mem.id.split("@")[0]}\n`;
         }
         Void.sendMessage(citel.chat, {
             text: textt,
