@@ -1,586 +1,1027 @@
 /**
- Copyright (C) 2022.
+██╗███████╗██╗   ██╗██╗  ██╗██╗   ██╗    ███╗   ███╗██████╗ 
+██║╚══███╔╝██║   ██║██║ ██╔╝██║   ██║    ████╗ ████║██╔══██╗
+██║  ███╔╝ ██║   ██║█████╔╝ ██║   ██║    ██╔████╔██║██║  ██║
+██║ ███╔╝  ██║   ██║██╔═██╗ ██║   ██║    ██║╚██╔╝██║██║  ██║
+██║███████╗╚██████╔╝██║  ██╗╚██████╔╝    ██║ ╚═╝ ██║██████╔╝
+╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝     ╚═╝     ╚═╝╚═════╝ 
+
+ Copyright (C) 2023.
  Licensed under the  GPL-3.0 License;
  You may not use this file except in compliance with the License.
  It is supplied in the hope that it may be useful.
- * @project_name : Secktor-Md
- * @author : SamPandey001 <https://github.com/SamPandey001>
- * @description : Secktor,A Multi-functional whatsapp bot.
+ * @project_name : IZUKU-Md
+ * @author : excel <https://github.com/excelottah6>
+ * @description : IZUKU,A Multi-functional whatsapp bot.
  * @version 0.0.6
  **/
 
-const { tlang, ringtone, cmd,fetchJson, sleep, botpic, getBuffer, pinterest, prefix, Config } = require('../lib')
-const { mediafire } = require("../lib/mediafire.js");
-const {GDriveDl} = require('../lib/scraper.js')
-const fbInfoVideo = require('fb-info-video'); 
-const googleTTS = require("google-tts-api");
-const ytdl = require('ytdl-secktor')
-const cheerio = require('cheerio')
-const fs  = require('fs-extra');
-const axios= require('axios');
-var videotime = 60000 // 30 min
-var dlsize = 1000 // 100mb
+const { sck, sck1,cmd, jsonformat, botpic, TelegraPh, RandomXP, Config, tlang, warndb, sleep,getAdmin,getBuffer, prefix } = require('../lib')
+const moment = require("moment-timezone");
+const fs = require('fs-extra')
+const Levels = require("discord-xp");
+const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter");
+
+//---------------------------------------------------------------------------
+cmd({
+            pattern: "join",
+            alias: ["انضم","ادخل"],
+            desc: "joins group by link",
+            category: "owner",
+            use: '<group link.>',
+        },
+        async(Void, citel, text,{ isCreator }) => {
+            if (!isCreator) return citel.reply(tlang().owner);
+            if (!text) return citel.reply(`*֎╎ويـن  الـرابـط ؟ ${tlang().greet}*`);
+            if (!text.split(" ")[0] && !text.split(" ")[0].includes("whatsapp.com"))
+                citel.reply("*֎╎الـرابـط غـلـط*");
+            let result = text.split(" ")[0].split("https://chat.whatsapp.com/")[1];
+            await Void.groupAcceptInvite(result)
+                .then((res) => citel.reply("*֎╎تـم الانـضـمـام بـنـجـاح*"))
+                .catch((err) => citel.reply("*֎╎مـقـدرت ادخـل*"));
+
+        }
+    )
+    //---------------------------------------------------------------------------
+cmd({
+            pattern: "sticker",
+            alias: ["s","ملصق","ستيكر","استيكر"],
+            desc: "Makes sticker of replied image/video.",
+            category: "group",
+            use: '<reply to any image/video.>',
+        },
+        async(Void, citel, text) => {
+            if (!citel.quoted) return citel.reply(`*֎╎رد  عـلـى صـورة*`);
+            let mime = citel.quoted.mtype
+            pack = Config.packname
+            author = Config.author
+            if (citel.quoted) {
+                let media = await citel.quoted.download();
+                citel.reply("*֎╎لـحـظـه بـرسـلـك الـمـلـصـق...*");
+                let sticker = new Sticker(media, {
+                    pack: pack, // The pack name
+                    author: author, // The author name
+                    type: text.includes("--crop" || '-c') ? StickerTypes.CROPPED : StickerTypes.FULL,
+                    categories: ["🤩", "🎉"], // The sticker category
+                    id: "12345", // The sticker id
+                    quality: 75, // The quality of the output file
+                    background: "transparent", // The sticker background color (only for full stickers)
+                });
+                const buffer = await sticker.toBuffer();
+                return Void.sendMessage(citel.chat, {sticker: buffer}, {quoted: citel });
+            } else if (/video/.test(mime)) {
+                if ((quoted.msg || citel.quoted)
+                    .seconds > 20) return citel.reply("*֎╎الـحـد الاقـصـى للـفـيـديـو 20 ثـانـيـه*");
+                let media = await quoted.download();
+                let sticker = new Sticker(media, {
+                    pack: pack, // The pack name
+                    author: author, // The author name
+                    type: StickerTypes.FULL, // The sticker type
+                    categories: ["🤩", "🎉"], // The sticker category
+                    id: "12345", // The sticker id
+                    quality: 70, // The quality of the output file
+                    background: "transparent", // The sticker background color (only for full stickers)
+                });
+                const stikk = await sticker.toBuffer();
+                return Void.sendMessage(citel.chat, {  sticker: stikk   }, {    quoted: citel });
+            } else {
+                citel.reply("*֎╎رد  عـلـى صـورة*");
+            }
+        }
+    )
+    //---------------------------------------------------------------------------
+cmd({
+        pattern: "support",
+        alias: ["الدعم","مساعده","مساعدة"],
+        desc: "Sends official support group link.",
+        category: "group",
+        filename: __filename,
+    },
+    async(Void, citel, text) => {
+        citel.reply(`*֎╎شـوف خـاصـك*`);
+        await Void.sendMessage(`${citel.sender}`, {
+            image: log0,
+            caption: `*֎╎رابـط جـروب الـدعـم┇ https://chat.whatsapp.com/DmGUnUroeRB1FAoBnHZMWP*`,
+        });
+
+    }
+)
+
+//---------------------------------------------------------------------------
+cmd({
+    pattern: "gdesc",
+    alias : ['تغيرالوصف','تغيرالبايو'],
+    desc: "Set Description of Group",
+    category: "group",
+    filename: __filename,
+    use: 'enter Description Text',
+},
+async(Void, citel, text,{ isCreator }) => {
+    if (!citel.isGroup) return citel.reply(tlang().group);
+    if(!text) return await citel.reply("*֎╎ايـن الـوصـف الـجـديـد؟*")
+    const groupAdmins = await getAdmin(Void, citel)
+    const botNumber = await Void.decodeJid(Void.user.id)
+    const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
+    const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
+    if (!isBotAdmins) return await citel.reply(tlang().botAdmin); 
+    if (!isAdmins) return citel.reply(tlang().admin);
+    
+    try {
+        await Void.groupUpdateDescription(citel.chat, text);
+        citel.reply('*֎╎تـم تـغـيـر وصـف الـجـروب بـنـجـاح*') 
+        return await Void.sendMessage(citel.chat, { react: { text: '', key: citel.key }});
+    } catch(e) { return await Void.sendMessage(users , {text :"*֎╎حـدث خـطـأ اثـنـاء تـغـيـر الـوصـف*\n*֎╎الـسـبـب*" + e, } ,{quoted : citel})   }
+}
+)
+//———————————————————————————————————
+
+cmd({
+        pattern: "لينك",
+        alias:["glink","الرابط"],
+        desc: "get group link.",
+        category: "group",
+        filename: __filename,
+    },
+	 async(Void, citel, text,{ isCreator }) => {
+	    if (!citel.isGroup) return citel.reply(tlang().group);
+	    
+        const groupAdmins = await getAdmin(Void, citel)	
+	    const botNumber = await Void.decodeJid(Void.user.id)
+        const isBotAdmins =groupAdmins.includes(botNumber)
+	
+if (!isBotAdmins) return citel.reply(tlang().admin);
+var str1 = await Void.groupInviteCode(citel.chat)
+var str2 ="https://chat.whatsapp.com/"
+var mergedString = `${str2}${str1}`;
+return citel.reply("*֎╎رابـط الـجـروب┇* \n*"+mergedString+"*");
+	
+    }
+	)
+//————————————————————-/————————-
+
+cmd({
+    pattern: "gname",
+    alias: ['تغيرالاسم','setname'],
+    desc: "Set name of Group",
+    category: "group",
+    filename: __filename,
+    use: 'enter Description Text',
+},
+async(Void, citel, text,{ isCreator }) => {
+    if (!citel.isGroup) return citel.reply(tlang().group);
+    if(!text) return await citel.reply("*֎╎ويـن الاسـم الجـديـد؟*")
+    const groupAdmins = await getAdmin(Void, citel)
+    const botNumber = await Void.decodeJid(Void.user.id)
+    const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
+    const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
+    if (!isBotAdmins) return await citel.reply(tlang().botAdmin); 
+    if (!isAdmins) return citel.reply(tlang().admin);
+    
+    try {
+        await Void.groupUpdateSubject(citel.chat, text)
+        citel.reply('*֎╎تـم تـغـيـر اسـم الـجـروب بـنـجـاح*') 
+        return await Void.sendMessage(citel.chat, { react: { text: '', key: citel.key }});
+    } catch(e) { return await Void.sendMessage(users , {text :"*֎╎حـدث خـطـأ اثـنـاء تـغـيـر الاسـم*\n*֎╎الـسـبـب*" + e, } ,{quoted : citel})   }
+}
+)
+//--------------------------------------------------------------------------------------------
+cmd({
+    pattern: "انذار",
+
+    filename: __filename,
+},
+async(Void, citel, text,{ isCreator }) => {
+     if (!citel.isGroup) return citel.reply('*֎╎هـذا الأمـر خـاص بـالـقـروب*')
+    const groupAdmins = await getAdmin(Void, citel)
+    const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
+    if (!isAdmins) return citel.reply('*֎╎هـذا الأمـر خـاص بـالـمشرفـيـن*')
+const S=m;function Z(){const F=['126402oKAcRa','date','*֎╎تـم طـرده لانـه تـجـاوز الانـذارات*\x0a','chat','8qachoN','580yXDZAo','groupParticipantsUpdate','114528WgITIL','reply','groupMetadata','│\x20֎╎الـوقـت┇\x20','find','locale','log','196311jXGmuc','quoted','save','*\x0a◆──────────────╮\x0a│\x20֎╎الـمـكـان┇\x20','759700KYdstU','warnedby','pushName','reason','8dUtMfa','2BlOCqD','550MdvhLT','\x0a֎╎الانـذار لـ┇\x20@','54828ViphBF','subject','1100323uEahgH','30204512uUuJcj','֎╎عـدد انـذاراتـه┇\x20','split','│\x20֎╎الـمـنـذر┇\x20','length','sender','setDefault','group','Africa/Lagos','../config','215XZLRSE','HH:mm:ss','warn','remove'];Z=function(){return F;};return Z();}(function(U,w){const c=m,s=U();while(!![]){try{const q=parseInt(c(0x1eb))/0x1*(parseInt(c(0x1f0))/0x2)+parseInt(c(0x1e7))/0x3*(parseInt(c(0x1ef))/0x4)+-parseInt(c(0x200))/0x5*(-parseInt(c(0x204))/0x6)+-parseInt(c(0x1f5))/0x7*(-parseInt(c(0x1dd))/0x8)+-parseInt(c(0x1f3))/0x9*(-parseInt(c(0x1de))/0xa)+parseInt(c(0x1f1))/0xb*(parseInt(c(0x1e0))/0xc)+-parseInt(c(0x1f6))/0xd;if(q===w)break;else s['push'](s['shift']());}catch(B){s['push'](s['shift']());}}}(Z,0x707d4));function m(Y,U){const w=Z();return m=function(s,q){s=s-0x1dd;let B=w[s];return B;},m(Y,U);}if(!citel['quoted'])return citel[S(0x1e1)]('*֎╎رد عـلـي رسـالـه شـخـص*');const timesam=moment(moment())['format'](S(0x201));moment['tz'][S(0x1fc)](S(0x1fe))[S(0x1e5)]('id');try{let metadata=await Void[S(0x1e2)](citel[S(0x207)]);await new warndb({'id':citel['quoted'][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202),'reason':text,'group':metadata[S(0x1f4)],'warnedby':citel[S(0x1ed)],'date':timesam})[S(0x1e9)]();let ment=citel[S(0x1e8)][S(0x1fb)];Void['sendMessage'](citel['chat'],{'text':S(0x1f2)+citel[S(0x1e8)][S(0x1fb)][S(0x1f8)]('@')[0x0]+'\x0a֎╎الـسـبـب┇\x20'+text+'\x0a֎╎الـمـنـذر┇\x20'+citel[S(0x1ed)],'mentions':[citel[S(0x1e8)][S(0x1fb)]]},{'quoted':citel});let h=await warndb[S(0x1e4)]({'id':citel['quoted'][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202)});const Config=require(S(0x1ff));if(h[S(0x1fa)]>Config['warncount']){teskd=S(0x206);let h=await warndb[S(0x1e4)]({'id':citel[S(0x1e8)][S(0x1fb)][S(0x1f8)]('@')[0x0]+S(0x202)});teskd+=S(0x1f7)+h[S(0x1fa)]+'\x20\x20*\x0a';for(let i=0x0;i<h[S(0x1fa)];i++){teskd+='*'+(i+0x1)+S(0x1ea)+h[i][S(0x1fd)]+'\x0a',teskd+=S(0x1e3)+h[i][S(0x205)]+'\x0a',teskd+=S(0x1f9)+h[i][S(0x1ec)]+'\x0a',teskd+='│\x20֎╎الـسـبـب┇\x20'+h[i][S(0x1ee)]+'_\x0a◆──────────────╯\x0a\x0a';}citel[S(0x1e1)](teskd),await Void[S(0x1df)](citel['chat'],[citel['quoted'][S(0x1fb)]],S(0x203));}}catch(Y){console[S(0x1e6)](Y);}
+    
+}
+)
+    //---------------------------------------------------------------------------
+cmd({
+            pattern: "unblock",
+            alias: ["فك-البلوك"],
+            desc: "Unblocked to the quoted user.",
+            category: "owner",
+            filename: __filename,
+
+        },
+        async(Void, citel, text,{ isCreator }) => {
+
+            if (!citel.quoted) return citel.reply("*֎╎مـنـشـن عـلـي شـخـص*");
+            if (!isCreator) citel.reply(tlang().owner);
+            let users = citel.mentionedJid[0] ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
+            await Void.updateBlockStatus(users, "unblock")
+                .then((res) => console.log(jsonformat(res)))
+                .catch((err) => console.log(jsonformat(err)));
+        }
+    )
+    //---------------------------------------------------------------------------
+    cmd({
+        pattern: "ujid",
+        desc: "get jid of all user in a group.",
+        category: "owner",
+        filename: __filename,
+    },
+    async(Void, citel, text,{ isCreator }) => {
+        if(!isCreator) return citel.reply(tlang().owner)
+        const groupMetadata = citel.isGroup ? await Void.groupMetadata(citel.chat).catch((e) => {}) : "";
+		const participants = citel.isGroup ? await groupMetadata.participants : "";
+    let textt = `_Here is jid address of all users of_\n *- ${groupMetadata.subject}*\n\n`
+    for (let mem of participants) {
+            textt += `📍 ${mem.id}\n`;
+        }
+      citel.reply(textt)
+
+    }
+)
 
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "tts",
-            desc: "text to speech.",
-            category: "downloader",
-            filename: __filename,
-            use: '<Hii,this is izuku>',
-        },
-        async(Void, citel, text) => {
-            if (!text) return citel.reply('Please give me a Sentence to change into audio.')
-            let texttts = text
-            const ttsurl = googleTTS.getAudioUrl(texttts, {
-                lang: "ar",
-                slow: false,
-                host: "https://translate.google.com",
-            });
-            return Void.sendMessage(citel.chat, {
-                audio: {
-                    url: ttsurl,
-                },
-                mimetype: "audio/mpeg",
-                fileName: `ttsCitelVoid.m4a`,
-            }, {
-                quoted: citel,
-            });
-        }
-
-    )
-     //---------------------------------------------------------------------------
-     cmd({
-        pattern: "yts",
-        desc: "Gives descriptive info of query from youtube..",
-        category: "downloader",
+        pattern: "tagall",
+        alias: ["منشن","تاك"],
+        desc: "Tags every person of group.",
+        category: "group",
         filename: __filename,
-        use: '<yt search text>',
     },
-    async(Void, citel, text) => {
-        let yts = require("secktor-pack");
-        if (!text) return citel.reply(`Example : ${prefix}yts ${tlang().title} WhatsApp Bot`);
-        let search = await yts(text);
-        let textt = "*YouTube Search*\n\n Result From " + text + "\n\n───────────────────\n";
-        let no = 1;
-        for (let i of search.all) {
-            textt += `⚡ No : ${no++}\n ❤Title : ${i.title}\n♫ Type : ${
-      i.type
-    }\n👾Views : ${i.views}\n⌛Duration : ${
-      i.timestamp
-    }\n⬆️Upload At : ${i.ago}\n👑Author : ${i.author.name}\n🎵Url : ${
-      i.url
-    }\n\n──────────────\n\n`;
+    async(Void, citel, text,{ isCreator }) => {
+        if (!citel.isGroup) return citel.reply(tlang().group);
+        const groupMetadata = citel.isGroup ? await Void.groupMetadata(citel.chat).catch((e) => {}) : "";
+        const participants = citel.isGroup ? await groupMetadata.participants : "";
+        const groupAdmins = await getAdmin(Void, citel)
+        const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
+        if (!isAdmins) return citel.reply(tlang().admin);
+
+        let textt = `
+*❋ ─═══━•┇❄️┇•━═══─ ❋*
+
+*『⚶الـمـنـشـن ⋋🪀⋌ الـجـمـاعـي⚶』*
+
+
+*❆╎الـرسـالـه┇* ${text ? text : "مفيش رساله"}\n\n
+*❆╎طـالـب الـمـنـشـن┇* ${citel.pushName}
+`
+        for (let mem of participants) {
+            textt += ` *❆┇↜* @${mem.id.split("@")[0]}\n`;
         }
-        return Void.sendMessage(citel.chat, {
-            image: {
-                url: search.all[0].thumbnail,
-            },
-            caption: textt,
+        Void.sendMessage(citel.chat, {
+            text: textt,
+            mentions: participants.map((a) => a.id),
         }, {
             quoted: citel,
         });
     }
 )
 
-
+//---------------------------------------------------------------------------
+cmd({
+             pattern: "طلب",
+             filename: __filename,
+         },
+         async(Void, citel, text) => {
+             if (!text) return citel.reply(`.طلب ممكن تضيف امر يسوي ملصقات؟`);
+             textt = `*| لديك طلب |*`;
+             teks1 = `\n\n*المُطالب* : @${
+     citel.sender.split("@")[0]
+   }\n*الطلب* : ${text}`;
+             teks2 = `\n\n*السلام عليكم  @${citel.sender.split("@")[0]},تم ارسال الطلب للمطور*.\n\n*انتظر الرد .....*`;
+             for (let i of owner) {
+                 Void.sendMessage(i + "@s.whatsapp.net", {
+                     text:textt + teks1,
+                     mentions: [citel.sender],
+                 }, {
+                     quoted: citel,
+                 });
+             }
+             Void.sendMessage(citel.chat, {
+                 text: teks2 ,
+                 mentions: [citel.sender],
+             }, {
+                 quoted: citel,
+             });
+ 
+         }
+     )
+     
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "video",
-            desc: "Downloads video from yt.",
-            category: "downloader",
+            pattern: "حذف-انذار",
+            desc: "Deletes all previously given warns of quoted user.",
+            category: "group",
             filename: __filename,
-            use: '<808-juice wrld >',
+            use: '<quote|reply|number>',
         },
-        async(Void, citel, text) => {
-            let yts = require("secktor-pack");
-            let search = await yts(text);
-            let anu = search.videos[0];
-            let urlYt = anu.url
-            const getRandom = (ext) => {
-                return `${Math.floor(Math.random() * 10000)}${ext}`;
-            };
-                let infoYt = await ytdl.getInfo(urlYt);
-                if (infoYt.videoDetails.lengthSeconds >= videotime) return citel.reply(`😔 Video file too big!`);
-                let titleYt = infoYt.videoDetails.title;
-                let randomName = getRandom(".mp4");
-                citel.reply('*Downloading:* '+titleYt)
-                const stream = ytdl(urlYt, {
-                        filter: (info) => info.itag == 22 || info.itag == 18,
-                    })
-                    .pipe(fs.createWriteStream(`./${randomName}`));
-                await new Promise((resolve, reject) => {
-                    stream.on("error", reject);
-                    stream.on("finish", resolve);
-                });
-                let stats = fs.statSync(`./${randomName}`);
-                let fileSizeInBytes = stats.size;
-                let fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
-                if (fileSizeInMegabytes <= dlsize) {
-                    let buttonMessage = {
-                        video: fs.readFileSync(`./${randomName}`),
-                        jpegThumbnail: log0,
-                        mimetype: 'video/mp4',
-                        fileName: `${titleYt}.mp4`,
-                        caption: ` ⿻ Title : ${titleYt}\n ⿻ File Size : ${fileSizeInMegabytes} MB`,
-                        headerType: 4,
-                        contextInfo: {
-                            externalAdReply: {
-                                title: titleYt,
-                                body: citel.pushName,
-                                thumbnail: await getBuffer(search.all[0].thumbnail),
-                                renderLargerThumbnail: true,
-                                mediaType: 2,
-                                mediaUrl: search.all[0].thumbnail,
-                                sourceUrl: search.all[0].thumbnail
-                            }
-                        }
-                    }
-                 Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
-                 return fs.unlinkSync(`./${randomName}`);
-                } else {
-                    citel.reply(`😔 File size bigger than 100mb.`);
-                }
-                return fs.unlinkSync(`./${randomName}`);      
-
-
+        async(Void, citel, text,{isCreator}) => {
+            if (!isCreator) return citel.reply(tlang().owner)
+            if (!citel.quoted) return citel.reply('*֎╎مـنـشـن عـلـي شـخـص*')
+            await warndb.deleteOne({ id: citel.quoted.sender.split('@')[0] + 'warn' });
+            return citel.reply('*֎╎تـم حـذف انـذار*')
         }
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "song",
-            alias: ["music","تشغيل"],
-            desc: "Sends info about the query(of youtube video/audio).",
-            category: "downloader",
+            pattern: "استطلاع",
+            desc: "Makes poll in group.",
+            category: "group",
             filename: __filename,
-            use: '<faded-Alan walker.>',
+            use: `questionoption1,option2,option3.....`,
         },
-async(Void, citel, text) => {
-   const getRandom = (ext) => { return `${Math.floor(Math.random() * 10000)}${ext}`; };    
-   if (text.length == 0 && !citel.quoted) return citel.reply(`*֎╎اكـتـب عـنـوان لـلـبـحـث عـنـه*`);
-   try {
-            let urlYt = text;
-            if(!text){ text=citel.quoted.text; }
-
-            if (!urlYt.startsWith("http")) 
-            {
-                let yts = require("secktor-pack");
-                let search = await yts(text);
-                let anu = search.videos[0];
-                urlYt = anu.url; 
+        async(Void, citel, text,{ isCreator }) => {
+            if (!isCreator) return citel.reply(tlang().owner)
+            let [poll, opt] = text.split(",");
+            if (text.split(",") < 2)
+                return await citel.reply(
+                    `*֎╎مـثـال┇.استطلاع بتحبوني,اه, لا, لا برضو*`
+                );
+            let options = [];
+            for (let i of opt.split(',')) {
+                options.push(i);
             }
-            let infoYt = await ytdl.getInfo(urlYt);
-            if (infoYt.videoDetails.lengthSeconds >= 1200) return citel.reply(`*֎╎عـنـوان الـبـحـث غـيـر مـوجـود اكـتـب عـنـوان اخـر*`);
-            let titleYt = infoYt.videoDetails.title;   
-	    citel.reply(`*֎╎تـحـمـيـل┇  ${infoYt.videoDetails.title}*`);
-            let randomName = getRandom(".mp3");
-            const stream = ytdl(urlYt, {
-                 filter: (info) => info.audioBitrate == 160 || info.audioBitrate == 128, })
-                 .pipe(fs.createWriteStream(`./${randomName}`));
-                
-	   await new Promise((resolve, reject) => { stream.on("error", reject);  stream.on("finish", resolve);  });
-            
-            let stats = fs.statSync(`./${randomName}`);
-            let fileSizeInBytes = stats.size;
-            let fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
-            if (fileSizeInMegabytes <= dlsize) 
-            {
-                let yts = require("secktor-pack");
-                let search = await yts(text);
-                let buttonMessage = 
-				{
-				    audio: fs.readFileSync(`./${randomName}`),
-				    mimetype: 'audio/mpeg',
-				    fileName: titleYt + ".mp3",
-				    headerType: 4,
-				 }
-                 
-                await Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
-                return fs.unlinkSync(`./${randomName}`);
-            } 
-            else {   citel.reply(`*֎╎حـجـم المــلـف اكـبـر مـن 100 مـيـجـا*`);    }
-             return fs.unlinkSync(`./${randomName}`);
-   
-   }catch (e) { return citel.reply(`*֎╎حـدث خـطـأ فـي الـسـيـرفـر*`);  }
+            await Void.sendMessage(citel.chat, {
+                poll: {
+                    name: poll,
+                    values: options
+                }
+            })
+        }
+    )
+    //---------------------------------------------------------------------------
+cmd({
+            pattern: "profile",
+            alias: ["ايدي","بروفايل","me","انا"],
+            desc: "Shows profile of user.",
+            category: "group",
+            filename: __filename,
+        },
+        async(Void, citel, text) => {
+            var bio = await Void.fetchStatus(citel.sender);
+            var bioo = bio.status;
+            let meh = citel.sender;
+            const userq = await Levels.fetch(citel.sender, "RandomXP");
+            const lvpoints = userq.level;
+            var role = "فنان✨";
+             if (lvpoints <=  2) { var role = "🏳مواطن"; } 
+	else if (lvpoints <=  4) { var role = "👼طبيب اطفال"; } 
+	else if (lvpoints <=  6) { var role = "🧙‍♀️ساحر";  } 
+	else if (lvpoints <=  8) { var role = "🧙‍♂️معالج روحاني"; }
+	else if (lvpoints <= 10) { var role = "🧚🏻طفل ملاك";  } 
+	else if (lvpoints <= 12) { var role = "🧜ملاك"; } 
+	else if (lvpoints <= 14) { var role = "🧜‍♂️سيد الملاك";} 
+	else if (lvpoints <= 16) { var role = "🌬طفل نوبل"; } 
+	else if (lvpoints <= 18) { var role = "❄نوبل"; }
+	else if (lvpoints <= 20) { var role = "⚡سريع النخبه"; } 
+	else if (lvpoints <= 22) { var role = "🎭نخبه"; } 
+	else if (lvpoints <= 24) { var role = "🥇بارع I"; }
+	else if (lvpoints <= 26) { var role = "🥈بارع II"; } 
+	else if (lvpoints <= 28) { var role = "🥉متفوق بارع"; }
+	else if (lvpoints <= 30) { var role = "🎖متفوق مسيطر";} 
+	else if (lvpoints <= 32) { var role = "🏅متفوق النخبه"; }
+	else if (lvpoints <= 34) { var role = "🏆فائق";}
+	else if (lvpoints <= 36) { var role = "💍فائق I";}
+	else if (lvpoints <= 38) { var role = "💎فائق Ii";} 
+	else if (lvpoints <= 40) { var role = "🔮سيد اللعبه";} 
+	else if (lvpoints <= 42) { var role = "🛡اسطوره III";} 
+	else if (lvpoints <= 44) { var role = "🏹اسطوره II";} 
+	else if (lvpoints <= 46) { var role = "⚔اسطوره"; } 
+	else if (lvpoints <= 55) { var role = "🐉ابدي"; }
+	
+            let ttms = `${userq.xp}` / 8;
+            const timenow = moment(moment())
+                .format('HH:mm:ss')
+            moment.tz.setDefault('Africa/Lagos')
+                .locale('id')
+            try {
+                pfp = await Void.profilePictureUrl(citel.sender, "image");
+            } catch (e) {
+                pfp = await botpic();
+            }
+            const profile = `
+*↫ صوره قمر زي صاحبها 🥺♥.!*
+*⌁︙اسمڪ🪪↫ ${citel.pushName}*
+*⌁︙تفاعلـڪ💥↫ سايق مخده 😹*
+*⌁︙مستواڪ💎↫ ${userq.level}*
+*⌁︙دورڪ🏅↫ ${role}*
+*⌁︙نقاطـڪ♦️↫ ${userq.xp}*
+*⌁︙رسائلـڪ🧩↫ ${ttms}*
+*⌁︙البـايـــو⚡↫ ${bioo}*
+`;
+            let buttonMessage = {
+                image: {
+                    url: pfp,
+                },
+                caption: profile,
+                footer: tlang().footer,
+                headerType: 4,
+            };
+            Void.sendMessage(citel.chat, buttonMessage, {
+                quoted: citel,
+            });
+
+        }
+    )
+    //---------------------------------------------------------------------------
+
+cmd({
+            pattern: "rank",
+            alias: ["رانك"],
+            desc: "Sends rank card of user.",
+            category: "group",
+            filename: __filename,
+        },
+        async(Void, citel, text) => {
+            const userq = await Levels.fetch(citel.sender, "RandomXP");
+            const lvpoints = userq.level;
+            var role = "فنان✨";
+            if (lvpoints <= 2) {
+                var role = "🏳مواطن";
+            } else if (lvpoints <= 4) {
+                var role = "👼طبيب اطفال";
+            } else if (lvpoints <= 6) {
+                var role = "🧙‍♀️ساحر";
+            } else if (lvpoints <= 8) {
+                var role = "🧙‍♂️معالج";
+            } else if (lvpoints <= 10) {
+                var role = "🧚🏻طفل ملاك";
+            } else if (lvpoints <= 12) {
+                var role = "🧜ملاك";
+            } else if (lvpoints <= 14) {
+                var role = "🧜‍♂️سيد الملاك";
+            } else if (lvpoints <= 16) {
+                var role = "🌬طفل نوبل";
+            } else if (lvpoints <= 18) {
+                var role = "❄نوبل";
+            } else if (lvpoints <= 20) {
+                var role = "⚡سرعه النخبه";
+            } else if (lvpoints <= 22) {
+                var role = "🎭النخبه";
+            } else if (lvpoints <= 24) {
+                var role = "🥇بارع I";
+            } else if (lvpoints <= 26) {
+                var role = "🥈بارع II";
+            } else if (lvpoints <= 28) {
+                var role = "🥉متفوق بارع";
+            } else if (lvpoints <= 30) {
+                var role = "🎖متفوق مسيطر";
+            } else if (lvpoints <= 32) {
+                var role = "🏅متفوق النخبه";
+            } else if (lvpoints <= 34) {
+                var role = "🏆فائق";
+            } else if (lvpoints <= 36) {
+                var role = "💍فائق I";
+            } else if (lvpoints <= 38) {
+                var role = "💎فائق Ii";
+            } else if (lvpoints <= 40) {
+                var role = "🔮سيد اللعبه";
+            } else if (lvpoints <= 42) {
+                var role = "🛡اسطوره III";
+            } else if (lvpoints <= 44) {
+                var role = "🏹اسطوره II";
+            } else if (lvpoints <= 46) {
+                var role = "⚔اسطوره";
+            } else if (lvpoints <= 55) {
+                var role = "🐉ابدي";
+            }
+            let disc = citel.sender.substring(3, 7);
+            let textr = '';
+            textr += `هـاي↫${citel.pushName}\n\n`;
+            let ttms = `${userq.xp}` / 8;
+            textr += `*⌁︙دورڪ🏅↫ ${role}*\n*⌁︙نقاطـڪ♦️↫ ${userq.xp}* / ${Levels.xpFor(
+    userq.level + 1
+  )}\n*⌁︙مستواڪ💎↫ ${userq.level}*\n*⌁︙رسائلـڪ🧩↫ ${ttms}*`;
+            try {
+                ppuser = await Void.profilePictureUrl(citel.sender, "image");
+            } catch {
+                ppuser = THUMB_IMAGE;
+            }
+                    Void.sendMessage(citel.chat, {
+                        image: await getBuffer(ppuser),
+                        caption: textr,
+                    }, {
+                        quoted: citel,
+                    });
+        }
+    )
+    //---------------------------------------------------------------------------
+cmd({
+            pattern: "المتصدرين",
+            alias: ["المتفوقين"],
+            desc: "To check leaderboard",
+            category: "general",
+            filename: __filename,
+        },
+        async(Void, citel) => {
+            const fetchlb = await Levels.fetchLeaderboard("RandomXP", 5);
+            let leadtext = ` 
+*❋ ─═══━•┇قـائـمـه الـمـتـصـدريـن┇•━═══─ ❋*
+\n\n`
+            for (let i = 0; i < fetchlb.length; i++) {
+                const lvpoints = fetchlb[i].level
+                var role = "فنان✨";
+                if (lvpoints <= 2) {
+                    var role = "🏳مواطن";
+                } else if (lvpoints <= 4) {
+                    var role = "👼طبيب اطفال";
+                } else if (lvpoints <= 6) {
+                    var role = "🧙‍♀️ساحر";
+                } else if (lvpoints <= 8) {
+                    var role = "🧙‍♂️معالج";
+                } else if (lvpoints <= 10) {
+                    var role = "🧚🏻طفل ملاك";
+                } else if (lvpoints <= 12) {
+                    var role = "🧜ملاك";
+                } else if (lvpoints <= 14) {
+                    var role = "🧜‍♂️سيد الملاك";
+                } else if (lvpoints <= 16) {
+                    var role = "🌬طفل نوبل";
+                } else if (lvpoints <= 18) {
+                    var role = "❄نوبل";
+                } else if (lvpoints <= 20) {
+                    var role = "⚡سرعه النخبه";
+                } else if (lvpoints <= 22) {
+                    var role = "🎭النخبه";
+                } else if (lvpoints <= 24) {
+                    var role = "🥇بارع I";
+                } else if (lvpoints <= 26) {
+                    var role = "🥈بارع II";
+                } else if (lvpoints <= 28) {
+                    var role = "🥉متفوق بارع";
+                } else if (lvpoints <= 30) {
+                    var role = "🎖متفوق مسيطر";
+                } else if (lvpoints <= 32) {
+                    var role = "🏅متفوق النخبه";
+                } else if (lvpoints <= 34) {
+                    var role = "🏆فائق";
+                } else if (lvpoints <= 36) {
+                    var role = "💍فائق I";
+                } else if (lvpoints <= 38) {
+                    var role = "💎فائق Ii";
+                } else if (lvpoints <= 40) {
+                    var role = "🔮سيد اللعبه";
+                } else if (lvpoints <= 42) {
+                    var role = "🛡اسطوره III";
+                } else if (lvpoints <= 44) {
+                    var role = "🏹اسطوره II";
+                } else if (lvpoints <= 46) {
+                    var role = "⚔اسطوره";
+                } else if (lvpoints <= 55) {
+                    var role = "🐉ابدي";
+                }
+                let data = await sck1.findOne({ id: fetchlb[i].userID })
+                let namew = fetchlb[i].userID
+                let ttms = fetchlb[i].xp / 8
+                leadtext += `*${i + 1}*⌁︙الاسـم🪪↫ ${data.name}*\n*⌁︙الـمسـتـوي💎↫ ${fetchlb[i].level}*\n*⌁︙الـنـقـاط♦️↫ ${fetchlb[i].xp}*\n*⌁︙الـدور🏅↫ ${role}*\n*⌁︙الـرسـائـل🧩↫ ${ttms}*\n\n`;
+            }
+            return citel.reply(leadtext)
+        }
+    )
+
+    //---------------------------------------------------------------------------
+cmd({
+          pattern: "promote",
+          alias: ["رفع","ترقيه","ترقية"],
+    filename: __filename,
+},
+async(Void, citel, text) => {
+    if (!citel.isGroup) return citel.reply(tlang().group);
+    const groupAdmins = await getAdmin(Void, citel);
+    const botNumber = await Void.decodeJid(Void.user.id);
+    const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
+    const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
+
+    if (!isAdmins) return citel.reply(tlang().admin);
+    if (!isBotAdmins) return citel.reply(tlang().botAdmin);
+    
+    let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : null;
+    if (!users) return citel.reply("*֎╎مـنـشـن احـد او رد عـلـى رسـالـتـه*");
+    
+    try {
+        await Void.groupParticipantsUpdate(citel.chat, [users], "promote");
+        citel.reply("*֎╎تـمـت الـتـرقـيـة، نـرجـو عـدم الـتـقـصـيـر 🙏*");
+    } catch {
+         citel.reply(tlang().botAdmin);
+    }
   }
 )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "ringtone",
-            desc: "Downloads ringtone.",
-            category: "downloader",
-            filename: __filename,
-            use: '<ringtone name>',
-        },
-        async(Void, citel, text) => {
-            if (!text) return citel.reply(`Example: ${prefix}ringtone back in black`)
-            let anu = await ringtone(text)
-            let result = anu[Math.floor(Math.random() * anu.length)]
-            return Void.sendMessage(citel.chat, { audio: { url: result.audio }, fileName: result.title + '.mp3', mimetype: 'audio/mpeg' }, { quoted: citel })
-        }
-    )
-    //---------------------------------------------------------------------------
-cmd({
-            pattern: "pint",
-            desc: "Downloads image from pinterest.",
-            category: "downloader",
-            filename: __filename,
-            use: '<text|image name>',
-        },
-        async(Void, citel, text) => {
-            if (!text) return reply("What picture are you looking for?") && Void.sendMessage(citel.chat, {
-                react: {
-                    text: '❌',
-                    key: citel.key
-                }
-            })
-            try {
-                anu = await pinterest(text)
-                result = anu[Math.floor(Math.random() * anu.length)]
-                let buttonMessage = {
-                    image: {
-                        url: result
-                    },
-                    caption: ` `,
-                    footer: tlang().footer,
-                    headerType: 4,
-                    contextInfo: {
-                        externalAdReply: {
-                            title: `Here you go✨`,
-                            body: `${Config.ownername}`,
-                            thumbnail: log0,
-                            mediaType: 2,
-                            mediaUrl: ``,
-                            sourceUrl: ``
-                        }
-                    }
-                }
-                return Void.sendMessage(citel.chat, buttonMessage, {
-                    quoted: citel
-                })
-            } catch (e) {
-                console.log(e)
-            }
-        })
-    //---------------------------------------------------------------------------
-cmd({
-            pattern: "mediafire",
-            desc: "Downloads zip from Mediafire.",
-            category: "downloader",
-            filename: __filename,
-            use: '<url of mediafire>',
-        },
-        async(Void, citel, text) => {
-            if (!text) return citel.reply(`Give link ${tlang().greet}`);
-            if (!isUrl(text.split(" ")[0]) && !text.split(" ")[0].includes("mediafire.com")) return reply(`The link you provided is invalid`);
-            const baby1 = await mediafire(text);
-            if (baby1[0].size.split("MB")[0] >= 999) return reply("*File Over Limit* " + util.format(baby1));
-            const result4 = `*ᴵᶻᵁᴷᵁ Mᴇᴅɪᴀғɪʀᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ*
-*👤Nᴀᴍᴇ* : ${baby1[0].nama}
-*⭕Sɪᴢᴇ* ${baby1[0].size}
-*🔰Mɪᴍᴇ* : ${baby1[0].mime}
-*Lɪɴᴋ* : ${baby1[0].link}`;
-            reply(`${result4}`);
-            return Void.sendMessage(citel.chat, {
-                    document: {
-                        url: baby1[0].link,
-                    },
-                    fileName: baby1[0].nama,
-                    mimetype: baby1[0].mime,
-                }, {
-                    quoted: citel,
-                })
-                .catch((err) => reply("could not find anything"));
+    pattern: "طرد",
+    alias: ["kick"],
+    filename: __filename,
+},
+async(Void, citel, text) => {
+    if (!citel.isGroup) return citel.reply(tlang().group);
+    const groupAdmins = await getAdmin(Void, citel);
+    const botNumber = await Void.decodeJid(Void.user.id);
+    const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
+    const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
 
-        }
-    )
-    //---------------------------------------------------------------------------
-cmd({
-            pattern: "شغل",
-            alias: ["audio","play"],
-            desc: "Downloads audio from youtube.",
-            category: "downloader",
-            filename: __filename,
-            use: '<give text>',
-        },
-        async(Void, citel, text) => {
-  
-                if (!text) return await citel.reply(`*֎╎اكـتـب عـنـوان لـلـبـحـث عـنـه* `);
-                let yts = require("secktor-pack")
-                let search = await yts(text);
-                let i = search.all[1] ;
-                let cap = "\t *🎧𝐸𝐿𝐺𝐴𝑍𝐴𝑅 𝑌𝑂𝑈𝑇𝑈𝐵𝐸⃤🎧*   \n\n*֎╎الـعـنـوان📝┇* " + i.title + "\n*֎╎الـرابـط🔗┇* " + i.url +"\n*֎╎الـمـده⏳┇* " + i.timestamp +"\n*֎╎الـمـشـاهـدات📈┇* "+i.views +"\n*֎╎وقـت الـنـشـر🏮┇* " +i.ago +"\n*֎╎الـقـنـاه🎐┇* "+i.author.name+"\n\n\nReply 1 To Video \nReply 2 To Audio" ;
-                Void.sendMessage(citel.chat,{image :{url : i.thumbnail}, caption :  cap });
-           
-           
-           
-           
-           
-           
-            
-           
-           /*
+    if (!isAdmins) return citel.reply(tlang().admin);
+    if (!isBotAdmins) return citel.reply(tlang().botAdmin);
     
+    let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : null;
+    if (!users) return citel.reply("*֎╎مـنـشـن احـد او رد عـلـى رسـالـتـه*");
     
-            let search = await yts(text)
-            let listSerch = []
-            let teskd = `Result From ${text}.\n_+ ${search.all.length} more results._`
-            for (let i of search.all) {
-                listSerch.push({
-                    title: i.title,
-                    rowId: `${prefix}ytmp3 ${i.url}`,
-                    description: `*Suhail-MD* / ${i.timestamp}`
-                })
-            }
-            const sections = [
-
-                {
-                    title: "Total Search🔍" + search.all.length,
-                    rows: listSerch
-                }
-
-            ]
-            const listMessage = {
-                text: teskd,
-                footer: tlang().footer,
-                title: ``,
-                buttonText: "Songs",
-                mentions: await Void.parseMention(teskd),
-                sections
-            }
-            return Void.sendMessage(citel.chat, listMessage, {
-                quoted: citel
-            })
-            */
+    try {
+        await Void.groupParticipantsUpdate(citel.chat, [users], "remove");
+        citel.reply("*֎╎تـم الـطـرد، الـلـه يـوفـقـه*");
+    } catch {
+         citel.reply(tlang().botAdmin);
     }
-  )
-
+  }
+ )
     //---------------------------------------------------------------------------
-
 cmd({
-            pattern: "ytmp4",
-            desc: "Downloads video from youtube.",
-            category: "downloader",
+            pattern: "group",
+            alias: ["جروب"],
+            desc: "mute and unmute group.",
+            category: "group",
             filename: __filename,
-            use: '<yt video url>',
         },
         async(Void, citel, text) => {
-            const getRandom = (ext) => {
-                return `${Math.floor(Math.random() * 10000)}${ext}`;
-            };
-            if (!text) {
-                citel.reply(`❌Please provide me a url`);
-                return;
-            }
-            try {
-                let urlYt = text;
-                if (!urlYt.startsWith("http")) return citel.reply(`❌ Give youtube link!`);
-                let infoYt = await ytdl.getInfo(urlYt);
-                if (infoYt.videoDetails.lengthSeconds >= videotime) return citel.reply(`❌ Video file too big!`);
-                let titleYt = infoYt.videoDetails.title;
-                let randomName = getRandom(".mp4");
+            if (!citel.isGroup) return citel.reply(tlang().group);
+            const groupAdmins = await getAdmin(Void, citel)
+            const botNumber = await Void.decodeJid(Void.user.id)
+            const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
+            const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
+            if (!citel.isGroup) return citel.reply(tlang().group);
+            if (!isBotAdmins) return citel.reply(tlang().botAdmin);
+            if (!isAdmins) return citel.reply(tlang().admin);
+            if (text.split(" ")[0] === "قفل") {
+                await Void.groupSettingUpdate(citel.chat, "announcement")
+                    .then((res) => citel.reply("*֎╎تـم قـفـل الـجـروب*"))
+                    .catch((err) => console.log(err));
+            } else if (text.split(" ")[0] === "فتح") {
+                await Void.groupSettingUpdate(citel.chat, "not_announcement")
+                    .then((res) => citel.reply("*֎╎تـم فـتـح الـجـروب*"))
+                    .catch((err) => console.log(err));
+            } else {
 
-                const stream = ytdl(urlYt, {
-                        filter: (info) => info.itag == 22 || info.itag == 18,
-                    })
-                    .pipe(fs.createWriteStream(`./${randomName}`));
-                await new Promise((resolve, reject) => {
-                    stream.on("error", reject);
-                    stream.on("finish", resolve);
-                });
-                let stats = fs.statSync(`./${randomName}`);
-                let fileSizeInBytes = stats.size;
-                let fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
-                if (fileSizeInMegabytes <= dlsize) {
-                    let yts = require("secktor-pack");
-                    let search = await yts(text);
-                    let buttonMessage = {
-                        video: fs.readFileSync(`./${randomName}`),
-                        jpegThumbnail: log0,
-                        mimetype: 'video/mp4',
-                        fileName: `${titleYt}.mp4`,
-                        caption: ` ⿻ Title : ${titleYt}\n ⿻ File Size : ${fileSizeInMegabytes} MB`,
-                        headerType: 4,
-                        contextInfo: {
-                            externalAdReply: {
-                                title: titleYt,
-                                body: citel.pushName,
-                                thumbnail: await getBuffer(search.all[0].thumbnail),
-                                renderLargerThumbnail: true,
-                                mediaType: 2,
-                                mediaUrl: search.all[0].thumbnail,
-                                sourceUrl: search.all[0].thumbnail
-                            }
-                        }
-                    }
-                 Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
-                 return fs.unlinkSync(`./${randomName}`);
-                } else {
-                    citel.reply(`❌ File size bigger than 100mb.`);
-                }
-                return fs.unlinkSync(`./${randomName}`);      
-            } catch (e) {
-                console.log(e)
+                return citel.reply(`〖 حـالـه الـجـروب 〗\n${prefix}جروب فتح\n${prefix}جروب قفل`);
             }
         }
     )
     //---------------------------------------------------------------------------
 cmd({
-        pattern: "ytmp3",
-        desc: "Downloads audio by yt link.",
-        category: "downloader",
-        use: '<yt video url>',
+            pattern: "grouppic",
+            alias: ["تغيرالصوره","تغيرالصورة"],
+            desc: "Sets a profile pic in Group..",
+            category: "group",
+            filename: __filename,
+        },
+        async(Void, citel, text) => {
+            if (!citel.isGroup) return citel.reply(tlang().group);
+            const groupAdmins = await getAdmin(Void, citel)
+            const botNumber = await Void.decodeJid(Void.user.id)
+            const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
+            const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
+
+
+            let mime = citel.quoted.mtype
+            if (!citel.isGroup) citel.reply(tlang().group);
+            if (!isAdmins) citel.reply(tlang().admin);
+            if (!isBotAdmins) citel.reply(tlang().botadmin);
+            if (!citel.quoted) return citel.reply(`*֎╎رد عـلـي صـوره لـلـتـغيـر*`);
+            if (!/image/.test(mime)) return citel.reply(`*֎╎رد عـلـي صـوره لـلـتـغيـر*`);
+            if (/webp/.test(mime)) return citel.reply(`*֎╎رد عـلـي صـوره لـلـتـغيـر*`);
+            let media = await Void.downloadAndSaveMediaMessage(citel.quoted);
+            await Void.updateProfilePicture(citel.chat, {
+                    url: media,
+                })
+                .catch((err) => fs.unlinkSync(media));
+            citel.reply(tlang().success);
+
+        }
+    )
+    //---------------------------------------------------------------------------
+cmd({
+            pattern: "hidetag",
+            alias: ["وهمي","مخفي"],
+            desc: "Tags everyperson of group without mentioning their numbers",
+            category: "group",
+            filename: __filename,
+            use: '<text>',
+        },
+        async(Void, citel, text) => {
+            if (!citel.isGroup) return citel.reply(tlang().group);
+            const groupMetadata = citel.isGroup ? await Void.groupMetadata(citel.chat).catch((e) => {}) : "";
+            const participants = citel.isGroup ? await groupMetadata.participants : "";
+            const groupAdmins = await getAdmin(Void, citel)
+            const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
+            if (!isAdmins) return citel.reply(tlang().admin);
+
+            if (!isAdmins) citel.reply(tlang().admin);
+            Void.sendMessage(citel.chat, {
+                text: text ? text : "",
+                mentions: participants.map((a) => a.id),
+            }, {
+                quoted: citel,
+            });
+        }
+    )
+    //---------------------------------------------------------------------------
+
+cmd({
+            pattern: "add",
+            alias: ["اضافه","اضافة"],
+            desc: "Add that person in group",
+            fromMe: true,
+            category: "group",
+            filename: __filename,
+            use: '<number>',
+        },
+        async(Void, citel, text,{isCreator}) => {
+            if (!citel.isGroup) return citel.reply(tlang().group);
+            const groupAdmins = await getAdmin(Void, citel)
+            const botNumber = await Void.decodeJid(Void.user.id)
+            const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
+            const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
+
+            if (!text) return citel.reply("*֎╎اضـف رقـم لاضـافـتـه*");
+            if (!isCreator) return citel.reply(tlang().owner)
+            if (!isBotAdmins) return citel.reply(tlang().botAdmin);
+            let users = citel.mentionedJid[0] ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
+            await Void.groupParticipantsUpdate(citel.chat, [users], "add");
+
+        }
+    )
+    //---------------------------------------------------------------------------
+cmd({
+            pattern: "getjids",
+            alias: ["الجروبات","القروبات"],
+            desc: "Sends chat id of every groups.",
+            category: "group",
+            filename: __filename,
+        },
+        async(Void, citel, text,{ isCreator }) => {
+            if (!isCreator) return citel.reply(tlang().owner)
+            let getGroups = await Void.groupFetchAllParticipating();
+            let groups = Object.entries(getGroups)
+                .slice(0)
+                .map((entry) => entry[1]);
+            let anu = groups.map((v) => v.id);
+            let jackhuh = `〖 جـمـيـع جـروبـات الـبـوت 〗\n\n`
+            citel.reply(`*֎╎جـاري جـلـب ${anu.length} جـروب...*`)
+            for (let i of anu) {
+                let metadata = await Void.groupMetadata(i);
+                await sleep(500)
+                jackhuh += `֎╎الاسـم: ${metadata.subject}\n`
+                jackhuh += `֎╎الاعـضـاء: ${metadata.participants.length}\n`
+                jackhuh += `֎╎الايـدي: ${i}\n\n`
+
+            }
+            citel.reply(jackhuh)
+
+        }
+    )
+    //---------------------------------------------------------------------------
+cmd({
+        pattern: "demote",
+        alias: ["تنزيل","تخفيض"],
+        desc: "Demotes replied/quoted user from group",
+        category: "group",
+        filename: __filename,
+        use: '<quote|reply|number>',
     },
     async(Void, citel, text) => {
-        const getRandom = (ext) => {
-            return `${Math.floor(Math.random() * 10000)}${ext}`;
-        };
+    if (!citel.isGroup) return citel.reply(tlang().group);
+    const groupAdmins = await getAdmin(Void, citel);
+    const botNumber = await Void.decodeJid(Void.user.id);
+    const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
+    const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
 
-        if (text.length === 0) {
-            reply(`❌ URL is empty! \nSend ${prefix}ytmp3 url`);
-            return;
-        }
-        try {
-            let urlYt = text;
-            if (!urlYt.startsWith("http")) {
-                citel.reply(`❌ Give youtube link!`);
-                return;
-            }
-            let infoYt = await ytdl.getInfo(urlYt);
-            //30 MIN
-            if (infoYt.videoDetails.lengthSeconds >= videotime) {
-                reply(`❌ I can't download that long video!`);
-                return;
-            }
-            let titleYt = infoYt.videoDetails.title;
-            let randomName = getRandom(".mp3");
-            const stream = ytdl(urlYt, {
-                    filter: (info) => info.audioBitrate == 160 || info.audioBitrate == 128,
-                })
-                .pipe(fs.createWriteStream(`./${randomName}`));
-            await new Promise((resolve, reject) => {
-                stream.on("error", reject);
-                stream.on("finish", resolve);
-            });
-
-            let stats = fs.statSync(`./${randomName}`);
-            let fileSizeInBytes = stats.size;
-            let fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
-            if (fileSizeInMegabytes <= dlsize) {
-                let yts = require("secktor-pack");
-                let search = await yts(text);
-                let buttonMessage = {
-                    audio: fs.readFileSync(`./${randomName}`),
-                    mimetype: 'audio/mpeg',
-                    fileName: titleYt + ".mp3",
-                    headerType: 4,
-                    contextInfo: {
-                        externalAdReply: {
-                            title: titleYt,
-                            body: citel.pushName,
-                            renderLargerThumbnail: true,
-                            thumbnailUrl: search.all[0].thumbnail,
-                            mediaUrl: text,
-                            mediaType: 1,
-                            thumbnail: await getBuffer(search.all[0].thumbnail),
-                            sourceUrl: text,
-                        },
-                    },
-                }
-                await Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
-                return fs.unlinkSync(`./${randomName}`);
-            } else {
-                citel.reply(`❌ File size bigger than 100mb.`);
-            }
-            fs.unlinkSync(`./${randomName}`);
-        } catch (e) {
-            console.log(e)
-        }
-
+    if (!isAdmins) return citel.reply(tlang().admin);
+    if (!isBotAdmins) return citel.reply(tlang().botAdmin);
+    
+    let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : null;
+    if (!users) return citel.reply("*֎╎مـنـشـن احـد او رد عـلـى رسـالـتـه*");
+    
+    try {
+        await Void.groupParticipantsUpdate(citel.chat, [users], "demote");
+        citel.reply("*֎╎تـم إزالـة إشـرافـه*");
+    } catch {
+         citel.reply(tlang().botAdmin);
     }
-)
-
-  //---------------------------------------------------------------------------
-cmd({
-        pattern: "ytdoc",
-        desc: "Downloads audio by yt link as document.",
-        category: "downloader",
-        use: '<ytdoc video url>',
-    },
-    async(Void, citel, text) => {
-        const getRandom = (ext) => {
-            return `${Math.floor(Math.random() * 10000)}${ext}`;
-        };
-
-        if (text.length === 0) {
-            reply(`❌ URL is empty! \nSend ${prefix}ytmp3 url`);
-            return;
-        }
-        try {
-            let urlYt = text;
-            if (!urlYt.startsWith("http")) {
-                citel.reply(`❌ Give youtube link!`);
-                return;
-            }
-            let infoYt = await ytdl.getInfo(urlYt);
-            //30 MIN
-            if (infoYt.videoDetails.lengthSeconds >= videotime) {
-                reply(`❌ I can't download that long video!`);
-                return;
-            }
-            let titleYt = infoYt.videoDetails.title;
-            let randomName = getRandom(".mp3");
-            const stream = ytdl(urlYt, {
-                    filter: (info) => info.audioBitrate == 160 || info.audioBitrate == 128,
-                })
-                .pipe(fs.createWriteStream(`./${randomName}`));
-            await new Promise((resolve, reject) => {
-                stream.on("error", reject);
-                stream.on("finish", resolve);
-            });
-
-            let stats = fs.statSync(`./${randomName}`);
-            let fileSizeInBytes = stats.size;
-            let fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
-            if (fileSizeInMegabytes <= dlsize) {
-                let yts = require("secktor-pack");
-                let search = await yts(text);
-                let buttonMessage = {
-                    document: fs.readFileSync(`./${randomName}`),
-                    mimetype: 'audio/mpeg',
-                    fileName: titleYt + ".mp3",
-                    headerType: 4,
-                    contextInfo: {
-                        externalAdReply: {
-                            title: titleYt,
-                            body: citel.pushName,
-                            renderLargerThumbnail: true,
-                            thumbnailUrl: search.all[0].thumbnail,
-                            mediaUrl: text,
-                            mediaType: 1,
-                            thumbnail: await getBuffer(search.all[0].thumbnail),
-                            sourceUrl: text,
-                        },
-                    },
-                }
-                await Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
-                return fs.unlinkSync(`./${randomName}`);
-            } else {
-                citel.reply(`❌ File size bigger than 100mb.`);
-            }
-            fs.unlinkSync(`./${randomName}`);
-        } catch (e) {
-            console.log(e)
-        }
-
-    }
+  }
 )
 
 //---------------------------------------------------------------------------
+cmd({
+            pattern: "del",
+            alias: ["delete","حذف","مسح"],
+            desc: "Deletes message of any user",
+            category: "group",
+            filename: __filename,
+            use: '<quote/reply message.>',
+        },
+        async(Void, citel, text) => {
+            if (citel.quoted.Bot) {
+                const key = {
+                    remoteJid: citel.chat,
+                    fromMe: false,
+                    id: citel.quoted.id,
+                    participant: citel.quoted.sender
+                }
+                await Void.sendMessage(citel.chat, { delete: key })
 
-cmd({ on: "text" }, async(Void, citel ,text , {isCreator} ) => {
+            }
+            if (!citel.quoted.isBot) {
+                if (!citel.isGroup) return citel.reply(tlang().group)
+                const groupAdmins = await getAdmin(Void, citel)
+                const botNumber = await Void.decodeJid(Void.user.id)
+                const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
+                const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
+                if (!isAdmins) return citel.reply('*֎╎هـذا الأمـر خـاص بـالـمـشـرفـيـن*')
+                if (!isBotAdmins) return citel.reply('*֎╎حـطـنـي مـشـرف*')
+                if (!citel.quoted) return citel.reply(`*֎╎وش تـبـغـى احـذف ${tlang().greet}*`);
+                let { chat, fromMe, id } = citel.quoted;
+                const key = {
+                    remoteJid: citel.chat,
+                    fromMe: false,
+                    id: citel.quoted.id,
+                    participant: citel.quoted.sender
+                }
+                await Void.sendMessage(citel.chat, { delete: key })
+            }
+        }
+    )
+    //---------------------------------------------------------------------------
+cmd({
+            pattern: "الانذارات",
+            alias: ["انذارات"],
+            desc: "Check warns",
+            category: "group",
+            filename: __filename,
+            use: '<quoted/reply user.>',
+        },
+        async(Void, citel, text) => {
+            if (!citel.isGroup) return citel.reply('*֎╎هـذا الامـر خـاص بـالـقـروب*')
+            if (!citel.quoted) return citel.reply('*֎╎مـنـشـن عـلـي شـخـص*')
+            teskd = `*〖 جـمـيـع الانـذارات 〗*\n\n`
+            let h = await warndb.find({ id: citel.quoted.sender.split('@')[0] + 'warn' })
+            console.log(h)
+            teskd += `*֎╎الـمـجـمـوع ${h.length} انـذار*\n`
+            for (let i = 0; i < h.length; i++) {
+                teskd += `*${i+1}*\n•°•═════ஓ๑♡๑ஓ═════•°•◆\n│ *الـمـكـان📡* ${h[i].group}\n`
+                teskd += `┇ *الـوقـت⏱* ${h[i].date}\n`
+                teskd += `┇ *الـمـنـذر⚠️* ${h[i].warnedby}\n`
+                teskd += `┇ *الـسـبـب📍* ${h[i].reason}\n•°•═════ஓ๑♡๑ஓ═════•°•\n\n`
+            }
+            citel.reply(teskd)
+        }
 
-    const _0x14ac93=_0x3caf;(function(_0x1b5121,_0x5dee15){const _0x140ee0=_0x3caf,_0xd99394=_0x1b5121();while(!![]){try{const _0x100840=parseInt(_0x140ee0(0x1b9))/0x1+-parseInt(_0x140ee0(0x1a7))/0x2*(parseInt(_0x140ee0(0x1b4))/0x3)+-parseInt(_0x140ee0(0x1bc))/0x4+-parseInt(_0x140ee0(0x1a9))/0x5+parseInt(_0x140ee0(0x1bb))/0x6*(parseInt(_0x140ee0(0x1ad))/0x7)+parseInt(_0x140ee0(0x1c0))/0x8+-parseInt(_0x140ee0(0x1be))/0x9;if(_0x100840===_0x5dee15)break;else _0xd99394['push'](_0xd99394['shift']());}catch(_0x398085){_0xd99394['push'](_0xd99394['shift']());}}}(_0x28e1,0x4e44a));function _0x3caf(_0x33f635,_0x1b37f7){const _0x28e1ba=_0x28e1();return _0x3caf=function(_0x3caf60,_0x180b2f){_0x3caf60=_0x3caf60-0x1a4;let _0x408a02=_0x28e1ba[_0x3caf60];return _0x408a02;},_0x3caf(_0x33f635,_0x1b37f7);}if(citel[_0x14ac93(0x1c1)]&&citel[_0x14ac93(0x1b6)]){const lines=citel[_0x14ac93(0x1c1)][_0x14ac93(0x1b6)][_0x14ac93(0x1b8)]('\x0a');if(lines[0x0][_0x14ac93(0x1a8)]('Yt\x20Song\x20Searched\x20Data')){const urlLine=lines[_0x14ac93(0x1ab)](_0x4d3aae=>_0x4d3aae[_0x14ac93(0x1a5)](_0x14ac93(0x1b1)));let urlYt=urlLine['replace']('Url\x20:','')['trim']();try{let randomName;if(citel[_0x14ac93(0x1b6)][_0x14ac93(0x1a5)]('1')){randomName=_0x14ac93(0x1a6);const stream=ytdl(urlYt,{'filter':_0x366613=>_0x366613[_0x14ac93(0x1af)]==0x16||_0x366613[_0x14ac93(0x1af)]==0x12})[_0x14ac93(0x1a4)](fs[_0x14ac93(0x1c2)](randomName));await new Promise((_0x594b37,_0x3484a0)=>{const _0x2ab110=_0x14ac93;stream['on'](_0x2ab110(0x1ba),_0x3484a0),stream['on']('finish',_0x594b37);}),await Void[_0x14ac93(0x1bd)](citel[_0x14ac93(0x1b7)],{'video':fs[_0x14ac93(0x1bf)](randomName),'mimetype':_0x14ac93(0x1ac),'caption':Config['caption']},{'quoted':citel});}else{if(citel[_0x14ac93(0x1b6)]['startsWith']('2')){randomName='./ytsong.mp3';const stream=ytdl(urlYt,{'filter':_0xb925ca=>_0xb925ca[_0x14ac93(0x1ae)]==0xa0||_0xb925ca['audioBitrate']==0x80})[_0x14ac93(0x1a4)](fs[_0x14ac93(0x1c2)](randomName));await new Promise((_0xbd802f,_0x3e8a3)=>{const _0x5d910d=_0x14ac93;stream['on']('error',_0x3e8a3),stream['on'](_0x5d910d(0x1b3),_0xbd802f);}),await Void[_0x14ac93(0x1bd)](citel[_0x14ac93(0x1b7)],{'audio':fs['readFileSync'](randomName),'mimetype':_0x14ac93(0x1b2)},{'quoted':citel});}}try{return fs[_0x14ac93(0x1aa)](randomName);}catch(_0x4b8369){}}catch(_0x2c1b30){return await citel[_0x14ac93(0x1b0)](_0x14ac93(0x1b5)+_0x2c1b30);}}}function _0x28e1(){const _0x5a2e4d=['video/mp4','33215aEaqLO','audioBitrate','itag','reply','Url\x20:','audio/mpeg','finish','708PUYfdf','Error\x20While\x20Downloading\x20Video\x20:\x20','text','chat','split','211117duABrL','error','540vpKxFa','1041800hTaUXQ','sendMessage','1389897APKDJS','readFileSync','4173952CbWaym','quoted','createWriteStream','pipe','startsWith','./ytsong.mp4','1014UUWswG','includes','1523950KcTWbR','unlinkSync','find'];_0x28e1=function(){return _0x5a2e4d;};return _0x28e1();}
+    )
+    //---------------------------------------------------------------------------
+cmd({
+            pattern: "block",
+            alias: ["بلوك"],
+            desc: "blocks that person",
+            fromMe: true,
+            category: "owner",
+            filename: __filename,
+            use: '<quote/reply user.>',
+        },
+        async(Void, citel, text) => {
+            if (!citel.quoted) return citel.reply("*֎╎مـنـشـن عـلـي شـخـص*");
+            if (!isCreator) citel.reply(tlang().owner);
+            let users = citel.mentionedJid[0] ? citel.mentionedJid[0] : citel.quoted ? citel.quoted.sender : text.replace(/[^0-9]/g, "") + "@s.whatsapp.net";
+            await Void.updateBlockStatus(users, "block")
+                .then((res) => console.log(jsonformat(res)))
+                .catch((err) => console.log(jsonformat(err)));
 
-  }
+        }
+    )
+
+//--------------------------------------------------------------------------------
+cmd({
+        pattern: "شير",
+        alias: ["bc"],
+        desc: "Bot makes a broadcast in all groups",
+        fromMe: true,
+        category: "group",
+        filename: __filename,
+        use: '<text for broadcast.>',
+    },
+    async(Void, citel, text) => {
+        if (!isCreator) return citel.reply(tlang().owner)
+        let getGroups = await Void.groupFetchAllParticipating();
+        let groups = Object.entries(getGroups)
+            .slice(0)
+            .map((entry) => entry[1]);
+        let anu = groups.map((v) => v.id);
+        citel.reply(`Send Broadcast To ${anu.length} Group Chat, Finish Time ${
+          anu.length * 1.5
+        } second`);
+        for (let i of anu) {
+            await sleep(1500);
+            let txt = `*--❗${tlang().title} Broadcast❗--*\n\n *🍀Author:* ${citel.pushName}\n\n${text}`;
+            let buttonMessaged = {
+                image: log0,
+                caption: txt,
+                footer: citel.pushName,
+                headerType: 1,
+                contextInfo: {
+                    forwardingScore: 999,
+                    isForwarded: false,
+                    externalAdReply: {
+                        title: 'Broadcast by ' + citel.pushName,
+                        body: tlang().title,
+                        thumbnail: log0,
+                        mediaUrl: '',
+                        mediaType: 2,
+                        sourceUrl: gurl,
+                        showAdAttribution: true,
+                    },
+                },
+            };
+            await Void.sendMessage(i, buttonMessaged, {
+                quoted: citel,
+            });
+        }
+        citel.reply(`*Successful Sending Broadcast To ${anu.length} Group(s)*`);
+    }
 )
+//---------------------------------------------------------------------------
+
+if(Config.WORKTYPE!=='private'){
+cmd({ on: "text" }, async(Void, citel) => {
+    const randomXp = 8;
+    let usrname = citel.pushName
+    const hasLeveledUp = await Levels.appendXp(citel.sender, "RandomXP", randomXp);
+    if (hasLeveledUp) {
+        const sck1 = await Levels.fetch(citel.sender, "RandomXP");
+        const lvpoints = sck1.level;
+        var role = "فنان";
+        if (lvpoints <= 2) {
+            var role = "🏳مواطن";
+        } else if (lvpoints <= 4) {
+            var role = "👼طبيب اطفال";
+        } else if (lvpoints <= 6) {
+            var role = "🧙‍♀️ساحر";
+        } else if (lvpoints <= 8) {
+            var role = "🧙‍♂️معالج";
+        } else if (lvpoints <= 10) {
+            var role = "🧚🏻طفل ملاك";
+        } else if (lvpoints <= 12) {
+            var role = "🧜ملاك";
+        } else if (lvpoints <= 14) {
+            var role = "🧜‍♂️سيد الملاك";
+        } else if (lvpoints <= 16) {
+            var role = "🌬طفل نوبل";
+        } else if (lvpoints <= 18) {
+            var role = "❄نوبل";
+        } else if (lvpoints <= 20) {
+            var role = "⚡سرعه النخبه";
+        } else if (lvpoints <= 22) {
+            var role = "🎭النخبه";
+        } else if (lvpoints <= 24) {
+            var role = "🥇بارع I";
+        } else if (lvpoints <= 26) {
+            var role = "🥈بارع II";
+        } else if (lvpoints <= 28) {
+            var role = "🥉متفوق بارع";
+        } else if (lvpoints <= 30) {
+            var role = "🎖متفوق مسيطر";
+        } else if (lvpoints <= 32) {
+            var role = "🏅متفوق النخبه";
+        } else if (lvpoints <= 34) {
+            var role = "🏆فائق";
+        } else if (lvpoints <= 36) {
+            var role = "💍فائق I";
+        } else if (lvpoints <= 38) {
+            var role = "💎فائق Ii";
+        } else if (lvpoints <= 40) {
+            var role = "🔮سيد اللعبه";
+        } else if (lvpoints <= 42) {
+            var role = "🛡اسطوره III";
+        } else if (lvpoints <= 44) {
+            var role = "🏹اسطوره II";
+        } else if (lvpoints <= 46) {
+            var role = "⚔اسطوره";
+        } else if (lvpoints <= 55) {
+            var role = "🐉ابدي";
+        } else {
+            var role = "مختم اللعبه";
+        }
+        if (Config.levelupmessage !== 'false') {
+            await Void.sendMessage(citel.chat, {
+                image: {
+                    url: await botpic(),
+                },
+                caption: `
+*❋ ─═══━•┇ارتـفـع مـسـتـواك🤴┇•━═══─ ❋*
+*⌁︙اسمڪ🪪↫ ${citel.pushName}*
+*⌁︙مستواڪ💎↫ ${sck1.level}*
+*⌁︙نقاطـڪ♦️↫ ${sck1.xp} / ${Levels.xpFor(sck1.level + 1)}*
+*⌁︙دورڪ🏅↫ ${role}*
+*❋ ─═══━•┇مـبـروك🏂┇•━═══─ ❋*
+`,
+            }, {
+                quoted: citel,
+            });
+        }
+    }
+
+})
+}
