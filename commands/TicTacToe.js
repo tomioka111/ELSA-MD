@@ -1,23 +1,11 @@
-/**
- Copyright (C) 2022.
- Licensed under the  GPL-3.0 License;
- You may not use this file except in compliance with the License.
- It is supplied in the hope that it may be useful.
- * @project_name : Secktor-Md
- * @author : @samapndey001 <https://github.com/SamPandey001>
- * @description : Secktor,A Multi-functional whatsapp bot.
- * @version 0.0.6
- **/
 
  const { cmd, parseJid,getAdmin,tlang } = require("../lib/");
  const eco = require('discord-mongoose-economy')
  const ty = eco.connect(mongodb);
 cmd(
   {
-    pattern: "deltic",
-    desc: "deletes TicTacToe running session.",
+    pattern: "استسلام",
     filename: __filename,
-    category: "game",
   },
   async (Void,citel,text,{isCreator}) => {
         if (!citel.isGroup) return citel.reply(tlang().group);
@@ -25,7 +13,7 @@ cmd(
         const participants = citel.isGroup ? await groupMetadata.participants : "";
         const groupAdmins = await getAdmin(Void, citel)
         const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
-        if(!isAdmins && !isCreator) return citel.reply('This command is only for Group Admin and my owner.')
+        if(!isAdmins && !isCreator) return citel.reply('*֎╎هذا الامر خاص بالمشرفين*')
          this.game = this.game ? this.game : false
          if (
         Object.values(this.game).find(
@@ -34,19 +22,17 @@ cmd(
         )
       ) {
         delete this.game
-        return citel.reply(`_Successfully Deleted running TicTacToe game._`);
+        return citel.reply(`*֎╎تـم حـذف الـجـولـه*`);
         } else {
-              return citel.reply(`there No TicTacToe game👾 is running.`)
+              return citel.reply(`*֎╎مـافـي جـولـه اصـلا*`)
                     
         }
   })
   
 cmd(
   {
-    pattern: "tic",
-    desc: "Play TicTacToe",
+    pattern: "اكس",
     filename: __filename,
-    category: "game",
   },
   async (Void,citel,text) => {
     if (!citel.isGroup) return citel.reply(tlang().group);
@@ -61,7 +47,7 @@ cmd(
             [room.game.playerX, room.game.playerO].includes(citel.sender)
         )
       )
-        return citel.reply("_A game is already going on_");
+        return citel.reply("*֎╎اللـعـبـه جـاريـه بـالـفـعـل*");
       let room = Object.values(this.game).find(
         (room) =>
           room.state === "WAITING" && (text ? room.name === text : true)
@@ -86,8 +72,8 @@ cmd(
           }[v];
         });
         let str = `
-Current turn: @${room.game.currentTurn.split("@")[0]}
-Room ID: ${room.id}
+        *֎╎دورك┇* @${room.game.currentTurn.split("@")[0]}
+${room.id}
 ${arr.slice(0, 3).join("  ")}
 ${arr.slice(3, 6).join("  ")}
 ${arr.slice(6).join("  ")}
@@ -106,7 +92,7 @@ ${arr.slice(6).join("  ")}
           state: "WAITING",
         };
         if (text) room.name = text;
-        citel.reply("_Waiting for player,use .ttt to join this game._ ");
+        citel.reply("*֎╎فـي انـتـظـار لاعـب اخـر اكـتـب .اكـس للـمـشاركـه*");
         this.game[room.id] = room;
       }
     }
@@ -136,7 +122,7 @@ cmd(
       let isWin = !1;
       let isTie = !1;
       let isSurrender = !1;
-      if (!/^([1-9]|(me)?give_up|surr?ender|off|skip)$/i.test(citel.text)) return;
+      if (!/^([1-9]|(me)?give_up|surr?ender|استسلم|skip)$/i.test(citel.text)) return;
       isSurrender = !/^[1-9]$/.test(citel.text);
       if (citel.sender !== room.game.currentTurn) {
         if (!isSurrender) return !0;
@@ -151,10 +137,10 @@ cmd(
       ) {
         citel.reply(
           {
-            "-3": "The game is over.",
-            "-2": "Invalid",
-            "-1": "_Invalid Position_",
-            0: "_Invalid Position_",
+            "-3": "*انتهت اللعبة.*",
+            "-2": "*غير صالح*",
+            "-1": "*֎╎تـم اللـعـب بـهـذا الـرقـم*",
+            0: "*֎╎تـم اللـعـب بـهـذا الـرقـم*",
           }[ok]
         );
         return !0;
@@ -181,31 +167,37 @@ cmd(
         isWin = true;
       }
       let winner = isSurrender ? room.game.currentTurn : room.game.winner;
-      let str = `Room ID: ${room.id}
+      let str = ` ${room.id}
       
 ${arr.slice(0, 3).join("  ")}
 ${arr.slice(3, 6).join("  ")}
 ${arr.slice(6).join("  ")}
 ${
   isWin
-    ? `@${winner.split("@")[0]} Won ! and got 2000💎 in wallet🤑`
+    ? `@${winner.split("@")[0]} فاز/ت 🎖️`
     : isTie
-    ? `Game Tied,well done to both of players.`
-    : `Current Turn ${["❌", "⭕"][1 * room.game._currentTurn]} @${
+    ? `*֎╎تـعـادل ، كـفـو لـثـنـيـن 👏*`
+    : `*֎╎دورك┇* ${["❌", "⭕"][1 * room.game._currentTurn]} @${
         room.game.currentTurn.split("@")[0]
       }`
 }
-⭕:- @${room.game.playerO.split("@")[0]}
-❌:- @${room.game.playerX.split("@")[0]}`;
+*֎╎الـلاعـب الاول❌┇ @${room.game.playerO.split("@")[0]}*
+*֎╎الـلاعـب الـثـانـي⭕┇ @${room.game.playerX.split("@")[0]}*`;
 
       if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== citel.chat)
         room[room.game._currentTurn ^ isSurrender ? "x" : "o"] = citel.chat;
         if(isWin){
-        await eco.give(citel.sender, "secktor", 2000);
+        await eco.give(citel.sender, "JEJE", 2000);
         }
       if (isWin || isTie) {
         await Void.sendMessage(citel.chat, {
           text: str,
+          buttons: [
+            {
+              /*buttonId: `${prefix}اكس_او`,
+              buttonText: { displayText: "اللعب مرة اخرى" },
+            },
+          ],*/
           mentions: [room.game.playerO,room.game.playerX],
         });
       } else {
@@ -221,7 +213,7 @@ ${
   }
 );
 
-cmd({ pattern: "ship" , category: "fun" }, async(Void, citel, text) => {
+cmd({ pattern: "شبيهي" }, async(Void, citel, text) => {
     const { tlang } = require('../lib')
    if (!citel.isGroup) return citel.reply(tlang().group);
    const groupMetadata = citel.isGroup ? await Void.groupMetadata(citel.chat).catch((e) => {}) : "";
@@ -231,15 +223,15 @@ cmd({ pattern: "ship" , category: "fun" }, async(Void, citel, text) => {
     async function couple(percent) {
          var text;
         if (percent < 25) {
-            text = `\t\t\t\t\t*ShipCent : ${percentage}%* \n\t\tThere's still time to reconsider your choices 😂`
+            text = `\t\t\t\t\t*نسبة التشابه ┇ ${percentage}%* \n\t\t*ابعد عنه ما يشبهك 🦦.*`
         } else if (percent < 50) {
-            text = `\t\t\t\t\t*ShipCent : ${percentage}%* \n\t\t Good enough, I guess! 🤥`
+            text = `\t\t\t\t\t*نسبة التشابه ┇ ${percentage}%* \n\t\t*امم شرايكم تصيرو اصدقاء 🦦؟*`
         } else if (percent < 75) {
-            text = `\t\t\t\t\t*ShipCent : ${percentage}%* \n\t\t\tStay together and you'll find a way ⭐️`
+            text = `\t\t\t\t\t*نسبة التشابه ┇ ${percentage}%* \n\t\t\t*ولل يزينكم 🦦.*`
         } else if (percent < 90) {
-            text = `\t\t\t\t\t*ShipCent : ${percentage}%* \n\tAmazing! You two will be a good couple 💖 `
+            text = `\t\t\t\t\t*نسبة التشابه ┇ ${percentage}%* \n\t*اممم ثنائي حلو 🦦.*`
         } else {
-            text = `\t\t\t\t\t*ShipCent : ${percentage}%* \n\tYou two are fated to be together 💙`
+            text = `\t\t\t\t\t*نسبة التشابه ┇ ${percentage}%* \n\t*الله ، خُلقتم لبعض 😔💙.*`
         }
         return text
         }
@@ -250,13 +242,9 @@ cmd({ pattern: "ship" , category: "fun" }, async(Void, citel, text) => {
        } else {
        shiper = members[Math.floor(Math.random() * members.length)]
        }
-       let caption = `\t😇 *Matchmaking.*😇 \n`
-        caption += `\t\t✯✶⊶⊷⊶⊷❍⊶⊷⊶⊷✶✯\n`
-        caption += `@${citel.sender.split('@')[0]}  x  @${shiper.split('@')[0]}\n`
-        caption += `\t\t✯✶⊶⊷⊶⊷❍⊶⊷⊶⊷✶✯\n`
+       let caption = `@${citel.sender.split('@')[0]}  x  @${shiper.split('@')[0]}\n \n`
         caption += await couple(percentage)
-        if(citel.sender.split('@')[0]===shiper.split('@')[0]) return citel.reply('```'+'Wait... do!,You wanna do matchmaking with yourself'+'```')
+        if(citel.sender.split('@')[0]===shiper.split('@')[0]) return citel.reply('```'+'*تستغبي يفنطل ؟*'+'```')
         await Void.sendMessage(citel.chat,{text: caption,mentions: [citel.sender,shiper]},{quoted:citel})
    }
 )
-// IDEA of Shipcent from => https://github.com/iamherok/WhatsApp-Botto-Ruka/blob/master/handler/message.js#L842
