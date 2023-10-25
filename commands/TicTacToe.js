@@ -1,11 +1,23 @@
+/**
+ Copyright (C) 2022.
+ Licensed under the  GPL-3.0 License;
+ You may not use this file except in compliance with the License.
+ It is supplied in the hope that it may be useful.
+ * @project_name : Secktor-Md
+ * @author : @samapndey001 <https://github.com/SamPandey001>
+ * @description : Secktor,A Multi-functional whatsapp bot.
+ * @version 0.0.6
+ **/
 
  const { cmd, parseJid,getAdmin,tlang } = require("../lib/");
  const eco = require('discord-mongoose-economy')
  const ty = eco.connect(mongodb);
 cmd(
   {
-    pattern: "استسلام",
+    pattern: "مغادره",
+    desc: "deletes TicTacToe running session.",
     filename: __filename,
+    category: "game",
   },
   async (Void,citel,text,{isCreator}) => {
         if (!citel.isGroup) return citel.reply(tlang().group);
@@ -32,7 +44,9 @@ cmd(
 cmd(
   {
     pattern: "اكس",
+    desc: "Play TicTacToe",
     filename: __filename,
+    category: "game",
   },
   async (Void,citel,text) => {
     if (!citel.isGroup) return citel.reply(tlang().group);
@@ -72,8 +86,8 @@ cmd(
           }[v];
         });
         let str = `
-        *֎╎دورك┇* @${room.game.currentTurn.split("@")[0]}
-${room.id}
+*֎╎دورك┇* @${room.game.currentTurn.split("@")[0]}
+*֎╎ايـدي الـغـرفـه┇* ${room.id}
 ${arr.slice(0, 3).join("  ")}
 ${arr.slice(3, 6).join("  ")}
 ${arr.slice(6).join("  ")}
@@ -92,7 +106,7 @@ ${arr.slice(6).join("  ")}
           state: "WAITING",
         };
         if (text) room.name = text;
-        citel.reply("*֎╎فـي انـتـظـار لاعـب اخـر اكـتـب .اكـس للـمـشاركـه*");
+        citel.reply("_Waiting for player,use .ttt to join this game._ ");
         this.game[room.id] = room;
       }
     }
@@ -167,7 +181,7 @@ cmd(
         isWin = true;
       }
       let winner = isSurrender ? room.game.currentTurn : room.game.winner;
-      let str = ` ${room.id}
+      let str = `*֎╎ايـدي الـغـرفـه┇* ${room.id}
       
 ${arr.slice(0, 3).join("  ")}
 ${arr.slice(3, 6).join("  ")}
@@ -181,23 +195,17 @@ ${
         room.game.currentTurn.split("@")[0]
       }`
 }
-*֎╎الـلاعـب الاول❌┇ @${room.game.playerO.split("@")[0]}*
-*֎╎الـلاعـب الـثـانـي⭕┇ @${room.game.playerX.split("@")[0]}*`;
+*֎╎الـلاعـب الاول❌┇* @${room.game.playerO.split("@")[0]}
+*֎╎الـلاعـب الـثـانـي⭕┇* @${room.game.playerX.split("@")[0]}`;
 
       if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== citel.chat)
         room[room.game._currentTurn ^ isSurrender ? "x" : "o"] = citel.chat;
         if(isWin){
-        await eco.give(citel.sender, "JEJE", 2000);
+        await eco.give(citel.sender, "secktor", 2000);
         }
       if (isWin || isTie) {
         await Void.sendMessage(citel.chat, {
           text: str,
-          buttons: [
-            {
-              /*buttonId: `${prefix}اكس_او`,
-              buttonText: { displayText: "اللعب مرة اخرى" },
-            },
-          ],*/
           mentions: [room.game.playerO,room.game.playerX],
         });
       } else {
@@ -213,7 +221,7 @@ ${
   }
 );
 
-cmd({ pattern: "شبيهي" }, async(Void, citel, text) => {
+cmd({ pattern: "شبيهي" , category: "fun" }, async(Void, citel, text) => {
     const { tlang } = require('../lib')
    if (!citel.isGroup) return citel.reply(tlang().group);
    const groupMetadata = citel.isGroup ? await Void.groupMetadata(citel.chat).catch((e) => {}) : "";
@@ -248,3 +256,4 @@ cmd({ pattern: "شبيهي" }, async(Void, citel, text) => {
         await Void.sendMessage(citel.chat,{text: caption,mentions: [citel.sender,shiper]},{quoted:citel})
    }
 )
+// IDEA of Shipcent from => https://github.com/iamherok/WhatsApp-Botto-Ruka/blob/master/handler/message.js#L842
