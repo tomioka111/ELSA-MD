@@ -104,7 +104,7 @@
      "required": false 
   },
   "heroku": {
-    "description": "لا تغيره,
+    "description": "لا تغيره",
      "value": "true",
      "required": false 
   }
