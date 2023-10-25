@@ -9,13 +9,17 @@
  * @version 0.0.6
  **/
 
-const { tlang, ringtone, cmd,fetchJson, sleep, botpic,ffmpeg, getBuffer, pinterest, prefix, Config } = require('../lib')
+const { tlang, ringtone, cmd,fetchJson, sleep, botpic, getBuffer, pinterest, prefix, Config } = require('../lib')
 const { mediafire } = require("../lib/mediafire.js");
+const {GDriveDl} = require('../lib/scraper.js')
+const fbInfoVideo = require('fb-info-video'); 
 const googleTTS = require("google-tts-api");
 const ytdl = require('ytdl-secktor')
-const fs = require('fs-extra')
-var videotime = 60000 // 1000 min
-var dlsize = 1000 // 1000mb
+const cheerio = require('cheerio')
+const fs  = require('fs-extra');
+const axios= require('axios');
+var videotime = 60000 // 30 min
+var dlsize = 1000 // 100mb
 
     //---------------------------------------------------------------------------
 cmd({
@@ -236,8 +240,8 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "play",
-            alias: ["music"],
+            pattern: "song",
+            alias: ["music","تشغيل"],
             desc: "Sends info about the query(of youtube video/audio).",
             category: "downloader",
             filename: __filename,
@@ -245,7 +249,7 @@ cmd({
         },
 async(Void, citel, text) => {
    const getRandom = (ext) => { return `${Math.floor(Math.random() * 10000)}${ext}`; };    
-   if (text.length == 0 && !citel.quoted) return citel.reply(`Give Song Name, Ex ${prefix}play back in black*`);
+   if (text.length == 0 && !citel.quoted) return citel.reply(`*֎╎اكـتـب عـنـوان لـلـبـحـث عـنـه*`);
    try {
             let urlYt = text;
             if(!text){ text=citel.quoted.text; }
@@ -258,9 +262,9 @@ async(Void, citel, text) => {
                 urlYt = anu.url; 
             }
             let infoYt = await ytdl.getInfo(urlYt);
-            if (infoYt.videoDetails.lengthSeconds >= 1200) return citel.reply(`*song not Found, Try Differ Name*`);
+            if (infoYt.videoDetails.lengthSeconds >= 1200) return citel.reply(`*֎╎عـنـوان الـبـحـث غـيـر مـوجـود اكـتـب عـنـوان اخـر*`);
             let titleYt = infoYt.videoDetails.title;   
-	    citel.reply(`_Downloading ${infoYt.videoDetails.title}?_`);
+	    citel.reply(`*֎╎تـحـمـيـل┇  ${infoYt.videoDetails.title}*`);
             let randomName = getRandom(".mp3");
             const stream = ytdl(urlYt, {
                  filter: (info) => info.audioBitrate == 160 || info.audioBitrate == 128, })
@@ -286,10 +290,10 @@ async(Void, citel, text) => {
                 await Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                 return fs.unlinkSync(`./${randomName}`);
             } 
-            else {   citel.reply(`❌ File size bigger than 100mb.`);    }
+            else {   citel.reply(`*֎╎حـجـم المــلـف اكـبـر مـن 100 مـيـجـا*`);    }
              return fs.unlinkSync(`./${randomName}`);
    
-   }catch (e) { return citel.reply(`Error While Downloading Your Song`);  }
+   }catch (e) { return citel.reply(`*֎╎حـدث خـطـأ فـي الـسـيـرفـر*`);  }
   }
 )
     //---------------------------------------------------------------------------
@@ -384,8 +388,8 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "song",
-            alias: ["audio"],
+            pattern: "شغل",
+            alias: ["audio","play"],
             desc: "Downloads audio from youtube.",
             category: "downloader",
             filename: __filename,
@@ -393,11 +397,11 @@ cmd({
         },
         async(Void, citel, text) => {
   
-                if (!text) return await citel.reply(`*_Ohh PLease, Give Me Song Name_*`);
+                if (!text) return await citel.reply(`*֎╎اكـتـب عـنـوان لـلـبـحـث عـنـه* `);
                 let yts = require("secktor-pack")
                 let search = await yts(text);
                 let i = search.all[1] ;
-                let cap = "\t *---Yt Song Searched Data---*   \n\nTitle : " + i.title + "\nUrl : " + i.url +"\nDescription : " + i.timestamp +"\nViews : "+i.views +"\nUploaded : " +i.ago +"\nAuthor : "+i.author.name+"\n\n\nReply 1 To Video \nReply 2 To Audio" ;
+                let cap = "\t *🎧𝐸𝐿𝐺𝐴𝑍𝐴𝑅 𝑌𝑂𝑈𝑇𝑈𝐵𝐸⃤🎧*   \n\n*֎╎الـعـنـوان📝┇* " + i.title + "\n*֎╎الـرابـط🔗┇* " + i.url +"\n*֎╎الـمـده⏳┇* " + i.timestamp +"\n*֎╎الـمـشـاهـدات📈┇* "+i.views +"\n*֎╎وقـت الـنـشـر🏮┇* " +i.ago +"\n*֎╎الـقـنـاه🎐┇* "+i.author.name+"\n\n\nرد بـ1 للـفـيـديـو \nرد بـ2 للـصـوت" ;
                 Void.sendMessage(citel.chat,{image :{url : i.thumbnail}, caption :  cap });
            
            
@@ -440,7 +444,7 @@ cmd({
                 quoted: citel
             })
             */
-    }   
+    }
   )
 
     //---------------------------------------------------------------------------
