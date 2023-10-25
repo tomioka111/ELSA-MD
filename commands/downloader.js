@@ -20,13 +20,14 @@ var dlsize = 1000 // 1000mb/*
     //---------------------------------------------------------------------------
 cmd({
             pattern: "tts",
+            alias: ["قول","انطق"],
             desc: "text to speech.",
             category: "downloader",
             filename: __filename,
             use: '<Hii,this is izuku>',
         },
         async(Void, citel, text) => {
-            if (!text) return citel.reply('Please give me a Sentence to change into audio.')
+            if (!text) return citel.reply('*֎╎اكـتـب اي نـص وسـأنـطـقـه فـي مـقـطـع*')
             let texttts = text
             const ttsurl = googleTTS.getAudioUrl(texttts, {
                 lang: "ar",
@@ -83,6 +84,7 @@ cmd({
     //---------------------------------------------------------------------------
 cmd({
             pattern: "video",
+            alias: ["فيديو"],
             desc: "Downloads video from yt.",
             category: "downloader",
             filename: __filename,
@@ -97,10 +99,10 @@ cmd({
                 return `${Math.floor(Math.random() * 10000)}${ext}`;
             };
                 let infoYt = await ytdl.getInfo(urlYt);
-                if (infoYt.videoDetails.lengthSeconds >= videotime) return citel.reply(`😔 Video file too big!`);
+                if (infoYt.videoDetails.lengthSeconds >= videotime) return citel.reply(`*֎╎حـجـم المــلـف كـبـيـر جـدا*`);
                 let titleYt = infoYt.videoDetails.title;
                 let randomName = getRandom(".mp4");
-                citel.reply('*Downloading:* '+titleYt)
+                citel.reply('*֎╎تـحـمـيـل┇* '+titleYt)
                 const stream = ytdl(urlYt, {
                         filter: (info) => info.itag == 22 || info.itag == 18,
                     })
@@ -118,7 +120,7 @@ cmd({
                         jpegThumbnail: log0,
                         mimetype: 'video/mp4',
                         fileName: `${titleYt}.mp4`,
-                        caption: ` ⿻ Title : ${titleYt}\n ⿻ File Size : ${fileSizeInMegabytes} MB`,
+                        caption: ` *֎╎الـعـنـوان📝┇* ${titleYt}\n *֎╎حـجـم الـمـلـف📥┇* ${fileSizeInMegabytes} مـيـجـا`,
                         headerType: 4,
                         contextInfo: {
                             externalAdReply: {
@@ -135,7 +137,7 @@ cmd({
                  Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                  return fs.unlinkSync(`./${randomName}`);
                 } else {
-                    citel.reply(`😔 File size bigger than 100mb.`);
+                    citel.reply(`*֎╎حـجـم المــلـف اكـبـر مـن 100 مـيـجـا*`);
                 }
                 return fs.unlinkSync(`./${randomName}`);      
 
