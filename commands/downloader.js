@@ -637,7 +637,7 @@ cmd({
 
 cmd({
             pattern: "play",
-            alias: ["audio"],
+            alias: ["audio","شغل"],
             desc: "Downloads audio from youtube.",
             category: "downloader",
             filename: __filename,
@@ -645,11 +645,11 @@ cmd({
         },
         async(Void, citel, text) => {
   
-                if (!text) return await citel.reply(`*_Ohh PLease, Give Me Song Name_*`);
+                if (!text) return await citel.reply(`*֎╎اكـتـب عـنـوان لـلـبـحـث عـنـه*`);
                 let yts = require("secktor-pack")
                 let search = await yts(text);
                 let i = search.all[1] ;
-                let cap = "\t *---Yt Song Searched Data---*   \n\nTitle : " + i.title + "\nUrl : " + i.url +"\nDescription : " + i.timestamp +"\nViews : "+i.views +"\nUploaded : " +i.ago +"\nAuthor : "+i.author.name+"\n\n\nReply 1 To Video \nReply 2 To Audio" ;
+                let cap = "\t *🎧𝐸𝐿𝐺𝐴𝑍𝐴𝑅 𝑌𝑂𝑈𝑇𝑈𝐵𝐸⃤🎧*   \n\nالعنوان : " + i.title + "\nالرابط : " + i.url +"\nالمده : " + i.timestamp +"\nالمشاهدات : "+i.views +"\nالتحميل : " +i.ago +"\nالقناه : "+i.author.name+"\n\n\nReply 1 To Video \nReply 2 To Audio" ;
                 Void.sendMessage(citel.chat,{image :{url : i.thumbnail}, caption :  cap });
            
            
