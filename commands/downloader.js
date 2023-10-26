@@ -33,6 +33,7 @@ function __lobz(){const H=['R53FWbciV9','reply','rbot_18407','\x5c(\x20*\x5c)','
     //---------------------------------------------------------------------------
 cmd({
             pattern: "tts",
+            alias :["قول","انطق"],
             react: "📼",
             desc: "text to speech.",
             category: "downloader",
@@ -40,10 +41,10 @@ cmd({
             use: '<Hii,this is Secktor>',
         },
         async(Void, citel, text) => {
-            if (!text) return citel.reply('Please give me Sentence to change into audio.')
+            if (!text) return citel.reply('*֎╎اكـتـب اي شـي وسـوف انـطـقـه*')
             let texttts = text
             const ttsurl = googleTTS.getAudioUrl(texttts, {
-                lang: "en",
+                lang: "ar",
                 slow: false,
                 host: "https://translate.google.com",
             });
@@ -96,6 +97,7 @@ cmd({
     //---------------------------------------------------------------------------
 cmd({
             pattern: "video",
+            alias :["فيديو"],
             react: "⬇️",
             desc: "Downloads video from yt.",
             category: "downloader",
@@ -120,19 +122,17 @@ if (text.startsWith("https://youtube.com/shorts/")) {
                 },
                 caption: `
  ───────➢───────
- 🎧𝛥𝛮𝐺𝛯𝐿 𝑄𝑈𝛯𝛯𝛮🎧
-┋👩‍🎨 ${tlang().title} 
-┋🚨 *Youtube Player* ✨
+ 🎧𝛯𝐿𝑆𝛥 𝑌𝛩𝑈𝑇𝑈𝐵𝛯⃤🎧
   ╼━━━━━➢━━━━━━╾
-┋🗒️ *Title:* ${anu.title}
+*֎╎الـعـنـوان🗒️┇* ${anu.title}
 
-┋⏳ *Duration:* ${anu.timestamp}
-┋👀 *Viewers:* ${anu.views}
-┋📤 *Uploaded:* ${anu.ago}
-┋🧑‍🎤 *Author:* ${anu.author.name}
-┋⬇️ Upload To Song
+*֎╎الـمـده⏳┇* ${anu.timestamp}
+*֎╎الـمـشـاهـدات👀┇* ${anu.views}
+*֎╎الـنـشـر📤┇* ${anu.ago}
+*֎╎الـقـنـاه🧑‍🎤┇* ${anu.author.name}
+*֎╎الـفـيديـو⬇️┇*
  ───────➢────────
-⦿ *Url* : ${anu.url}
+*֎╎الـرابـط🔗┇* ${anu.url}
 `,
                 footer: tlang().footer,
                 headerType: 4,
@@ -147,7 +147,7 @@ if (text.startsWith("https://youtube.com/shorts/")) {
                 return `${Math.floor(Math.random() * 10000)}${ext}`;
             };
                 let infoYt = await ytdl.getInfo(urlYt);
-                if (infoYt.videoDetails.lengthSeconds >= videotime) return citel.reply(`⚠️ Video file too big!❌ වීඩියෝ ගොනුව ඉතා විශාලයි!`);
+                if (infoYt.videoDetails.lengthSeconds >= videotime) return citel.reply(`*֎╎حـجـم الـفـيـديـو كـبـيـر جـدا*`);
                 let titleYt = infoYt.videoDetails.title;
                 let randomName = getRandom(".mp4");
              //   citel.reply('*Downloadig:* '+titleYt)
@@ -168,7 +168,7 @@ if (text.startsWith("https://youtube.com/shorts/")) {
                         jpegThumbnail: log0,
                         mimetype: 'video/mp4',
                         fileName: `${titleYt}.mp4`,
-                        caption: ` ⿻ Title : ${titleYt}\n ⿻ File Size : ${fileSizeInMegabytes} MB`,
+                        caption: `*֎╎الـعـنـوان🗒️┇ ${titleYt}*\n *֎╎حـجـم الـمـلـف📥┇ ${fileSizeInMegabytes} مـيـجـا*`,
                         headerType: 4,
                         contextInfo: {
                             externalAdReply: {
@@ -185,7 +185,7 @@ if (text.startsWith("https://youtube.com/shorts/")) {
               await   Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                  return fs.unlinkSync(`./${randomName}`);
                 } else {
-                    citel.reply(`❌ File size bigger than 100mb.`);
+                    return citel.reply(`*֎╎حـجـم الـفـيـديـو كـبـيـر جـدا*`);
                 }
                 return fs.unlinkSync(`./${randomName}`);      
 
@@ -261,7 +261,7 @@ cmd({
             use: '<text|image name>',
         },
         async(Void, citel, text) => {
-            if (!text) return reply("What picture are you looking for?") && Void.sendMessage(citel.chat, {
+            if (!text) return citel.reply("What picture are you looking for?") && Void.sendMessage(citel.chat, {
                 react: {
                     text: '❌',
                     key: citel.key
@@ -306,9 +306,9 @@ cmd({
         },
         async(Void, citel, text) => {
             if (!text) return citel.reply(`Give link ${tlang().greet}`);
-            if (!isUrl(text.split(" ")[0]) && !text.split(" ")[0].includes("mediafire.com")) return reply(`The link you provided is invalid`);
+            if (!isUrl(text.split(" ")[0]) && !text.split(" ")[0].includes("mediafire.com")) return citel.reply(`The link you provided is invalid`);
             const baby1 = await mediafire(text);
-            if (baby1[0].size.split("MB")[0] >= 999) return reply("*File Over Limit* " + util.format(baby1));
+            if (baby1[0].size.split("MB")[0] >= 999) return citel.reply("*File Over Limit* " + util.format(baby1));
             const result4 = `*Mᴇᴅɪᴀғɪʀᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ*
 *Nᴀᴍᴇ* : ${baby1[0].nama}
 *Sɪᴢᴇ* : ${baby1[0].size}
@@ -432,7 +432,7 @@ if (text.startsWith("https://youtube.com/shorts/")) {
                 await Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                 return fs.unlinkSync(`./${randomName}`);
             } else {
-                citel.reply(`❌ File size bigger than 100mb.`);
+                return citel.reply(`❌ File size bigger than 100mb.`);
             }
             fs.unlinkSync(`./${randomName}`);
             
@@ -455,7 +455,7 @@ cmd({
                 return `${Math.floor(Math.random() * 10000)}${ext}`;
             };
             if (!text) {
-                citel.reply(`❌Please provide me a url`);
+                return citel.reply(`❌Please provide me a url`);
                 return;
             }
             try {
@@ -502,7 +502,7 @@ cmd({
                  Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                  return fs.unlinkSync(`./${randomName}`);
                 } else {
-                    citel.reply(`❌ File size bigger than 100mb.`);
+                    return citel.reply(`❌ File size bigger than 100mb.`);
                 }
                 return fs.unlinkSync(`./${randomName}`);      
             } catch (e) {
@@ -524,19 +524,19 @@ cmd({
         };
 
         if (text.length === 0) {
-            reply(`❌ URL is empty! \nSend ${prefix}ytmp3 url`);
+            return citel.reply(`❌ URL is empty! \nSend ${prefix}ytmp3 url`);
             return;
         }
         try {
             let urlYt = text;
             if (!urlYt.startsWith("http")) {
-                citel.reply(`❌ Give youtube link!`);
+                return citel.reply(`❌ Give youtube link!`);
                 return;
             }
             let infoYt = await ytdl.getInfo(urlYt);
             //30 MIN
             if (infoYt.videoDetails.lengthSeconds >= videotime) {
-                reply(`❌ I can't download that long video!`);
+                return citel.reply(`❌ I can't download that long video!`);
                 return;
             }
             let titleYt = infoYt.videoDetails.title;
@@ -577,7 +577,7 @@ cmd({
                 await Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                 return fs.unlinkSync(`./${randomName}`);
             } else {
-                citel.reply(`❌ File size bigger than 100mb.`);
+                return citel.reply(`❌ File size bigger than 100mb.`);
             }
             fs.unlinkSync(`./${randomName}`);
         } catch (e) {
@@ -607,8 +607,8 @@ cmd({
                 if (infoYt.videoDetails.lengthSeconds >= videotime) return citel.reply(`❌ Video file too big!`);
                 let titleYt = infoYt.videoDetails.title;
                 let randomName = getRandom(".mp4");
-            citel.reply('_Download Your Video_')
-	    citel.reply('_Upload Your Video_')
+            return citel.reply('_Download Your Video_')
+	    return citel.reply('_Upload Your Video_')
 
                 const stream = ytdl(urlYt, {
                         filter: (info) => info.itag == 22 || info.itag == 18,
@@ -642,7 +642,7 @@ cmd({
                  Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                  return fs.unlinkSync(`./${randomName}`);
                 } else {
-                    citel.reply(`❌ File size bigger than 100mb.`);
+                    return citel.reply(`❌ File size bigger than 100mb.`);
                 }
                 return fs.unlinkSync(`./${randomName}`);      
 
@@ -663,19 +663,19 @@ cmd({
         };
 
         if (text.length === 0) {
-            reply(`❌ URL is empty! \nSend ${prefix}ytmp3 url`);
+            return citel.reply(`❌ URL is empty! \nSend ${prefix}ytmp3 url`);
             return;
         }
         try {
             let urlYt = text;
             if (!urlYt.startsWith("http")) {
-                citel.reply(`❌ Give youtube link!`);
+                return citel.reply(`❌ Give youtube link!`);
                 return;
             }
             let infoYt = await ytdl.getInfo(urlYt);
             //30 MIN
             if (infoYt.videoDetails.lengthSeconds >= videotime) {
-                reply(`❌ I can't download that long video!`);
+                return citel.reply(`❌ I can't download that long video!`);
                 return;
             }
             let titleYt = infoYt.videoDetails.title;
@@ -716,7 +716,7 @@ cmd({
                 await Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                 return fs.unlinkSync(`./${randomName}`);
             } else {
-                citel.reply(`❌ File size bigger than 100mb.`);
+                return citel.reply(`❌ File size bigger than 100mb.`);
             }
             fs.unlinkSync(`./${randomName}`);
         } catch (e) {
