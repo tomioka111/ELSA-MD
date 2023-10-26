@@ -272,7 +272,7 @@ let checkgroup = await sck.findOne({ id: citel.chat })
 let buttons = [{
           buttonId: `${prefix}البوت فتح`,
           buttonText: {
-              displayText: "فتح,
+              displayText: "فتح",
           },
           type: 1,
       },
