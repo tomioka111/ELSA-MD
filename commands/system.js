@@ -78,30 +78,30 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "unban",
+            pattern: "فك-البان",
             category: "misc",
             filename: __filename,
             desc: "Unbans banned user (from using bot)."
         },
         async(Void, citel, text,{ isCreator }) => {
-            if (!isCreator) return citel.reply("This command is only for my Owner")
+            if (!isCreator) return citel.reply("*֎╎هـذا الامـر للـمـطـور فـقـط*")
             try {
                 let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
-                if (!users) return citel.reply("Please mention the user.❌")
+                if (!users) return citel.reply("*֎╎مـنشـن عـلـي شـخـص*")
                 let pushnamer = Void.getName(users);
                 sck1.findOne({ id: users }).then(async(usr) => {
                     if (!usr) {
                         console.log(usr.ban)
-                        return citel.reply(`${pushnamer} is unbanned.`)
+                        return citel.reply(`*${pushnamer} تـم رفـع الـحـظـر عـنـه*`)
                     } else {
                         console.log(usr.ban)
-                        if (usr.ban !== "true") return citel.reply(`${usr.name} is already unbanned.`)
+                        if (usr.ban !== "true") return citel.reply(`*${usr.name} تـم رفـع الـحـظـر عـنـه بـالـفـعـل*`)
                         await sck1.updateOne({ id: users }, { ban: "false" })
-                        return citel.reply(`${usr.name} is free  now`)
+                        return citel.reply(`*${usr.name} يـمـكنك اسـتـخـدام الـبـوت الان*`)
                     }
                 })
             } catch {
-                return citel.reply("Please mention any user.❌")
+                return citel.reply("*֎╎مـنشـن عـلـي شـخـص*")
             }
 
 
@@ -110,18 +110,18 @@ cmd({
     //---------------------------------------------------------------------------
     cmd({
         pattern: "url",
-        alias : ['createurl'],
+        alias : ['تلجراف','تليجراف'],
         category: "misc",
         filename: __filename,
         desc: "image to url."
     },
     async(Void, citel, text) => {
-        if (!citel.quoted) return await citel.reply(`*Reply To Any Image/Video To Get Url*`)
+        if (!citel.quoted) return await citel.reply(`*֎╎رد عـلـي صـوره او فـيـديـو اكـتـب الامـر مـثـال┇.تلجراف*`)
         let mime = citel.quoted.mtype
-        if(mime !='videoMessage' && mime !='imageMessage' ) return await citel.reply("Uhh Please, Reply To An Image/Video")
+        if(mime !='videoMessage' && mime !='imageMessage' ) return await citel.reply("*֎╎رد عـلـي صـوره او فـيـديـو اكـتـب الامـر مـثـال┇.تلجراف*")
         let media = await Void.downloadAndSaveMediaMessage(citel.quoted);
         let anu = await TelegraPh(media);
-        await citel.reply('*Here is URL of your media.\n'+util.format(anu));
+        await citel.reply('*֎╎الـرابـط┇*\n'+util.format(anu));
         return await fs.unlinkSync(media);
     })
 
@@ -129,19 +129,19 @@ cmd({
 //---------------------------------------------------------------------------
 cmd({
     pattern: "trt",
-    alias :['translate'],
+    alias :['ترجمه','ترجمة'],
     category: "misc",
     filename: __filename,
     desc: "Translate\'s given text in desird language."
 },
 async(Void, citel, text) => {
-    if(!text && !citel.quoted) return await citel.reply(`*Please Give Me Text. Example: _${prefix}trt en Who are you_*`);
+    if(!text && !citel.quoted) return await citel.reply(`*֎╎اكـتـب نـص لـتـرجـمـتـه*`);
     const translatte = require("translatte");
-    let lang = text ? text.split(" ")[0].toLowerCase() : 'en';
+    let lang = text ? text.split(" ")[0].toLowerCase() : 'ar';
     if (!citel.quoted)  { text = text.replace( lang , "");  }
     else { text = citel.quoted.text; }
     var whole = await translatte(text, { from:"auto",  to: lang , });
-    if ("text" in whole) { return await citel.reply('*Translated text:*\n'+whole.text); }
+    if ("text" in whole) { return await citel.reply('*֎╎الـتـرجـمـه┇*\n'+whole.text); }
 }
 )
     //---------------------------------------------------------------------------
@@ -214,6 +214,7 @@ cmd({
     //---------------------------------------------------------------------------
 cmd({
             pattern: "ban",
+            alias :['بان'],
             category: "owner",
             filename: __filename,
             desc: "Bans user from using bot."
@@ -222,21 +223,21 @@ cmd({
             if (!isCreator) return citel.reply(tlang().owner)
             try {
                 let users = citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
-                if (!users) return citel.reply(`🥷 Please mention the user ${tlang().greet}.`)
+                if (!users) return citel.reply(`*֎╎مـنشـن عـلـي شـخـص🥷*`)
                 let pushnamer = Void.getName(users);
                 sck1.findOne({ id: users }).then(async(usr) => {
                     if (!usr) {
                         await new sck1({ id: users, ban: "true" }).save()
-                        return citel.reply(`_Banned ${usr.name} from Using Commands._`)
+                        return citel.reply(`*تـم حـظـر ${usr.name} مـن اسـتـخـدام الـبـوت*`)
                     } else {
-                        if (usr.ban == "true") return citel.reply(`${pushnamer} is already Banned from Using Commands`)
+                        if (usr.ban == "true") return citel.reply(`*${pushnamer} تـم حـظـره مـن اسـتـخـدام الـبـوت بـالـفـعـل*`)
                         await sck1.updateOne({ id: users }, { ban: "true" })
-                        return citel.reply(`_Successfully Banned ${usr.name} from Using Commands._`)
+                        return citel.reply(`*${usr.name} تـم حـظـره مـن اسـتـخـدام الـبـوت*`)
                     }
                 })
             } catch (e) {
                 console.log(e)
-                return citel.reply("Please mention the user ")
+                return citel.reply("*֎╎مـنشـن عـلـي شـخـص🥷*")
             }
 
 
@@ -245,25 +246,26 @@ cmd({
     //---------------------------------------------------------------------------
 cmd({
             pattern: "alive",
+            alias :['بوت','السا'],
             category: "general",
             filename: __filename,
             desc: "is bot alive??"
         },
         async(Void, citel, text, isAdmins) => {
-            let alivemessage = Config.ALIVE_MESSAGE || `*A bot developed by EXCEL.*`
+            let alivemessage = Config.ALIVE_MESSAGE || `*بـوتـه الـسـا بـالـخـدمـه*`
             const alivtxt = `
-*Hello, ${citel.pushName},*
-_This is  ${tlang().title}._
+*֎╎مـرحـبـا┇ ${citel.pushName},*
+*֎╎انــا┇ ${tlang().title}*
 ${alivemessage}
-━━✥◈✥━━
-◈*Version:-* _0.0.7_
-◈*Uptime:-* _${runtime(process.uptime())}_
-◈*Owner:-* _${Config.ownername}_
-◈*Branch:-* _${Config.BRANCH}_
-━━✥◈✥━━
-_Type ${prefix}menu for my command list._
+*❋─═━•┇❄️┇•━═─❋*
+*֎╎الاصـدار┇ v1*
+*֎╎مـده الـتـشـغـيـل┇ ${runtime(process.uptime())}*
+*֎╎الـمـطـور┇ ${Config.ownername}_
+*֎╎الـفـرع┇ ${Config.BRANCH}*
+*❋─═━•┇❄️┇•━═─❋*
+*֎╎اكـتـب .الاوامر لـظـهـور اوامـر الـبـوت*
 
-_Powered by ${Config.ownername}_
+*֎╎صـنـع بـواسـطـه┇ ${Config.ownername}*
 `;
             let aliveMessage = {
                 image: {

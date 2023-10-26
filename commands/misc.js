@@ -70,20 +70,20 @@ async(Void, citel, text,{ isCreator }) => {
              filename: __filename,
          },
          async(Void, citel, text) => {
-             if (!citel.quoted) return citel.reply(`*Mention the Image or video Sir.*`);
+             if (!citel.quoted) return citel.reply(`*֎╎رد عـلـي مـلـصـق لـسـرقـتـه*`);
              let mime = citel.quoted.mtype
              var pack;
              var author;
              if (text) {
                  anu = text.split("|");
-                 pack = anu[0] !== "" ? anu[0] : citel.pushName + '✨';
+                 pack = anu[0] !== "" ? anu[0] : citel.pushName + '𝐸𝐿𝑆𝐴 𝐵𝑂𝑇-𝑀𝐷';
                  author = anu[1] !== "" ? anu[1] : Config.author;
              } else {
                  pack = citel.pushName;
-                 author = "✨";
+                 author = "𝐸𝐿𝑆𝐴 𝐵𝑂𝑇-𝑀𝐷";
              }
                  let media = await citel.quoted.download();
-                 citel.reply("*Processing Your request*");
+                 citel.reply("*֎╎لـحـظـه بـرسـلـك الـمـلـصـق...*");
                 let sticker = new Sticker(media, {
                     pack: pack, // The pack name
                     author: author, // The author name
@@ -229,7 +229,7 @@ async(Void, citel, text,{ isCreator }) => {
      )
      
         
-        cmd({
+cmd({
   pattern: "البوت",
   desc: "activates and deactivates bot.\nuse buttons to toggle.",
   category: "misc",
@@ -272,7 +272,7 @@ let checkgroup = await sck.findOne({ id: citel.chat })
 let buttons = [{
           buttonId: `${prefix}البوت فتح`,
           buttonText: {
-              displayText: "فتح",
+              displayText: "فتح,
           },
           type: 1,
       },
@@ -284,14 +284,14 @@ let buttons = [{
           type: 1,
       },
   ];
-  await Void.sendButtonText(citel.chat, buttons, `*֎╎حـالـه الـبـوت┇*  ${checkgroup.botenable}`, Void.user.name, citel);
-     }
-)
-        
+  await Void.sendButtonText(citel.chat, buttons, `*֎╎حـالـه الـبـوت┇* ${checkgroup.botenable}`, Void.user.name, citel);
+}
+}
+})   
+         
      //---------------------------------------------------------------------------
  cmd({
              pattern: "antilink",
-             alias: ["الروابط"],
              filename: __filename,
          },
          async(Void, citel, text) => {

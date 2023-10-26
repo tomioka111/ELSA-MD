@@ -115,7 +115,7 @@ cmd({
     },
     async(Void, citel) => {
         let { data } = await axios.get('https://youtube.com/@ABDALLAH_MOHAMED')
-        let cap = `Hey ${citel.pushName}\n
+        let cap = `هـاي ${citel.pushName}\n
 /
 ╭┈─────────────────────    .· * • ˚
 │*📡 قناتي:* https://youtube.com/@ABDALLAH_MOHAMED
@@ -175,7 +175,7 @@ cmd({
             contextInfo: {
                 externalAdReply: {
                     title: tlang().title,
-                    body: `Bot-Status`,
+                    body: `حاله البوت`,
                     thumbnail: log0,
                     mediaType: 2,
                     mediaUrl: ``,
@@ -193,6 +193,7 @@ cmd({
 //---------------------------------------------------------------------------
 cmd({
     pattern: "theme",
+    alias: ["ثيم","الثيم"],
     desc: "To find all themes",
     category: "general",
     filename: __filename,
@@ -201,7 +202,7 @@ async(Void, citel,text,{isCreator}) => {
 
 if(!isCreator) return citel.reply(tlang().owner);
 let str="*All available themes in IZUKU *"
-str+=`1. IZUKU\n2. ADAM\n3. AYANOKOJI\n4. EDITH\n5. FRIDAY\n6. GENOS\n7. GIDEON\n8. GOKU\n9. LUFFY\n10. NARUTO\n11. NEZUKO\n12. PARKER\n13. GARENA\n14. SECKTOR\n15 Eren Jeager\n\n these are the themes of IZUKU Userbot.\_Reply ${prefix}setvar THEME:GARENA`
+str+=`1. ELSA\n Eren Jeager\n\n these are the themes of IZUKU Userbot.\_Reply ${prefix}setvar THEME:GARENA`
 return citel.reply(str)
     
 }
