@@ -24,27 +24,28 @@ let updating = false;
 
 cmd({
     pattern: "update",
+    alias: ["تحديث"],
     desc: "Shows repo's refreshed commits.",
     category: "misc",
     filename: __filename
 },
 async (Void, citel, text, { isCreator }) => {
-    if (!isCreator) return citel.reply('This command is only for my owner');
+    if (!isCreator) return citel.reply('*֎╎هـذا الامـر للـمـطـور فـقـط*');
 
     if (updating) {
-        citel.reply("An update is already in progress. Please wait.");
+        citel.reply("*֎╎جـاري الـتـحـديـث انـتـظـر*");
         return;
     }
 
     updating = true;
-    let asciiBorder = '╔══════════════════════════╗\n';
-    asciiBorder += '║    Updater - IZUKU MD    ║\n';
-    asciiBorder += '╚══════════════════════════╝\n';
+    let asciiBorder = '*❋ ─═══━•┇❄️┇•━═══─ ❋*\n';
+    asciiBorder += '┇    *֎╎جـاري تـحـديـث ELSA_BOT*     ┇\n';
+    asciiBorder += '*❋ ─═══━•┇❄️┇•━═══─ ❋*\n';
 
     // Create a loading bar
     const loadingBarLength = 20;
     const loadingMessage = {
-        text: `${asciiBorder}Updating: [${' '.repeat(loadingBarLength)}] 0%`,
+        text: `${asciiBorder}*֎╎جـاري الـتـحـديـث┇*  [${' '.repeat(loadingBarLength)}] 0%`,
         footer: 'UPDATER',
         headerType: 4
     };
@@ -55,7 +56,7 @@ async (Void, citel, text, { isCreator }) => {
         await sleep(1000); // Simulate a step in the update process
         const progress = (i / loadingBarLength) * 100;
         const updatedMessage = {
-            text: `${asciiBorder}Updating: [${'█'.repeat(i)}${' '.repeat(loadingBarLength - i)}] ${progress.toFixed(0)}%`,
+            text: `${asciiBorder}*֎╎جـاري الـتـحـديـث┇* [${'█'.repeat(i)}${' '.repeat(loadingBarLength - i)}] ${progress.toFixed(0)}%`,
             footer: 'UPDATER',
             headerType: 4
         };
@@ -64,7 +65,7 @@ async (Void, citel, text, { isCreator }) => {
 
     // After the update process, send the final message
     const finalMessage = {
-        text: `${asciiBorder}Update finished.`,
+        text: `${asciiBorder}*֎╎انـتـهـي الـتـحـديـث*`,
         footer: 'UPDATER',
         headerType: 4
     };
