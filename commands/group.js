@@ -806,61 +806,6 @@ cmd({
   }
 )
 
-    //---------------------------------------------------------------------------
-
-smd({
-    pattern: "antidemote",
-    desc: "Detects Promote and Automaticaly demote promoted person.", 
-    category: "group",
-    filename: __filename,
-},
-async(Void, citel, text) => {
-    if (!citel.isGroup) return citel.reply(tlang().group);
-    const groupMetadata = citel.isGroup ? await Void.bot.groupMetadata(msg.chat).catch((e) => {}) : "";
-    const participants = citel.isGroup ? await groupMetadata.participants : "";
-    const groupAdmins = await getAdmin(Void, citel)
-    const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
-    if (!isAdmins && !isCreator) return citel.reply(tlang().admin);
-        
-  let checkinfo = await sck.findOne({ id : msg.chat })  || await sck.new({ id: msg.chat});
-  if (text.toLowerCase().startsWith("on") || text.toLowerCase().startsWith("act") || text.toLowerCase().startsWith("enable") ) {
-    if (checkinfo.antidemote == 'true') return await citel.reply("*Anti_Demote Already Enabled In Current Chat!*")
-    await sck.updateOne({ id: msg.chat }, { antidemote : 'true' });
-    return await citel.reply("*Anti_Demote Enable Succesfully! _No One Demote Here Now_.*")
-  }else if (text.toLowerCase().startsWith("off") || text.toLowerCase().startsWith("deact") || text.toLowerCase().startsWith("disable") ) {
-    if (checkinfo.antidemote == 'false') return await citel.reply("*Anti_Demote Already Disabled In Current Chat!*")
-    await sck.updateOne({ id: msg.chat }, { antidemote : 'false' });
-    return await citel.reply("*Anti_Demote Disable Succesfully!*")
-  }
-  else return await msg.reply(`*Uhh Dear, Please Toggle between "On" And "Off".* \n*_To Enable & Disable Stop Demoting Peoples!_*`)
-});
-//---------------------------------------------------------------------------
-smd({
-    pattern: "antipromote",
-    desc: "Detects Promote and Automaticaly demote promoted person.", 
-    category: "group",
-    filename: __filename,
-},
-async(Void, citel, text) => {
-    if (!citel.isGroup) return citel.reply(tlang().group);
-    const groupMetadata = citel.isGroup ? await Void.bot.groupMetadata(msg.chat).catch((e) => {}) : "";
-    const participants = citel.isGroup ? await groupMetadata.participants : "";
-    const groupAdmins = await getAdmin(Void, citel)
-    const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
-    if (!isAdmins && !isCreator) return citel.reply(tlang().admin);
-        
-  let checkinfo = await sck.findOne({ id : msg.chat })  || await sck.new({ id: msg.chat});
-  if (text.toLowerCase().startsWith("on") || text.toLowerCase().startsWith("act") || text.toLowerCase().startsWith("enable") ) {
-    if (checkinfo.antipromote == 'true') return await citel.reply("*Anti_Promote Already Enabled In Current Chat!*")
-    await sck.updateOne({ id: msg.chat }, { antipromote : 'true' });
-    return await citel.reply("*Anti_Promote Enable Succesfully! _No One Promote Here Now_.*")
-  }else if (text.toLowerCase().startsWith("off") || text.toLowerCase().startsWith("deact") || text.toLowerCase().startsWith("disable") ) {
-    if (checkinfo.antipromote == 'false') return await citel.reply("*Anti_Promote Already Disabled In Current Chat!*")
-    await sck.updateOne({ id: citel.chat }, { antipromote : 'false' });
-    return await citel.reply("*Anti_Promote Disable Succesfully!*")
-  }
-  else return await citel.reply(`*Uhh Dear, Please Toggle between "On" And "Off".* \n*_To Stop Promoting Peoples in Chat_*`)
-});
 //---------------------------------------------------------------------------
 cmd({
             pattern: "del",

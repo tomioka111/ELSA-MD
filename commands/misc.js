@@ -229,6 +229,65 @@ async(Void, citel, text,{ isCreator }) => {
      )
      
         
+        cmd({
+  pattern: "البوت",
+  desc: "activates and deactivates bot.\nuse buttons to toggle.",
+  category: "misc",
+  filename: __filename,
+},
+async(Void, citel, text,{isCreator}) => {
+  if (!citel.isGroup) return citel.reply(tlang().group);
+  if(!isCreator) return //citel.reply(tlang().owner)
+switch (text.split(" ")[0]) {
+ case 'فتح':{
+         let checkgroup = await sck.findOne({ id: citel.chat })
+         if (!checkgroup) {
+             await new sck({ id: citel.chat, botenable: "true" }).save()
+             return citel.reply(`*֎╎تـم فـتـح الـبـوت ${tlang().title}*`)
+         } else {
+             if (checkgroup.botenable == "true") return citel.reply("*֎╎تـم فـتـح الـبـوت بـالـفـعـل*")
+             await sck.updateOne({ id: citel.chat }, { botenable: "true" })
+             return citel.reply(`*֎╎تـم فـتـح الـبـوت ${tlang().title}*`)
+         }
+     }
+  
+ break
+case 'قفل':{
+            {
+             let checkgroup = await sck.findOne({ id: citel.chat })
+             if (!checkgroup) {
+                 await new sck({ id: citel.chat, botenable: "false" })
+                     .save()
+                 return citel.reply(`*֎╎تـم قـفـل الـبـوت ${tlang().title}*`)
+             } else {
+                 if (checkgroup.botenable == "false") return citel.reply("*֎╎تـم قـفـل الـبـوت بـالـفـعـل*")
+                 await sck.updateOne({ id: citel.chat }, { botenable: "false" })
+                 return citel.reply(`*֎╎تـم قـفـل الـبـوت ${tlang().title}*`)
+             }
+         }
+}
+break
+default:{
+let checkgroup = await sck.findOne({ id: citel.chat })
+let buttons = [{
+          buttonId: `${prefix}البوت فتح`,
+          buttonText: {
+              displayText: "فتح",
+          },
+          type: 1,
+      },
+      {
+          buttonId: `${prefix}البوت قفل`,
+          buttonText: {
+              displayText: "قفل",
+          },
+          type: 1,
+      },
+  ];
+  await Void.sendButtonText(citel.chat, buttons, `*֎╎حـالـه الـبـوت┇*  ${checkgroup.botenable}`, Void.user.name, citel);
+     }
+)
+        
      //---------------------------------------------------------------------------
  cmd({
              pattern: "antilink",
