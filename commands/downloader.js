@@ -63,6 +63,7 @@ cmd({
      //---------------------------------------------------------------------------
      cmd({
         pattern: "yts",
+        alias :["يوتيوب","بحث"],
         react: "🔎",
         desc: "Gives descriptive info of query from youtube..",
         category: "downloader",
@@ -71,18 +72,18 @@ cmd({
     },
     async(Void, citel, text) => {
         let yts = require("secktor-pack");
-        if (!text) return citel.reply(`Example : ${prefix}yts ${tlang().title} WhatsApp Bot`);
+        if (!text) return citel.reply(`*֎╎اكـتـب عـنـوان للـبـحـث مـثـال┇.يوتيوب طـريـقـه صـنـع بـوت*`);
         let search = await yts(text);
-        let textt = "*YouTube Search*\n\n Result From " + text + "\n\n───────────────────\n";
+        let textt = " ╼━━━━━➢━━━━━━╾\n🔎𝛯𝐿𝑆𝛥 𝑌𝛩𝑈𝑇𝑈𝐵𝛯 𝑆𝛯𝛥𝑅𝐶𝛨🔎\n╼━━━━━➢━━━━━━╾\n\n *֎╎عـنـوان الـبـحـث🗒️┇*" + text + "\n\n*❋ ─═══━•┇❄️┇•━═══─ ❋*\n";
         let no = 1;
         for (let i of search.all) {
-            textt += `⚡ No : ${no++}\n ❤Title : ${i.title}\n♫ Type : ${
+            textt += `*֎╎الـطـريـقـه⚡┇* ${no++}\n *֎╎الـعـنـوان❤┇* ${i.title}\n*֎╎الـنـوع🌿┇* ${
       i.type
-    }\n🙈Views : ${i.views}\n⌛Duration : ${
+    }\n*֎╎الـمـشـاهـدات🙈┇* ${i.views}\n*֎╎الـمـده⌛┇* ${
       i.timestamp
-    }\n🌟Upload At : ${i.ago}\n👑Author : ${i.author.name}\n🎵Url : ${
+    }\n*֎╎وقـت الـنـشـر🌟┇* ${i.ago}\n*֎╎الـقـنـاه👑┇* ${i.author.name}\n*֎╎الـرابـط🔗┇* ${
       i.url
-    }\n\n──────────────\n\n`;
+    }\n\n*❋ ─═══━•┇❄️┇•━═══─ ❋*\n\n`;
         }
         return Void.sendMessage(citel.chat, {
             image: {
@@ -121,9 +122,9 @@ if (text.startsWith("https://youtube.com/shorts/")) {
                     url: anu.thumbnail,
                 },
                 caption: `
- ───────➢───────
- 🎧𝛯𝐿𝑆𝛥 𝑌𝛩𝑈𝑇𝑈𝐵𝛯⃤🎧
-  ╼━━━━━➢━━━━━━╾
+ ╼━━━━━━➢━━━━━━━━╾
+      🎧𝛯𝐿𝑆𝛥 𝑌𝛩𝑈𝑇𝑈𝐵𝛯⃤🎧
+ ╼━━━━━━➢━━━━━━━━╾
 *֎╎الـعـنـوان🗒️┇* ${anu.title}
 
 *֎╎الـمـده⏳┇* ${anu.timestamp}
@@ -131,7 +132,7 @@ if (text.startsWith("https://youtube.com/shorts/")) {
 *֎╎الـنـشـر📤┇* ${anu.ago}
 *֎╎الـقـنـاه🧑‍🎤┇* ${anu.author.name}
 *֎╎الـفـيديـو⬇️┇*
- ───────➢────────
+ ╼━━━━━━➢━━━━━━━╾
 *֎╎الـرابـط🔗┇* ${anu.url}
 `,
                 footer: tlang().footer,
@@ -235,25 +236,11 @@ cmd({
 
         }
     )
-    //---------------------------------------------------------------------------
-cmd({
-            pattern: "ringtone",
-            react: "🎷",
-            desc: "Downloads ringtone.",
-            category: "downloader",
-            filename: __filename,
-            use: '<ringtone name>',
-        },
-        async(Void, citel, text) => {
-            if (!text) return citel.reply(`Example: ${prefix}ringtone back in black`)
-            let anu = await ringtone(text)
-            let result = anu[Math.floor(Math.random() * anu.length)]
-            return Void.sendMessage(citel.chat, { audio: { url: result.audio }, fileName: result.title + '.mp3', mimetype: 'audio/mpeg' }, { quoted: citel })
-        }
-    )
+    
     //---------------------------------------------------------------------------
 cmd({
             pattern: "pint",
+            alias :["بينت","بينترست"],
             react: "📥",
             desc: "Downloads image from pinterest.",
             category: "downloader",
@@ -261,7 +248,7 @@ cmd({
             use: '<text|image name>',
         },
         async(Void, citel, text) => {
-            if (!text) return reply("What picture are you looking for?") && Void.sendMessage(citel.chat, {
+            if (!text) return citel.reply("*֎╎اكـتـب عـنـوان للـبـحـث*") && Void.sendMessage(citel.chat, {
                 react: {
                     text: '❌',
                     key: citel.key
@@ -279,7 +266,7 @@ cmd({
                     headerType: 4,
                     contextInfo: {
                         externalAdReply: {
-                            title: `Here it is✨`,
+                            title: `*بـوتـه الـسـا بـالـخـدمـه✨*`,
                             body: `${Config.ownername}`,
                             thumbnail: log0,
                             mediaType: 2,
@@ -298,33 +285,43 @@ cmd({
     //---------------------------------------------------------------------------
 cmd({
             pattern: "mediafire",
-            react: "⬇️",
-            desc: "Downloads zip from Mediafire.",
+            alias :['ميديا','ميديافاير'],
+            desc: "Downloads media from Mediafire.",
             category: "downloader",
             filename: __filename,
             use: '<url of mediafire>',
         },
         async(Void, citel, text) => {
-            if (!text) return citel.reply(`Give link ${tlang().greet}`);
-            if (!isUrl(text.split(" ")[0]) && !text.split(" ")[0].includes("mediafire.com")) return reply(`The link you provided is invalid`);
-            const baby1 = await mediafire(text);
-            if (baby1[0].size.split("MB")[0] >= 999) return reply("*File Over Limit* " + util.format(baby1));
-            const result4 = `*Mᴇᴅɪᴀғɪʀᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ*
-*Nᴀᴍᴇ* : ${baby1[0].nama}
-*Sɪᴢᴇ* : ${baby1[0].size}
-*Mɪᴍᴇ* : ${baby1[0].mime}
-*Lɪɴᴋ* : ${baby1[0].link}`;
-            reply(`${result4}`);
-            return Void.sendMessage(citel.chat, {
-                    document: {
-                        url: baby1[0].link,
-                    },
+            if (!text) return citel.reply(`*֎╎ارسـل الـرابـط*`);
+            
+            if (!text.includes("mediafire.com")) return citel.reply(`*֎╎الـرابـط غـيـر صـحـيـح*`);
+            let isUrl=text;
+            const baby1 = await mediafire(isUrl);
+	
+	if(!baby1.length) return citel.reply(`*֎╎الـرابـط غـيـر صـحـيـح*`);
+	const apkSize = parseInt(baby1[0].size);
+	if(apkSize > 100) return citel.reply(`*֎╎الـمـلـف ك بـيـر جـدا*`);
+	
+let result4 = ` *📥𝛯𝐿𝑆𝛥 𝛭𝛯𝐷𝛪𝛥𝐹𝛪𝑅𝛯📥*
+*֎╎الاسـم👤┇ ${baby1[0].nama}*
+*֎╎الـحـجـم⭕┇ ${baby1[0].size}*
+*֎╎مـلـكـي🔰┇ ${baby1[0].mime}*
+
+`;
+	result4 +=Config.caption ; 
+	
+            //citel.reply(`${result4}`);
+            
+            let buttonMessaged = {
+                    document: { url: baby1[0].link, },
+                    caption: result4,
                     fileName: baby1[0].nama,
                     mimetype: baby1[0].mime,
-                }, {
-                    quoted: citel,
-                })
-                .catch((err) => reply("could not found anything"));
+                    
+                }; 
+                
+ return await Void.sendMessage(citel.chat, buttonMessaged)
+                //.catch((err) => citel.reply(`could not found anything`));
 
         }
     )
@@ -442,6 +439,7 @@ if (text.startsWith("https://youtube.com/shorts/")) {
 
 cmd({
             pattern: "ytmp4",
+            alias :["فيد"],
             react: "📺",
             desc: "Downloads video from youtube.",
             category: "downloader",
@@ -453,14 +451,14 @@ cmd({
                 return `${Math.floor(Math.random() * 10000)}${ext}`;
             };
             if (!text) {
-                citel.reply(`❌Please provide me a url`);
+                citel.reply(`*֎╎ارسـل رابـط فـيـديـو يـوتـيـوب*`);
                 return;
             }
             try {
                 let urlYt = text;
-                if (!urlYt.startsWith("http")) return citel.reply(`❌ Give youtube link!`);
+                if (!urlYt.startsWith("http")) return citel.reply(`*֎╎ارسـل رابـط فـيـديـو يـوتـيـوب*`);
                 let infoYt = await ytdl.getInfo(urlYt);
-                if (infoYt.videoDetails.lengthSeconds >= videotime) return citel.reply(`❌ Video file too big!`);
+                if (infoYt.videoDetails.lengthSeconds >= videotime) return citel.reply(`*֎╎حـجـم الـفـيـديـو كـبـيـر جـدا*`);
                 let titleYt = infoYt.videoDetails.title;
                 let randomName = getRandom(".mp4");
 
@@ -483,7 +481,7 @@ cmd({
                         jpegThumbnail: log0,
                         mimetype: 'video/mp4',
                         fileName: `${titleYt}.mp4`,
-                        caption: ` ⿻ Title : ${titleYt}\n ⿻ File Size : ${fileSizeInMegabytes} MB`,
+                        caption: ` *֎╎الـعـنـوان🗒️┇ ${titleYt}*\n *֎╎حـجـم الـمـلـف📥┇ ${fileSizeInMegabytes} مـيـجـا*`,
                         headerType: 4,
                         contextInfo: {
                             externalAdReply: {
@@ -500,7 +498,7 @@ cmd({
                  Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                  return fs.unlinkSync(`./${randomName}`);
                 } else {
-                    citel.reply(`❌ File size bigger than 100mb.`);
+                    citel.reply(`*֎╎حـجـم الـفـيـديـو كـبـيـر جـدا*`);
                 }
                 return fs.unlinkSync(`./${randomName}`);      
             } catch (e) {
@@ -511,6 +509,7 @@ cmd({
     //---------------------------------------------------------------------------
 cmd({
         pattern: "ytmp3",
+        alias :["صوتي"],
         react: "🥁",
         desc: "Downloads audio by yt link.",
         category: "downloader",
@@ -522,19 +521,19 @@ cmd({
         };
 
         if (text.length === 0) {
-            reply(`❌ URL is empty! \nSend ${prefix}ytmp3 url`);
+            citel.reply(`*֎╎ارسـل رابـط فـيـديـو يـوتـيـوب*`);
             return;
         }
         try {
             let urlYt = text;
             if (!urlYt.startsWith("http")) {
-                citel.reply(`❌ Give youtube link!`);
+                citel.reply(`*֎╎ارسـل رابـط فـيـديـو يـوتـيـوب*`);
                 return;
             }
             let infoYt = await ytdl.getInfo(urlYt);
             //30 MIN
             if (infoYt.videoDetails.lengthSeconds >= videotime) {
-                reply(`❌ I can't download that long video!`);
+                citel.reply(`*֎╎حـجـم المـقـطـع كـبـيـر جـدا*`);
                 return;
             }
             let titleYt = infoYt.videoDetails.title;
@@ -575,7 +574,7 @@ cmd({
                 await Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                 return fs.unlinkSync(`./${randomName}`);
             } else {
-                citel.reply(`❌ File size bigger than 100mb.`);
+                citel.reply(`*֎╎حـجـم المـقـطـع كـبـيـر جـدا*`);
             }
             fs.unlinkSync(`./${randomName}`);
         } catch (e) {
@@ -587,6 +586,7 @@ cmd({
 //---------------------------------------------------------------------------
 cmd({
             pattern: "dovideo",
+            alias :["فيديوملف","فيدملف"],
 	    react: "⬇️",
             desc: "Downloads video from yt.",
             category: "downloader",
@@ -602,11 +602,11 @@ cmd({
                 return `${Math.floor(Math.random() * 10000)}${ext}`;
             };
                 let infoYt = await ytdl.getInfo(urlYt);
-                if (infoYt.videoDetails.lengthSeconds >= videotime) return citel.reply(`❌ Video file too big!`);
+                if (infoYt.videoDetails.lengthSeconds >= videotime) return citel.reply(`*֎╎حـجـم الـفـيـديـو كـبـيـر جـدا*`);
                 let titleYt = infoYt.videoDetails.title;
                 let randomName = getRandom(".mp4");
-            citel.reply('_Download Your Video_')
-	    citel.reply('_Upload Your Video_')
+            citel.reply('*֎╎جـاري تـحـمـيـل الـمـلـف...*')
+	    citel.reply('*֎╎تـم تـحـمـيـل الـمـلـف*')
 
                 const stream = ytdl(urlYt, {
                         filter: (info) => info.itag == 22 || info.itag == 18,
@@ -624,7 +624,7 @@ cmd({
                         document: fs.readFileSync(`./${randomName}`),
                         mimetype: 'document/mp4',
                         fileName: `${titleYt}.mp4`,
-                        caption: `★[ANGEL QUEEN MD]★ `,                        
+                        caption: `*『❄️┇❆ 𝐸𝐿𝑆𝐴 𝐵𝑂𝑇-𝑀𝐷 ❆┇❄️』*`,                        
                         headerType: 4,
                         contextInfo: {
                             externalAdReply: {
@@ -640,7 +640,7 @@ cmd({
                  Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                  return fs.unlinkSync(`./${randomName}`);
                 } else {
-                    citel.reply(`❌ File size bigger than 100mb.`);
+                    citel.reply(`*֎╎حـجـم الـفـيـديـو كـبـيـر جـدا*`);
                 }
                 return fs.unlinkSync(`./${randomName}`);      
 
@@ -649,7 +649,7 @@ cmd({
     )
   //---------------------------------------------------------------------------
 cmd({
-        pattern: "song2",
+        pattern: "hssjgsgrfhf",
         react: "🎧",
         desc: "Downloads audio by yt link as document.",
         category: "downloader",
@@ -661,7 +661,7 @@ cmd({
         };
 
         if (text.length === 0) {
-            reply(`❌ URL is empty! \nSend ${prefix}ytmp3 url`);
+            citel.reply(`❌ URL is empty! \nSend ${prefix}ytmp3 url`);
             return;
         }
         try {
@@ -673,7 +673,7 @@ cmd({
             let infoYt = await ytdl.getInfo(urlYt);
             //30 MIN
             if (infoYt.videoDetails.lengthSeconds >= videotime) {
-                reply(`❌ I can't download that long video!`);
+                citel.reply(`❌ I can't download that long video!`);
                 return;
             }
             let titleYt = infoYt.videoDetails.title;
