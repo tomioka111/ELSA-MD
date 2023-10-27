@@ -168,7 +168,7 @@ cmd({
             if (!text) return reply("*֎╎اكـتـب عـنـوان لـلـبـحـث*");
             let name1 = text.split("|")[0]
             let name2 = text.split("|")[1] || `1`
-            citel.reply(`*֎╎جـاري ارسـال ${name2} صـوره لـ ${name1}*`)
+            citel.reply(`*֎╎جـاري ارسـال صـوره لـ ${name1}*`)
             let nn = name2
             for (let i = 0; i < 5; i++) {
 

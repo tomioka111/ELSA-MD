@@ -291,7 +291,7 @@ let buttons = [{
          
      //---------------------------------------------------------------------------
  cmd({
-             pattern: "antilink",
+             pattern: "antil",
              filename: __filename,
          },
          async(Void, citel, text) => {
@@ -334,20 +334,14 @@ smd({
         async(Void, citel, text) => {
 
    if (!citel.quoted) return citel.reply(`*_Please reply any User_*`);
-    var bio = await Void.fetchStatus(citel.quoted.sender);
-    var bioo = bio.status;
-    var setAt = bio.setAt.toString();
-    
-    var words = setAt.split(" ");
+    var bio = await Void.fetchStatus(citel.sender);
+            var bioo = bio.status;
+       var words = setAt.split(" ");
     if(words.length > 3){ setAt= words.slice(0, 5).join(' ') ; }
      
-    var num = citel.quoted.sender.split('@')[0];
     let pfp;
     try  {  pfp = await Void.profilePictureUrl(citel.quoted.sender, "image"); } 
-    catch (e) { pfp = await Void.profilePictureUrl(citel.sender, "image") ||  'https://telegra.ph/file/29a8c892a1d18fdb26028.jpg' ; }    //|| 'https://telegra.ph/file/29a8c892a1d18fdb26028.jpg' ;  }
-    
-    let username = await sck1.findOne({ id: citel.quoted.sender });
-    var tname = username.name;
+    catch (e) { pfp = await Void.profilePictureUrl(citel.sender, "image") ||  'https://telegra.ph/file/29a8c892a1d18fdb26028.jpg' ; }
 
     
     let Elsa = `
