@@ -316,7 +316,7 @@ cmd({
             use: '<quote|reply|number>',
         },
         async(Void, citel, text,{isCreator}) => {
-            if (!isCreator) return citel.reply(tlang().owner)
+            if (!isCreator) return citel.reply(tlang().admin)
             if (!citel.quoted) return citel.reply('*֎╎مـنـشـن عـلـي شـخـص*')
             await warndb.deleteOne({ id: citel.quoted.sender.split('@')[0] + 'warn' });
             return citel.reply('*֎╎تـم حـذف انـذار*')
@@ -331,11 +331,11 @@ cmd({
             use: `questionoption1,option2,option3.....`,
         },
         async(Void, citel, text,{ isCreator }) => {
-            if (!isCreator) return citel.reply(tlang().owner)
+            if (!isCreator) return citel.reply(tlang().admin)
             let [poll, opt] = text.split("!");
             if (text.split(",") < 2)
                 return await citel.reply(
-                    `*֎╎مـثـال┇.استطلاع بتحبوني,اه, لا, لا برضو*`
+                    `*֎╎مـثـال┇.استطلاع بتحبوني! اه,لا,لا برضو*`
                 );
             let options = [];
             for (let i of opt.split(',')) {

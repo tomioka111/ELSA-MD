@@ -21,16 +21,17 @@ const { TelegraPh } = require('../lib/scraper')
 const util = require('util')
 //---------------------------------------------------------------------------
 cmd({
-            pattern: "addnote",
+            pattern: "ملاحظه",
+            alias : ['اضف-ملاحظه','ملاحظة'],
             category: "owner",
             desc: "Adds a note on db.",
             filename: __filename
         },
         async(Void, citel, text,{ isCreator }) => {
             if (!isCreator) return citel.reply(tlang().owner)
-            if (!text) return citel.reply("🔍 Please provide me a valid gist url.")
+            if (!text) return citel.reply("*֎╎اكـتـب مـا تـريـد حـفـظـه فـي الـمـذكـره*")
             await addnote(text)
-            return citel.reply(`New note ${text} added in mongodb.`)
+            return citel.reply(`*֎╎تـم اضـافـه مـلاحـظـه جـديـده فـي الـمـذكـره*`)
 
         }
     )
@@ -183,7 +184,7 @@ cmd({
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "delnote",
+            pattern: "حذف-ملاحظه",
             category: "owner",
             filename: __filename,
             desc: "Deletes note from db."
@@ -192,13 +193,13 @@ cmd({
             const { tlang } = require('../lib/scraper')
             if (!isCreator) return citel.reply(tlang().owner)
             await delnote(text.split(" ")[0])
-             return citel.reply(`Id: ${text.split(" ")[0]}\'s note has been deleted from mongodb.`)
+             return citel.reply(`*֎╎تـم حـذف مـلاحـظـه ${text.split(" ")[0]}\' مـن مـلاحـظـاتـك*`)
 
         }
     )
     //---------------------------------------------------------------------------
 cmd({
-            pattern: "delallnotes",
+            pattern: "حذف-ملاحظاتي",
             category: "owner",
             filename: __filename,
             desc: "Deletes all notes from db."
@@ -207,7 +208,7 @@ cmd({
             const { tlang } = require('../lib/scraper')
             if (!isCreator) return citel.reply(tlang().owner)
             await delallnote()
-             return citel.reply(`All notes deleted from mongodb.`)
+             return citel.reply(`*֎╎تـم حـذف كـل مـلاحـظـاتـك*`)
 
         }
     )
@@ -254,7 +255,7 @@ cmd({
         async(Void, citel, text, isAdmins) => {
             let alivemessage = Config.ALIVE_MESSAGE || `*بـوتـه الـسـا بـالـخـدمـه*`
             const alivtxt = `
-*֎╎مـرحـبـا┇ ${citel.pushName},*
+*֎╎مـرحـبـا┇ ${citel.pushName}*
 *֎╎انــا┇ ${tlang().title}*
 ${alivemessage}
 *❋─═━•┇❄️┇•━═─❋*
@@ -283,7 +284,7 @@ ${alivemessage}
     )
     //---------------------------------------------------------------------------
 cmd({
-        pattern: "allnotes",
+        pattern: "ملاحظاتي",
         category: "owner",
         filename: __filename,
         desc: "Shows list of all notes."
@@ -292,7 +293,7 @@ cmd({
         const { tlang } = require('../lib')
         if (!isCreator) return citel.reply(tlang().owner)
         const note_store = new Array()
-        let leadtext = `All Available Notes are:-\n\n`
+        let leadtext = `*֎╎كـل مـلاحـظـاتـك هـنـا📝┇*\n\n`
         leadtext += await allnotes()
         return citel.reply(leadtext)
 

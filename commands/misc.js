@@ -198,7 +198,7 @@ async(Void, citel, text,{ isCreator }) => {
          },
          async(Void, citel, text,{ isCreator }) => {
              try {
-                 if (!text) return citel.reply(`*֎╎تـم تـشـفـيـر الـنـص*`);
+                 if (!text) return citel.reply(`*֎╎اكـتـب نـص لـتـشـفـيـره*`);
  
                  let textt = text || citel.quoted.text
                  let eb = await eBinary(textt);
@@ -211,7 +211,7 @@ async(Void, citel, text,{ isCreator }) => {
      //---------------------------------------------------------------------------
  cmd({
              pattern: "فك-تشفير",
-             alias: ["فك-شيفره"],
+             alias: ["فك-شيفره","حل"],
              desc: "decode binary",
              category: "misc",
              use: '<query>',
@@ -219,7 +219,7 @@ async(Void, citel, text,{ isCreator }) => {
          },
          async(Void, citel, text,{ isCreator }) => {
              try {
-                 if (!text) return citel.reply(`*֎╎تـم فـك تـشـفـيـر الـنـص*`);
+                 if (!text) return citel.reply(`*֎╎اكـتـب نـص لـفـك تـشـفـيـره*`);
                  let eb = await dBinary(text);
                  citel.reply(eb);
              } catch (e) {
@@ -322,53 +322,6 @@ let buttons = [{
      )
          
      //---------------------------------------------------------------------------
-     
-     
-smd({
-            pattern: "كشف",
-            desc: "Makes wa me of quoted or mentioned user.",
-            category: "user",
-            react: "⚙️",
-            filename: __filename
-        },
-        async(Void, citel, text) => {
-
-   if (!citel.quoted) return citel.reply(`*_Please reply any User_*`);
-    var bio = await Void.fetchStatus(citel.sender);
-            var bioo = bio.status;
-       var words = setAt.split(" ");
-    if(words.length > 3){ setAt= words.slice(0, 5).join(' ') ; }
-     
-    let pfp;
-    try  {  pfp = await Void.profilePictureUrl(citel.quoted.sender, "image"); } 
-    catch (e) { pfp = await Void.profilePictureUrl(citel.sender, "image") ||  'https://telegra.ph/file/29a8c892a1d18fdb26028.jpg' ; }
-
-    
-    let Elsa = `
-┏━━⟪⟪ تست ⟫━⦿
-┃✗ *•ᴘᴇʀsᴏɴ's ɪɴғᴏʀᴍᴀᴛɪᴏɴ•*
-┃✗ *•ɴᴜᴍ•* ${citel.pushName}
-┃✗ *•ʙɪᴏ•*  ${bioo}
-┃✗   *•ᴋᴇᴇᴘ ᴄᴀʟᴍ ᴅᴜᴅᴇ•*
-┗━━━━━━━━━━⦿
-`
-    let king = {            
-    image: { url: pfp},
-    caption: Elsa,
-    footer: tlang().footer,
-    headerType: 4,
-    contextInfo: {
-        externalAdReply: {
-            title: `${Config.ownername}`,
-            body: `ELSA-BOT`,
-            thumbnail: log0,
-            mediaType: 4,
-            mediaUrl: '',
-            sourceUrl: `ELSA`,}}}
-  
-return await Void.sendMessage(citel.chat, king,{quoted:citel});
-}
-)
  
      cmd({
         pattern: 'اختصار',

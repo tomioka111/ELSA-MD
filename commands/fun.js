@@ -23,7 +23,7 @@ async(Void, citel, text) => {
 )
 //---------------------------------------------------------------------------
  cmd({
-             pattern: "س",
+             pattern: "سؤال",
              filename: __filename,
          },
          async(Void, citel, text) => {

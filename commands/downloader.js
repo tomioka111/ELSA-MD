@@ -586,7 +586,7 @@ cmd({
 //---------------------------------------------------------------------------
 cmd({
             pattern: "dovideo",
-            alias :["فيديوملف","فيدملف"],
+            alias :["فيديوملف","فيدملف","ملف"],
 	    react: "⬇️",
             desc: "Downloads video from yt.",
             category: "downloader",
