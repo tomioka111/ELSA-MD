@@ -218,7 +218,7 @@ Secktor.cmd({
 }*/
             return await Void.sendMessage(citel.chat, { image: { url: THUMB_IMAGE }, caption: str })
         }
-    )*/
+    )
     //---------------------------------------------------------------------------
 Secktor.cmd({
         pattern: "owner",
