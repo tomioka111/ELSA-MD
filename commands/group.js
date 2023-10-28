@@ -331,7 +331,7 @@ cmd({
             use: `questionoption1,option2,option3.....`,
         },
         async(Void, citel, text,{ isCreator }) => {
-            if (!isCreator) return citel.reply(tlang().admin)
+            if (!isAdmins) return citel.reply(tlang().admin)
             let [poll, opt] = text.split("!");
             if (text.split(",") < 2)
                 return await citel.reply(

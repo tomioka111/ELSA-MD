@@ -339,7 +339,7 @@ let urll = `https://s.vercel.app/api?url=${text.match(/\bhttps?:\/\/\S+/gi)[0]}&
 let media  = await getBuffer(urll)
 return await Void.sendMessage(citel.chat ,{image : media } , {quoted:citel} )
 }
-catch (err) { return citel.reply("*֎╎تـم  اخـتـصـار  رابـطـك ┇*")}
+catch (err) { return citel.reply("*֎╎تـم  اخـتـصـار  رابـطـك ┇*\n\n${anu.data}")}
     }
 )
 
