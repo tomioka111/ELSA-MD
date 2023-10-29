@@ -212,7 +212,7 @@ cmd({
     },
     async(Void, citel, text) => {
 
-        if (!citel.quoted) return citel.reply (`*֎╎مـنـشـن عـلـي شـخـص او رد عـلـي رسـالـتـه*`)
+        if (!citel.quoted) return citel.reply (`*֎╎ رد عـلـي رسـالـتـه*`)
         let pfp;
         try  { pfp = await Void.profilePictureUrl(citel.quoted.sender, "image"); } 
         catch (e) {  return citel.reply("*֎╎لا يـوجـد لـديـه صـوره بـروفـايـل*") } 
@@ -245,7 +245,7 @@ cmd({
             filename: __filename
         },
 async(Void, citel, text) => {
-            if (!citel.quoted) return citel.reply(`*֎╎مـنـشـن عـلـي شـخـص او رد عـلـي رسـالـتـه*`);
+            if (!citel.quoted) return citel.reply(`*֎╎رد عـلـي رسـالـتـه*`);
             var bio = await Void.fetchStatus(citel.quoted.sender);
             var bioo = bio.status;
             var setAt = bio.setAt.toString();
@@ -254,6 +254,12 @@ async(Void, citel, text) => {
             if(words.length > 3){ setAt= words.slice(0, 5).join(' ') ; }
              
             var num = citel.quoted.sender.split('@')[0];
+            let ttms = `${userq.xp}` / 8;
+            const timenow = moment(moment())
+                .format('HH:mm:ss')
+            moment.tz.setDefault('Africa/Lagos')
+                .locale('id')
+            
             let pfp;
             try  {  pfp = await Void.profilePictureUrl(citel.quoted.sender, "image"); } 
             catch (e) { pfp = await Void.profilePictureUrl(citel.sender, "image") ||  'https://telegra.ph/file/29a8c892a1d18fdb26028.jpg' ; }    //|| 'https://telegra.ph/file/29a8c892a1d18fdb26028.jpg' ;  }
