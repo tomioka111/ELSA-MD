@@ -59,9 +59,9 @@ cmd({
                     if (!checkgroup) {
                         await new sck({ id: citel.chat, economy: "true" })
                             .save()
-                        return citel.reply(' *֎╎تـم تـفـعـيـل الاقـتـصـاد*')
+                        return citel.reply('*֎╎تـم تـفـعـيـل الاقـتـصـاد*')
                     } else {
-                        if (checkgroup.economy == "true") return citel.reply("*֎╎تـم تـفـعـيـل الاقـتـصـاد بـالـفـعـل*)
+                        if (checkgroup.economy == "true") return citel.reply("*֎╎تـم تـفـعـيـل الاقـتـصـاد بـالـفـعـل*")
                         await sck.updateOne({ id: citel.chat }, { economy: "true" })
                         citel.reply('*֎╎تـم تـفـعـيـل الاقـتـصـاد بـالـقـروب*')
                         return
@@ -76,7 +76,7 @@ cmd({
                             .save()
                         return citel.reply("*֎╎تـم تـفـعـيـل الاحـداث*")
                     } else {
-                        if (checkgroup.events == "true") return citel.reply("*֎╎تـم تـفـعـيـل الاحـداث بـالـفـعـل*)
+                        if (checkgroup.events == "true") return citel.reply("*֎╎تـم تـفـعـيـل الاحـداث بـالـفـعـل*")
                         await sck.updateOne({ id: citel.chat }, { events: "true" })
                         return citel.reply("*֎╎تـم تـفـعـيـل الاحـداث*")
                     }
