@@ -135,7 +135,7 @@ async(Void, citel, text,{ isCreator }) => {
         try {
             const data = await Void.fetchBlocklist();
             if (data.length === 0) return await citel.reply(`*֎╎لا يـوجـد اي ارقـام مـحـظـوره*`);
-            let txt = `\n*〖قـائـمـه الـمـحـظـوريـن〗*\n\n*֎╎عـدد الـمـحـظـوريـن┇* ${data.length}_\n\n┓─━═║✠║◦¦❄️¦◦║✠║═━─┏ \n*〖قـائـمـه الـمـحـظـوريـن〗*\n`;
+            let txt = `\n*〖قـائـمـه الـمـحـظـوريـن〗*\n\n*֎╎عـدد الـمـحـظـوريـن┇* ${data.length}\n\n┓─━═║✠║◦¦❄️¦◦║✠║═━─┏\n`;
             for (let i = 0; i < data.length; i++) {      txt += `֎╎ ${i + 1}┇ wa.me/${data[i].split("@")[0]}\n`;    }
             txt += "┛─━═║✠║◦¦❄️¦◦║✠║═━─┗";
             return await Void.sendMessage(citel.chat, { text: txt });
@@ -216,7 +216,7 @@ cmd({
         let pfp;
         try  { pfp = await Void.profilePictureUrl(citel.quoted.sender, "image"); } 
         catch (e) {  return citel.reply("*֎╎لا يـوجـد لـديـه صـوره بـروفـايـل*") } 
-        return await Void.sendMessage(citel.chat, {image: { url: pfp },caption: '  *---صـوره بـروفـايـلـه---*\n*بـواسـطـه┇*'+Config.author, },{quoted:citel}); 
+        return await Void.sendMessage(citel.chat, {image: { url: pfp },caption: '  *---صـوره بـروفـايـلـه---*\nبـواسـطـه┇'+Config.author, },{quoted:citel}); 
 
 
          }
@@ -532,24 +532,21 @@ const buffer = await sticker.toBuffer();
 
 
  cmd({
-        pattern: 'اختصار',
-        alias :['قص' , 'تقصير'],
-        category: "search",
-        desc: "Provides screenshot of given url",
-        use: '<text>',
-        filename: __filename,
-    },
-    async(Void, citel, text) => {
-let limit = 5;
-try {
-if (!text) return citel.reply("*֎╎ويـن  الـرابـط ؟*");
-let urll = `https://s.vercel.app/api?url=${text.match(/\bhttps?:\/\/\S+/gi)[0]}&width=1280&height=720`
-let media  = await getBuffer(urll)
-return await Void.sendMessage(citel.chat ,{image : media } , {quoted:citel} )
-}
-catch (err) { return citel.reply("*֎╎تـم  اخـتـصـار  رابـطـك ┇*\n\n${anu.data}")}
-    }
-)
+            pattern: "اختصار",
+            alias :['قص','تقصير'],
+            filename: __filename
+        },
+        async(Void, citel, text) => {
+            if (!text) return citel.reply('֎╎ويـن  الـرابـط ؟ ')
+            try {
+                link = text.split(" ")[0];
+                anu = await axios.get(`https://tinyurl.com/api-create.php?url=${link}`);
+                citel.reply(`֎╎تـم  اخـتـصـار  رابـطـك :\n\n${anu.data}`);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    )
 
      //---------------------------------------------------------------------------
 
