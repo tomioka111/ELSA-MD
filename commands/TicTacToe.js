@@ -86,8 +86,8 @@ cmd(
           }[v];
         });
         let str = `
-*֎╎دورك┇* @${room.game.currentTurn.split("@")[0]}
-*֎╎ايـدي الـغـرفـه┇* ${room.id}
+*❄️⃝🧚‍♀️دورك┇* @${room.game.currentTurn.split("@")[0]}
+*❄️⃝🧚‍♀️ايـدي الـغـرفـه┇* ${room.id}
 ${arr.slice(0, 3).join("  ")}
 ${arr.slice(3, 6).join("  ")}
 ${arr.slice(6).join("  ")}
@@ -181,7 +181,7 @@ cmd(
         isWin = true;
       }
       let winner = isSurrender ? room.game.currentTurn : room.game.winner;
-      let str = `*֎╎ايـدي الـغـرفـه┇* ${room.id}
+      let str = `*❄️⃝🧚‍♀️يـدي الـغـرفـه┇* ${room.id}
       
 ${arr.slice(0, 3).join("  ")}
 ${arr.slice(3, 6).join("  ")}
@@ -190,13 +190,13 @@ ${
   isWin
     ? `@${winner.split("@")[0]} فاز/ت 🎖️`
     : isTie
-    ? `*֎╎تـعـادل ، كـفـو لـثـنـيـن 👏*`
-    : `*֎╎دورك┇* ${["❌", "⭕"][1 * room.game._currentTurn]} @${
+    ? `*❄️⃝🧚‍♀️تـعـادل ، كـفـو لـثـنـيـن 👏*`
+    : `*❄️⃝🧚‍♀️دورك┇* ${["❌", "⭕"][1 * room.game._currentTurn]} @${
         room.game.currentTurn.split("@")[0]
       }`
 }
-*֎╎الـلاعـب الاول❌┇* @${room.game.playerO.split("@")[0]}
-*֎╎الـلاعـب الـثـانـي⭕┇* @${room.game.playerX.split("@")[0]}`;
+*❄️⃝🧚‍♀️الـلاعـب الاول❌┇* @${room.game.playerO.split("@")[0]}
+*❄️⃝🧚‍♀️الـلاعـب الـثـانـي⭕┇* @${room.game.playerX.split("@")[0]}`;
 
       if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== citel.chat)
         room[room.game._currentTurn ^ isSurrender ? "x" : "o"] = citel.chat;
@@ -250,7 +250,7 @@ cmd({ pattern: "شبيهي" , category: "fun" }, async(Void, citel, text) => {
        } else {
        shiper = members[Math.floor(Math.random() * members.length)]
        }
-       let caption = `@${citel.sender.split('@')[0]}  x  @${shiper.split('@')[0]}\n \n`
+       let caption = `@${citel.sender.split('@')[0]}  ✘  @${shiper.split('@')[0]}\n \n`
         caption += await couple(percentage)
         if(citel.sender.split('@')[0]===shiper.split('@')[0]) return citel.reply('```'+'*تستغبي يفنطل ؟*'+'```')
         await Void.sendMessage(citel.chat,{text: caption,mentions: [citel.sender,shiper]},{quoted:citel})

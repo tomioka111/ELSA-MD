@@ -157,13 +157,11 @@ cmd({
         latensie = speed() - timestampe;
         let ter = `
 ㅤ ────────────────────────── .°୭̥ ❁ 	
-╰─➤｡･:*˚:✧｡ *${tlang().title}* ｡･:*˚:✧｡
-╰─➤*🌟Description:* A WhatsApp bot with rich features, build in NodeJs to make your WhatsApp enjoyable.
-╰─➤*⚡️Speed:* ${latensie.toFixed(4)} ms
-╰─➤*⏱Uptime:* ${runtime(process.uptime())}
-╰─➤*📡Version:* 0.0.8
-╰─➤*👤Owner:*  ${Config.ownername}
-╰─➤*Powered by ${tlang().title}*
+*❄️⃝🧚‍♀️الـسـرعـه⚡️┇ ${latensie.toFixed(4)} مـللـي ثـانـيـه*
+*❄️⃝🧚‍♀️مـده الـتـشـغـيـل⏱┇ ${runtime(process.uptime())}*
+*❄️⃝🧚‍♀️ الاصـدار📡┇ V1*
+*❄️⃝🧚‍♀️ الـمـطـوريـن👤┇ ${Config.ownername}*
+*❄️⃝🧚‍♀️ اسـم الـبـوتـه🤖┇ ${tlang().title}*
 °୭̥ ❁ ───────────────────────── .°୭̥ ❁ `;
         let buttonMessaged = {
             image: {

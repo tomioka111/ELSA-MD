@@ -100,7 +100,7 @@ async(Void, citel, text,{ isCreator }) => {
     if (!isAdmins && !isCreator) return citel.reply(tlang().admin);
 
     let Group = await sck.findOne({ id: citel.chat })
-    if (!text)  {  return await citel.reply ("**֎╎رسـالـه الـمــغادره┇* "+Group.goodbye)  }
+    if (!text)  {  return await citel.reply ("*֎╎رسـالـه الـمــغادره┇* "+Group.goodbye)  }
     await sck.updateOne({ id: citel.chat }, { goodbye:text,events:'true' }) 
  
     let metadata = await Void.groupMetadata(citel.chat);
@@ -284,8 +284,8 @@ async(Void, citel, text) => {
          },
          async(Void, citel, text) => {
 
-if (!citel.quoted) return citel.reply (`*Please Reply to User With Name*`);
-if ( !text ) return citel.reply( `Please Give Me User Name, \n *Example : ${prefix}vcard alex tv* `)
+if (!citel.quoted) return citel.reply (`*֎╎رد عـلـي رسـالـه شـخـص واكـتـب اسـم*`);
+if ( !text ) return citel.reply( `*֎╎رد عـلـي رسـالـه شـخـص واكـتـب اسـم مـثـال┇.كونكت ELSA*`)
 var words = text.split(" ");
 if (words.length >3) {   text= words.slice(0, 3).join(' ')  }
 // citel.reply(text);
