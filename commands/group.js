@@ -144,7 +144,7 @@ cmd({
 },
 async(Void, citel, text,{ isCreator }) => {
     if (!citel.isGroup) return citel.reply(tlang().group);
-    const groupMetadata = citel.isGroup ? await Lucifer.bot.groupMetadata(citel.chat).catch((e) => {}) : "";
+    const groupMetadata = citel.isGroup ? await Void.bot.groupMetadata(citel.chat).catch((e) => {}) : "";
     const participants = citel.isGroup ? await groupMetadata.participants : "";
     const groupAdmins = participants.filter(p => p.admin)
     const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
@@ -161,7 +161,7 @@ ${text ? "≡ Message :" + text : ""}
 ${listAdmin}
 └───────────
 `.trim()
-return await Lucifer.bot.sendMessage(citel.chat,{text : tag ,mentions: [citel.sender, ...groupAdmins.map(v => v.id) ,]} ,)
+return await Void.bot.sendMessage(citel.chat,{text : tag ,mentions: [citel.sender, ...groupAdmins.map(v => v.id) ,]} ,)
 
 
 
