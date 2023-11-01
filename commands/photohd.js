@@ -88,8 +88,8 @@ const { cmd } = require('../lib')
         const randomImage = images[randomIndex];
       
         await Void.sendMessage(citel.chat, {
-          image: { url: randomImage }
-          caption: "*هـا هـي خـلـفـيـتـك┇*"
+          image: { url: randomImage },
+          caption: "*֎╎هـا هـي خـلـفـيـتـك┇*"
         });
       });
       

@@ -34,7 +34,7 @@
          desc: "daily gold.",
          category: "economy",
          filename: __filename,
-         react: "💸"
+         react: "💷"
      },
      async(Void, citel, text,{ isCreator }) => {
         let zerogroup = (await sck.findOne({
@@ -61,7 +61,7 @@
          desc: "reset wallet of quoted user.",
          category: "economy",
          filename: __filename,
-         react: "💸"
+         react: "💷"
      },
      async(Void, citel, text,{ isCreator }) => {
         let zerogroup = (await sck.findOne({
@@ -86,7 +86,7 @@
     desc: "update capacity.",
     category: "economy",
     filename: __filename,
-    react: "💸"
+    react: "💷"
 },
 async(Void, citel, text,{ isCreator }) => {
     let zerogroup = (await sck.findOne({
@@ -159,7 +159,7 @@ default:
         const deposit = await eco.deposit(citel.sender, "secktor", d);
         const balance = await eco.balance(citel.sender, "secktor")
         if(deposit.noten) return citel.reply('You can\'t deposit what you don\'t have💰.'); //if user states more than whats in his wallet
-return await citel.reply(`*⛩️ الـمـرسـل┇ ${citel.pushName}*\n*🍀تـم ايـداع💰 ${deposit.amount} *بـنـجـاح الـي الـبـنـك الـخـاص بـك📈*`)
+return await citel.reply(`*⛩️ الـمـرسـل┇ ${citel.pushName}*\n*🍀تـم ايـداع💰 ${deposit.amount} بـنـجـاح الـي الـبـنـك الـخـاص بـك📈*`)
     }
 )
      cmd({
@@ -194,7 +194,7 @@ cmd({
     desc: "transfer gold.",
     category: "economy",
     filename: __filename,
-    react: "💸"
+    react: "💷"
 },
 async(Void, citel, text,{ isCreator }) => {
     let zerogroup = (await sck.findOne({
@@ -379,7 +379,7 @@ default:
         const withdraw = await eco.withdraw(user, secktor, query);
         if(withdraw.noten) return citel.reply('*֎╎🏧الامـوال فـي الـبـنـك لا تـكـفـي للـسـحـب🫤*'); //if user states more than whats in his wallet
         const add = eco.give(user, secktor, query);
-          citel.reply(`*֎╎تـنـبـيـه🏧┇* \n *֎╎تـم سـحـب_${withdraw.amount}_🪙 عـمـلـه مـن مـحـفـظـتـك💰*`)
+          citel.reply(`*֎╎تـنـبـيـه🏧┇* \n *֎╎تـم سـحـب_${withdraw.amount}_ عـمـلـه🪙 مـن مـحـفـظـتـك💰*`)
     }
 )
 
