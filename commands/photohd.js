@@ -82,13 +82,14 @@ const { cmd } = require('../lib')
       ];
       
       cmd({
-        pattern: 'خلفية',
+        pattern: 'خلفيه',
       }, async(Void, citel, text) => {
         const randomIndex = Math.floor(Math.random() * images.length);
         const randomImage = images[randomIndex];
       
         await Void.sendMessage(citel.chat, {
           image: { url: randomImage }
+          caption: "*هـا هـي خـلـفـيـتـك┇*"
         });
       });
       
