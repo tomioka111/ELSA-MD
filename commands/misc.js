@@ -664,11 +664,11 @@ case 'قفل':{
              if (!checkgroup) {
                  await new sck({ id: citel.chat, botenable: "false" })
                      .save()
-                 return citel.reply(`*֎╎تـم قـفـل الـبـوت ${tlang().title}*`)
+                 return citel.reply(`*֎╎تـم قـفـل الـبـوت* ${tlang().title}`)
              } else {
                  if (checkgroup.botenable == "false") return citel.reply("*֎╎تـم قـفـل الـبـوت بـالـفـعـل*")
                  await sck.updateOne({ id: citel.chat }, { botenable: "false" })
-                 return citel.reply(`*֎╎تـم قـفـل الـبـوت ${tlang().title}*`)
+                 return citel.reply(`*֎╎تـم قـفـل الـبـوت* ${tlang().title}`)
              }
          }
 }

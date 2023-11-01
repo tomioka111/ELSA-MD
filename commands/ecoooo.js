@@ -81,31 +81,4 @@ str+= `ـ *${i+1}* \n╮─────────────ـ\n│ *֎╎ا�
 ⌬━─━｢❄️｣━─━⌬`)
      
      }
-     )
-     
-
-    //---------------------------------------------------------------------------
-   
-    cmd({
-       pattern: "خذ",
-       filename: __filename,
-       react: "👍"
-   },
-   async(Void, citel, text,{ isCreator }) => {
-    const groupAdmins = await getAdmin(Void, citel)
-        const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) : false;
-        if (!isAdmins) return citel.reply(tlang().admin);
-
-        const secktor = "secktor"
-        let users = citel.mentionedJid ? citel.mentionedJid : citel.msg.contextInfo.participant || false;
-if(!users) return citel.reply('*منشن مين تبغى تزرف منه/م*')
-for (const user of users) {
- await eco.deduct(user, secktor, parseInt(text.split(' ')[0]));
-}
-
-       return await Void.sendMessage(citel.chat,{text: `*֎╎تـم اخـذت ${parseInt(text.split(' ')[0])} مـن @${users.split('@')[0]}*`,mentions:[users]},{quoted:citel})
-
-   }
-)
-
-
+   )

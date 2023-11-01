@@ -343,7 +343,7 @@ return await citel.reply(`*֎╎بـنـك💰┇* ${citel.pushName}\n\n_🪙${b
         case 'caught':
            const rmoney = Math.floor(Math.random() * 1000)
            await eco.deduct(user1, secktor, rmoney);
-           await citel.reply(`*֎╎اسـف👮لـقـد دفـعـت ${rmoney} 🪙 مـن مـحـفـظـتـك🥹`)
+           await citel.reply(`*֎╎اسـف👮لـقـد دفـعـت ${rmoney} 🪙 مـن مـحـفـظـتـك🥹*`)
            ////citel.react('😦')
              break
 default:
