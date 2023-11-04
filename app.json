@@ -1,6 +1,6 @@
 {
-  "name": "ELSA-MD BY ELGAZAR ",
-  "description": "تم صنع هذا البوت بواسطه الجزار وايتاشي",
+  "name": "𝙱𝙾𝚃 𝙶𝚈𝚄 ",
+  "description": "تم صنع هذا البوت بواسطه غيو + محنكة",
   "logo": "https://telegra.ph/file/24bb9841a79d8b45e8441.jpg",
   "keywords": ["nodejs", "bot", "whatsapp bot", "GARENA", "ElsaBot", "Secktor","ELSAMD","theme bot","multi device","baileys","elgazar"],
   "success_url": "/",
@@ -8,7 +8,7 @@
 "env": {
   "OWNER_NAME": {
   "description": "اسم المطور",
-      "value": "𝐄𝐋𝐆𝐀𝐙𝐀𝐑 ❄️&𝐈𝐓𝐀𝐂𝐇𝐈 👑"
+      "value": "توميوكا غيو"
   },
   "ALIVE_MESSAGE": {
     "description": "رساله ان البوت متصل",
@@ -71,10 +71,11 @@
   },
   "OWNER_NUMBER": {
     "description": "اضافه مطور اخر",
-       "value": "201098906252"
+       "value": "966505433177"
   },
    "SESSION_ID": {
     "description": "جلسه البوت"
+       "value": "IZUKU;;;eyJub2lzZUtleSI6eyJwcml2YXRlIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoiNkhEc3hUSzZDaGJNcTltZUdUQlNYbFlvSVNOQ2wvQURSR1gvNmtNYmlHOD0ifSwicHVibGljIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoiOVRPWjlKTVNEWldLaU56TGZsUGlJcU9uOG1GMkYrMWJ0ajVBODgrVVpEND0ifX0sInNpZ25lZElkZW50aXR5S2V5Ijp7InByaXZhdGUiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOiJxSHVQdXlYODhkSzBYZmY4ZTRIQUllNkxYc3hQNFhBRWVmbWptT002dzA4PSJ9LCJwdWJsaWMiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOiJjenJwbmJkelo1Y1orTTgzSUxTTURReWgrNlBWRWlzVnpiRnZvZVBqMTBJPSJ9fSwic2lnbmVkUHJlS2V5Ijp7ImtleVBhaXIiOnsicHJpdmF0ZSI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6IldNMzNjbXlKUmVGb2ZZemY3YWNTdFE0RDZDODA5SjdkV0dQM2IweUhibEk9In0sInB1YmxpYyI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6IlJWR3R5QjlUY2RnVGRsMU5naHN2UThRbEFVRUtVYmFNYkh1S2FHb2xTeVE9In19LCJzaWduYXR1cmUiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOiJiZU5VMFBnYWtSQnpucFd6dzdKZjM1K25Kb0NDYkRuYm4wRGxTN3RkNm1mNTVBN1lhbTBLci9vbnlWU0Zqd0xnaWEwNzBXNXMzU1lDYWd0UzZQUXdBQT09In0sImtleUlkIjoxfSwicmVnaXN0cmF0aW9uSWQiOjE4MiwiYWR2U2VjcmV0S2V5IjoiNGZpbnVqODliNyttZUJBZ29FL3gwelNXREduNS81bUlqVEZmNCtDRndOYz0iLCJwcm9jZXNzZWRIaXN0b3J5TWVzc2FnZXMiOltdLCJuZXh0UHJlS2V5SWQiOjMxLCJmaXJzdFVudXBsb2FkZWRQcmVLZXlJZCI6MzEsImFjY291bnRTeW5jQ291bnRlciI6MCwiYWNjb3VudFNldHRpbmdzIjp7InVuYXJjaGl2ZUNoYXRzIjpmYWxzZX0sImRldmljZUlkIjoibF9YQmZ0VVZSY3VsaC1DYUd1NklzdyIsInBob25lSWQiOiJlOTUzOTlkYS04MWUzLTQ3MDItYjI2Ni1mN2Y5ZmM4ZmE2YjMiLCJpZGVudGl0eUlkIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjoibS9aZ3owbE01MTl2ekR2WHlDNUpJM0tMRE9ZPSJ9LCJyZWdpc3RlcmVkIjpmYWxzZSwiYmFja3VwVG9rZW4iOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOiJ6bWJWbG50REhFTjZkVkY1a1BtbHhVRnlCNms9In0sInJlZ2lzdHJhdGlvbiI6e30sImFjY291bnQiOnsiZGV0YWlscyI6IkNNMmU5dkVGRUtiRW1hb0dHQWM9IiwiYWNjb3VudFNpZ25hdHVyZUtleSI6ImFEZmpSWmNWQ1hlY0IrKzArUVRqM252RlA2NTdiKzVndzV1SUhHUTIwQmc9IiwiYWNjb3VudFNpZ25hdHVyZSI6Ijc5dW9TQzdyWHc3VlgvT0lkV1B4eG9qRmhhN09sVXRxa2FzOEVaVi9may96cTk0cE1hTS9BazBvSFAwT25IRW1DRWNkWkxOdWllVlJuaVZsR1RWSEJnPT0iLCJkZXZpY2VTaWduYXR1cmUiOiJCdDZIazUwaFJpSWZhRlZEemhqeHMyV1lsYmswVDhoUTBXdnZVNnZrL2NjbFhjd01ydEdiNEY3UjVpaTJzc29vOHZmWnE5NkVGL05jb1BpZHFWU3pBZz09In0sIm1lIjp7ImlkIjoiOTQ3MTkxOTE4MDM6N0BzLndoYXRzYXBwLm5ldCIsIm5hbWUiOiLwnZmx8J2ZvvCdmoMg8J2ZtvCdmojwnZqEIn0sInNpZ25hbElkZW50aXRpZXMiOlt7ImlkZW50aWZpZXIiOnsibmFtZSI6Ijk0NzE5MTkxODAzOjdAcy53aGF0c2FwcC5uZXQiLCJkZXZpY2VJZCI6MH0sImlkZW50aWZpZXJLZXkiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOiJCV2czNDBXWEZRbDNuQWZ2dFBrRTQ5NTd4VCt1ZTIvdVlNT2JpQnhrTnRBWSJ9fV0sInBsYXRmb3JtIjoic21iYSIsImxhc3RBY2NvdW50U3luY1RpbWVzdGFtcCI6MTY5OTExMTQ2NywibXlBcHBTdGF0ZUtleUlkIjoiQUFBQUFOL0oifQ=="
   },
     "OPENAI_API_KEY": {
     "description": "مفتاح AIKEY",
@@ -87,7 +88,7 @@
   },
     "THEME": {
     "description": "تغير ثيم البوت ELSA",
-     "value": "ELSA"
+     "value": "𝙱𝙾𝚃 𝙶𝚈𝚄"
   },
     "WORKTYPE": {
   "description": "حاله البوت عام او خاص",
@@ -100,7 +101,7 @@
   },
   "PACK_INFO": {
     "description": "حقوق الملصق",
-     "value": "ELSA;BOT",
+     "value": "توميوكا غيو;محنكة عمتك",
      "required": false 
   },
   "heroku": {
